@@ -1,0 +1,159 @@
+/* =========================================
+   RESPONSIVE.CSS — Media Queries
+   Portfolio: Ahsan Jannat
+   ========================================= */
+
+/* ---- Tablet (≤ 1024px) ---- */
+@media (max-width: 1024px) {
+
+  .hero-container {
+    gap: 48px;
+  }
+
+  .portrait-img { width: 440px; }
+  .portrait-ring { width: 460px; height: 460px; }
+  .portrait-glow { width: 520px; height: 520px; }
+
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .timeline-grid { gap: 40px; }
+  .projects-grid { grid-template-columns: 1fr 1fr; }
+  .about-grid { gap: 48px; }
+
+}
+
+/* ---- Small Tablet / Large Mobile (≤ 768px) ---- */
+@media (max-width: 768px) {
+
+  /* Navbar */
+  .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .nav-menu {
+    position: fixed;
+    top: 0; right: -100%;
+    width: min(300px, 85vw);
+    height: 100vh;
+    background: rgba(10, 15, 30, 0.98);
+    backdrop-filter: blur(24px);
+    border-left: 1px solid var(--border);
+    padding: 100px 32px 40px;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+    margin-left: 0;
+  }
+  .nav-menu.open { right: 0; }
+  .nav-list { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .nav-link { font-size: 1.1rem; padding: 12px 0; }
+  .nav-link::after { bottom: 0; left: 0; right: 0; }
+  .nav-link.active::after, .nav-link:hover::after { left: 0; right: 70%; }
+
+  /* Mobile overlay */
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 998;
+    display: none;
+  }
+  .nav-overlay.active { display: block; }
+
+  /* Hero */
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 100px 24px 60px;
+    text-align: center;
+  }
+  .hero-left { order: 2; }
+  .hero-right { order: 1; }
+  .hero-tag { justify-content: center; }
+  .hero-sub { margin: 0 auto 40px; }
+  .hero-btns { justify-content: center; }
+  .hero-socials { justify-content: center; }
+
+  .portrait-img { width: 320px; }
+  .portrait-ring { width: 340px; height: 340px; }
+  .portrait-glow { width: 380px; height: 380px; }
+
+  .stats-card {
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 12px;
+    padding: 16px;
+  }
+  .stat-num { font-size: 1.6rem; }
+
+  .scroll-indicator { display: none; }
+
+  /* About */
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-info-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Services */
+  .services-grid { grid-template-columns: 1fr; }
+
+  /* Experience */
+  .timeline-grid { grid-template-columns: 1fr; gap: 48px; }
+
+  /* Projects */
+  .projects-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Testimonials */
+  .testimonials-grid { grid-template-columns: 1fr; }
+
+  /* Contact */
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .form-row { grid-template-columns: 1fr; }
+
+  /* Footer */
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+
+}
+
+/* ---- Mobile (≤ 480px) ---- */
+@media (max-width: 480px) {
+
+  .section { padding: 80px 0; }
+  .section-header { margin-bottom: 40px; }
+
+  .hero-headline { font-size: 2.6rem; }
+
+  .stats-card {
+    gap: 8px;
+    padding: 14px 12px;
+  }
+  .stat-num { font-size: 1.4rem; }
+  .stat-label { font-size: 0.65rem; }
+
+  .projects-grid { grid-template-columns: 1fr; }
+
+  .about-info-grid { grid-template-columns: 1fr; }
+
+  .hero-btns { flex-direction: column; align-items: center; }
+  .btn { width: 100%; justify-content: center; }
+
+  .filter-bar { gap: 8px; }
+  .filter-btn { padding: 8px 16px; font-size: 0.8rem; }
+
+  .contact-item { align-items: flex-start; }
+
+  .whatsapp-float { width: 50px; height: 50px; font-size: 1.4rem; bottom: 20px; right: 20px; }
+  .whatsapp-popup { width: calc(100vw - 40px); right: 20px; }
+
+  .portrait-img { width: 260px; }
+  .portrait-ring { width: 280px; height: 280px; }
+
+}
+
+/* ---- Very small (≤ 360px) ---- */
+@media (max-width: 360px) {
+  .hero-headline { font-size: 2.2rem; }
+  .logo-name { display: none; }
+}
+
+/* ---- Large screens (≥ 1440px) ---- */
+@media (min-width: 1440px) {
+  .hero-container { max-width: 1320px; }
+  .container { max-width: 1320px; }
+  .portrait-img { width: 600px; }
+}
