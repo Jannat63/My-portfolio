@@ -78,9 +78,10 @@
     flex-direction: row;
     justify-content: space-evenly;
     gap: 12px;
-    padding: 16px;
+    padding: 20px 16px;
   }
-  .stat-num { font-size: 1.6rem; }
+  .stat-num { font-size: 2rem; }
+  .stat-plus { font-size: 1.8rem; }
 
   .scroll-indicator { display: none; }
 
