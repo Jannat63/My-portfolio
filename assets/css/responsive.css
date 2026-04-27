@@ -77,11 +77,11 @@
   .stats-card {
     flex-direction: row;
     justify-content: space-evenly;
-    gap: 12px;
-    padding: 20px 16px;
+    gap: 10px;
+    padding: 18px 14px;
   }
-  .stat-num { font-size: 2rem; }
-  .stat-plus { font-size: 1.8rem; }
+  .stat-num { font-size: 1.7rem; }
+  .stat-plus { font-size: 1.4rem; }
 
   .scroll-indicator { display: none; }
 
