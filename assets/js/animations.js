@@ -8,7 +8,7 @@
 
 /* ---- TYPEWRITER EFFECT ---- */
 const typedEl = document.getElementById('typed-text');
-const words = ['dominate.', 'grow.', 'convert.', 'lead.'];
+const words = ['rule.', 'grow.', 'convert.', 'lead.'];
 let wordIndex = 0;
 let charIndex = 0;
 let isDeleting = false;

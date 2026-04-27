@@ -324,7 +324,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 }
 .portrait-glow {
   position: absolute;
-  width: 820px; height: 820px;
+  width: 960px; height: 960px;
   background: radial-gradient(circle, rgba(59,130,246,0.18) 0%, rgba(249,115,22,0.10) 50%, transparent 70%);
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
@@ -332,7 +332,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   pointer-events: none;
 }
 .portrait-img {
-  width: 740px;
+  width: 850px;
   max-width: 100%;
   position: relative;
   z-index: 1;
@@ -342,7 +342,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .portrait-img:hover { filter: drop-shadow(0 20px 80px rgba(249,115,22,0.35)); }
 .portrait-ring {
   position: absolute;
-  width: 700px; height: 700px;
+  width: 820px; height: 820px;
   border: 1px dashed rgba(249,115,22,0.2);
   border-radius: 50%;
   top: 50%; left: 50%;
