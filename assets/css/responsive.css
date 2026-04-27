@@ -10,9 +10,9 @@
     gap: 48px;
   }
 
-  .portrait-img { width: 440px; }
-  .portrait-ring { width: 460px; height: 460px; }
-  .portrait-glow { width: 520px; height: 520px; }
+  .portrait-img { width: 560px; }
+  .portrait-ring { width: 580px; height: 580px; }
+  .portrait-glow { width: 640px; height: 640px; }
 
   .services-grid { grid-template-columns: 1fr 1fr; }
   .timeline-grid { gap: 40px; }
@@ -70,9 +70,9 @@
   .hero-btns { justify-content: center; }
   .hero-socials { justify-content: center; }
 
-  .portrait-img { width: 320px; }
-  .portrait-ring { width: 340px; height: 340px; }
-  .portrait-glow { width: 380px; height: 380px; }
+  .portrait-img { width: 380px; }
+  .portrait-ring { width: 400px; height: 400px; }
+  .portrait-glow { width: 440px; height: 440px; }
 
   .stats-card {
     flex-direction: row;
@@ -140,8 +140,8 @@
   .whatsapp-float { width: 50px; height: 50px; font-size: 1.4rem; bottom: 20px; right: 20px; }
   .whatsapp-popup { width: calc(100vw - 40px); right: 20px; }
 
-  .portrait-img { width: 260px; }
-  .portrait-ring { width: 280px; height: 280px; }
+  .portrait-img { width: 300px; }
+  .portrait-ring { width: 320px; height: 320px; }
 
 }
 
@@ -155,5 +155,5 @@
 @media (min-width: 1440px) {
   .hero-container { max-width: 1320px; }
   .container { max-width: 1320px; }
-  .portrait-img { width: 600px; }
+  .portrait-img { width: 780px; }
 }
