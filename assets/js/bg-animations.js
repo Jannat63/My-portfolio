@@ -1,21 +1,22 @@
 /* =========================================
-   bg-animations.js  v2.0
-   Aurora + Gradient Mesh + Particles MIXED
+   bg-animations.js  v1.0
+   Per-section canvas background effects
    Portfolio: Ahsan Jannat
    ========================================= */
 
 'use strict';
 
-/* ══════════════════════════════════════════
-   CANVAS SETUP
-   ══════════════════════════════════════════ */
+/* ── Global canvas setup ── */
 const canvas = document.createElement('canvas');
 canvas.id = 'bgCanvas';
-Object.assign(canvas.style, {
-  position: 'fixed', top: '0', left: '0',
-  width: '100%', height: '100%',
-  zIndex: '0', pointerEvents: 'none',
-});
+canvas.style.cssText = `
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 1;
+`;
 document.body.prepend(canvas);
 
 const ctx = canvas.getContext('2d');
@@ -24,301 +25,464 @@ let W, H;
 function resize() {
   W = canvas.width  = window.innerWidth;
   H = canvas.height = window.innerHeight;
-  initMesh();
 }
+resize();
 window.addEventListener('resize', resize);
 
-/* ══════════════════════════════════════════
-   SECTION COLOR THEMES
-   ══════════════════════════════════════════ */
-const themes = {
-  home: {
-    aurora: ['#f97316','#fb923c','#3b82f6'],
-    glowA: 'rgba(249,115,22,', glowB: 'rgba(59,130,246,',
-  },
-  about: {
-    aurora: ['#8b5cf6','#3b82f6','#14b8a6'],
-    glowA: 'rgba(139,92,246,', glowB: 'rgba(20,184,166,',
-  },
-  services: {
-    aurora: ['#f97316','#ef4444','#8b5cf6'],
-    glowA: 'rgba(249,115,22,', glowB: 'rgba(139,92,246,',
-  },
-  experience: {
-    aurora: ['#14b8a6','#3b82f6','#8b5cf6'],
-    glowA: 'rgba(20,184,166,', glowB: 'rgba(59,130,246,',
-  },
-  projects: {
-    aurora: ['#f97316','#3b82f6','#14b8a6'],
-    glowA: 'rgba(59,130,246,', glowB: 'rgba(249,115,22,',
-  },
-  testimonials: {
-    aurora: ['#8b5cf6','#f97316','#3b82f6'],
-    glowA: 'rgba(139,92,246,', glowB: 'rgba(249,115,22,',
-  },
-  contact: {
-    aurora: ['#f97316','#14b8a6','#3b82f6'],
-    glowA: 'rgba(249,115,22,', glowB: 'rgba(20,184,166,',
-  },
-};
+/* ── Color palette ── */
+const ORANGE = 'rgba(249,115,22,';
+const BLUE   = 'rgba(59,130,246,';
+const PURPLE = 'rgba(139,92,246,';
+const TEAL   = 'rgba(20,184,166,';
+const WHITE  = 'rgba(255,255,255,';
 
-/* ══════════════════════════════════════════
-   COLOR UTILITIES
-   ══════════════════════════════════════════ */
-function hexToRgb(hex) {
-  return [
-    parseInt(hex.slice(1,3),16),
-    parseInt(hex.slice(3,5),16),
-    parseInt(hex.slice(5,7),16),
-  ];
-}
-function lerpColor(c1, c2, t) {
-  const a = hexToRgb(c1), b = hexToRgb(c2);
-  return `rgb(${Math.round(a[0]+(b[0]-a[0])*t)},${Math.round(a[1]+(b[1]-a[1])*t)},${Math.round(a[2]+(b[2]-a[2])*t)})`;
-}
-function hexToRgbStr(hex) {
-  const [r,g,b] = hexToRgb(hex); return `${r},${g},${b}`;
-}
+/* ── Section tracking ── */
+const sectionIds = ['home','about','services','experience','projects','testimonials','contact'];
+let currentSection = 'home';
+let targetSection  = 'home';
+let transitionProgress = 1;
+let transitionSpeed = 0.018;
 
-/* ══════════════════════════════════════════
-   THEME TRANSITION
-   ══════════════════════════════════════════ */
-let currentTheme    = { ...themes.home };
-let fromTheme       = themes.home;
-let toTheme         = themes.home;
-let targetThemeName = 'home';
-let themeProgress   = 1;
-
-function setTheme(name) {
-  if (!themes[name] || name === targetThemeName) return;
-  fromTheme       = { aurora: [...currentTheme.aurora], glowA: currentTheme.glowA, glowB: currentTheme.glowB };
-  toTheme         = themes[name];
-  targetThemeName = name;
-  themeProgress   = 0;
-}
-
-/* ══════════════════════════════════════════
-   GRADIENT MESH  — slow liquid warp
-   ══════════════════════════════════════════ */
-let meshPts = [];
-
-function initMesh() {
-  meshPts = [];
-  for (let r = 0; r <= 4; r++) {
-    for (let c = 0; c <= 5; c++) {
-      meshPts.push({
-        bx: (c / 5) * (typeof W !== 'undefined' ? W : window.innerWidth),
-        by: (r / 4) * (typeof H !== 'undefined' ? H : window.innerHeight),
-        phase: Math.random() * Math.PI * 2,
-        speed: 0.2 + Math.random() * 0.3,
-        amp:   40 + Math.random() * 40,
-      });
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+      const id = entry.target.id;
+      if (id !== currentSection) {
+        targetSection = id;
+        transitionProgress = 0;
+        initSection(id);
+      }
     }
+  });
+}, { threshold: 0.3 });
+
+sectionIds.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) sectionObserver.observe(el);
+});
+
+/* ══════════════════════════════════════
+   SECTION RENDERERS
+   ══════════════════════════════════════ */
+
+/* ─── HOME: Floating constellation particles ─── */
+const homeParticles = [];
+(function initHome() {
+  for (let i = 0; i < 120; i++) {
+    homeParticles.push({
+      x: Math.random() * 1920,
+      y: Math.random() * 1080,
+      r: Math.random() * 1.8 + 0.3,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      opacity: Math.random() * 0.6 + 0.2,
+      pulse: Math.random() * Math.PI * 2,
+    });
+  }
+})();
+
+function drawHome(alpha) {
+  const t = Date.now() * 0.001;
+
+  const gr1 = ctx.createRadialGradient(W * 0.78, H * 0.2, 0, W * 0.78, H * 0.2, W * 0.45);
+  gr1.addColorStop(0, ORANGE + (0.1 * alpha) + ')');
+  gr1.addColorStop(1, 'transparent');
+  ctx.fillStyle = gr1;
+  ctx.fillRect(0, 0, W, H);
+
+  const gr2 = ctx.createRadialGradient(W * 0.15, H * 0.85, 0, W * 0.15, H * 0.85, W * 0.35);
+  gr2.addColorStop(0, BLUE + (0.07 * alpha) + ')');
+  gr2.addColorStop(1, 'transparent');
+  ctx.fillStyle = gr2;
+  ctx.fillRect(0, 0, W, H);
+
+  homeParticles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+    if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+    p.pulse += 0.02;
+    const pulse = Math.sin(p.pulse) * 0.3 + 0.7;
+
+    ctx.beginPath();
+    ctx.arc(p.x * (W / 1920), p.y * (H / 1080), p.r * pulse, 0, Math.PI * 2);
+    ctx.fillStyle = WHITE + (p.opacity * alpha * pulse) + ')';
+    ctx.fill();
+  });
+
+  const scaledParticles = homeParticles.map(p => ({ x: p.x * (W / 1920), y: p.y * (H / 1080), opacity: p.opacity }));
+  for (let i = 0; i < scaledParticles.length; i++) {
+    for (let j = i + 1; j < scaledParticles.length; j++) {
+      const dx = scaledParticles[i].x - scaledParticles[j].x;
+      const dy = scaledParticles[i].y - scaledParticles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 100) {
+        ctx.beginPath();
+        ctx.moveTo(scaledParticles[i].x, scaledParticles[i].y);
+        ctx.lineTo(scaledParticles[j].x, scaledParticles[j].y);
+        ctx.strokeStyle = WHITE + ((1 - dist / 100) * 0.08 * alpha) + ')';
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+
+  const rx = W * 0.65 + Math.sin(t * 0.3) * 20;
+  const ry = H * 0.45 + Math.cos(t * 0.2) * 15;
+  ctx.beginPath();
+  ctx.arc(rx, ry, W * 0.28, 0, Math.PI * 2);
+  ctx.strokeStyle = ORANGE + (0.06 * alpha) + ')';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(rx, ry, W * 0.22, 0, Math.PI * 2);
+  ctx.strokeStyle = BLUE + (0.04 * alpha) + ')';
+  ctx.lineWidth = 0.5;
+  ctx.stroke();
+}
+
+/* ─── ABOUT: Flowing wave ribbons ─── */
+function drawAbout(alpha) {
+  const t = Date.now() * 0.0008;
+
+  const gr = ctx.createRadialGradient(W * 0.1, H * 0.5, 0, W * 0.1, H * 0.5, W * 0.5);
+  gr.addColorStop(0, PURPLE + (0.09 * alpha) + ')');
+  gr.addColorStop(1, 'transparent');
+  ctx.fillStyle = gr;
+  ctx.fillRect(0, 0, W, H);
+
+  const waves = [
+    { color: ORANGE, opacity: 0.04, freq: 0.003, amp: 60, speed: 0.6, yBase: 0.25 },
+    { color: BLUE,   opacity: 0.05, freq: 0.004, amp: 50, speed: 0.9, yBase: 0.45 },
+    { color: PURPLE, opacity: 0.04, freq: 0.002, amp: 70, speed: 0.5, yBase: 0.65 },
+    { color: TEAL,   opacity: 0.03, freq: 0.005, amp: 40, speed: 1.1, yBase: 0.80 },
+  ];
+
+  waves.forEach(w => {
+    ctx.beginPath();
+    ctx.moveTo(0, H * w.yBase);
+    for (let x = 0; x <= W; x += 4) {
+      const y = H * w.yBase + Math.sin(x * w.freq + t * w.speed) * w.amp
+                             + Math.sin(x * w.freq * 0.5 + t * w.speed * 0.7) * (w.amp * 0.4);
+      ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = w.color + (w.opacity * alpha) + ')';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  });
+
+  for (let i = 0; i < 5; i++) {
+    const ox = W * (0.1 + i * 0.2) + Math.sin(t * 0.4 + i) * 30;
+    const oy = H * 0.5 + Math.cos(t * 0.3 + i * 1.2) * 80;
+    const og = ctx.createRadialGradient(ox, oy, 0, ox, oy, 80 + i * 20);
+    og.addColorStop(0, (i % 2 === 0 ? BLUE : ORANGE) + (0.06 * alpha) + ')');
+    og.addColorStop(1, 'transparent');
+    ctx.fillStyle = og;
+    ctx.fillRect(0, 0, W, H);
   }
 }
 
-function drawMesh(t) {
-  const angle = t * 0.1;
-  const cx  = W * (0.5 + Math.sin(angle) * 0.3);
-  const cy  = H * (0.5 + Math.cos(angle * 0.7) * 0.3);
-  const cx2 = W * (0.5 - Math.sin(angle * 0.8) * 0.4);
-  const cy2 = H * (0.5 - Math.cos(angle * 0.5) * 0.4);
+/* ─── SERVICES: Animated geometric grid ─── */
+function drawServices(alpha) {
+  const t = Date.now() * 0.001;
 
-  const g1 = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H) * 0.95);
-  g1.addColorStop(0,   currentTheme.aurora[0] + '1a');
-  g1.addColorStop(0.5, currentTheme.aurora[1] + '0d');
-  g1.addColorStop(1,   'transparent');
-  ctx.fillStyle = g1; ctx.fillRect(0,0,W,H);
+  const gr = ctx.createRadialGradient(W, 0, 0, W, 0, W * 0.6);
+  gr.addColorStop(0, ORANGE + (0.08 * alpha) + ')');
+  gr.addColorStop(1, 'transparent');
+  ctx.fillStyle = gr;
+  ctx.fillRect(0, 0, W, H);
 
-  const g2 = ctx.createRadialGradient(cx2, cy2, 0, cx2, cy2, Math.max(W, H) * 0.75);
-  g2.addColorStop(0,   currentTheme.aurora[2] + '14');
-  g2.addColorStop(0.6, currentTheme.aurora[0] + '08');
-  g2.addColorStop(1,   'transparent');
-  ctx.fillStyle = g2; ctx.fillRect(0,0,W,H);
+  const cols = 14, rows = 9;
+  const cw = W / cols, ch = H / rows;
+
+  for (let i = 0; i <= cols; i++) {
+    const wave = Math.sin(t * 0.8 + i * 0.4) * 8;
+    ctx.beginPath();
+    ctx.moveTo(i * cw, 0);
+    ctx.lineTo(i * cw + wave, H);
+    ctx.strokeStyle = WHITE + (0.025 * alpha) + ')';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+  for (let j = 0; j <= rows; j++) {
+    const wave = Math.sin(t * 0.6 + j * 0.5) * 6;
+    ctx.beginPath();
+    ctx.moveTo(0, j * ch + wave);
+    ctx.lineTo(W, j * ch + wave);
+    ctx.strokeStyle = WHITE + (0.025 * alpha) + ')';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+
+  for (let i = 1; i < cols; i++) {
+    for (let j = 1; j < rows; j++) {
+      const pulse = Math.sin(t * 1.2 + i * 0.7 + j * 0.9);
+      if (pulse > 0.6) {
+        const r = (pulse - 0.6) * 6;
+        ctx.beginPath();
+        ctx.arc(i * cw, j * ch, r, 0, Math.PI * 2);
+        ctx.fillStyle = ORANGE + (0.3 * alpha * (pulse - 0.6) * 2.5) + ')';
+        ctx.fill();
+      }
+    }
+  }
+
+  for (let h = 0; h < 4; h++) {
+    const hx = W * (0.1 + h * 0.25) + Math.sin(t * 0.3 + h) * 40;
+    const hy = H * 0.5 + Math.cos(t * 0.25 + h * 1.5) * 100;
+    const size = 40 + h * 15;
+    drawHex(hx, hy, size, BLUE + (0.05 * alpha) + ')', BLUE + (0.08 * alpha) + ')');
+  }
 }
 
-/* ══════════════════════════════════════════
-   AURORA BANDS  — flowing curtains of light
-   ══════════════════════════════════════════ */
-const BANDS = [
-  { yBase:0.12, freq:0.0018, amp:0.13, speed:0.18, width:0.24, ci:0 },
-  { yBase:0.28, freq:0.0024, amp:0.11, speed:0.26, width:0.20, ci:1 },
-  { yBase:0.20, freq:0.0014, amp:0.15, speed:0.13, width:0.26, ci:2 },
-  { yBase:0.42, freq:0.0020, amp:0.10, speed:0.32, width:0.18, ci:0 },
-  { yBase:0.56, freq:0.0013, amp:0.12, speed:0.22, width:0.22, ci:1 },
-  { yBase:0.70, freq:0.0022, amp:0.09, speed:0.29, width:0.16, ci:2 },
-  { yBase:0.82, freq:0.0016, amp:0.11, speed:0.17, width:0.20, ci:0 },
-];
+function drawHex(x, y, r, stroke, fill) {
+  ctx.beginPath();
+  for (let i = 0; i < 6; i++) {
+    const angle = (Math.PI / 3) * i - Math.PI / 6;
+    const px = x + r * Math.cos(angle);
+    const py = y + r * Math.sin(angle);
+    i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+  }
+  ctx.closePath();
+  ctx.fillStyle = fill;
+  ctx.fill();
+  ctx.strokeStyle = stroke;
+  ctx.lineWidth = 1;
+  ctx.stroke();
+}
 
-function drawAurora(t) {
-  BANDS.forEach((band, bi) => {
-    const color   = currentTheme.aurora[band.ci];
-    const rgb     = hexToRgbStr(color);
-    const bandH   = H * band.width;
-    const baseY   = H * band.yBase;
+/* ─── EXPERIENCE: Flowing timeline streams ─── */
+function drawExperience(alpha) {
+  const t = Date.now() * 0.001;
+
+  const gr = ctx.createRadialGradient(0, H * 0.5, 0, 0, H * 0.5, W * 0.4);
+  gr.addColorStop(0, TEAL + (0.07 * alpha) + ')');
+  gr.addColorStop(1, 'transparent');
+  ctx.fillStyle = gr;
+  ctx.fillRect(0, 0, W, H);
+
+  const streams = 8;
+  for (let s = 0; s < streams; s++) {
+    const sx = W * (s / (streams - 1));
+    const phase = (s / streams) * Math.PI * 2;
 
     ctx.beginPath();
-    for (let x = 0; x <= W; x += 4) {
-      const y = baseY
-        + Math.sin(x * band.freq + t * band.speed) * H * band.amp
-        + Math.sin(x * band.freq * 1.7 + t * band.speed * 0.6 + bi * 0.8) * H * band.amp * 0.35
-        + Math.sin(x * band.freq * 0.4 + t * band.speed * 1.4) * H * band.amp * 0.18;
-      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    for (let y = 0; y <= H; y += 3) {
+      const x = sx + Math.sin(y * 0.008 + t * 0.8 + phase) * 30
+                   + Math.sin(y * 0.015 + t * 0.5 + phase * 0.5) * 15;
+      y === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
     }
-    for (let x = W; x >= 0; x -= 4) {
-      const y = baseY + bandH
-        + Math.sin(x * band.freq * 1.1 + t * band.speed * 0.8 + 1.2) * H * band.amp * 0.55
-        + Math.sin(x * band.freq * 0.6 + t * band.speed * 1.2) * H * band.amp * 0.28;
-      ctx.lineTo(x, y);
-    }
-    ctx.closePath();
+    const col = s % 3 === 0 ? ORANGE : s % 3 === 1 ? BLUE : TEAL;
+    ctx.strokeStyle = col + (0.04 * alpha) + ')';
+    ctx.lineWidth = 1;
+    ctx.stroke();
 
-    const ag = ctx.createLinearGradient(0, baseY, 0, baseY + bandH);
-    ag.addColorStop(0,   `rgba(${rgb},0)`);
-    ag.addColorStop(0.25,`rgba(${rgb},0.10)`);
-    ag.addColorStop(0.5, `rgba(${rgb},0.18)`);
-    ag.addColorStop(0.75,`rgba(${rgb},0.10)`);
-    ag.addColorStop(1,   `rgba(${rgb},0)`);
-    ctx.fillStyle = ag;
-    ctx.fill();
+    const dotY = ((t * 80 * (0.5 + s * 0.1)) % H);
+    const dotX = sx + Math.sin(dotY * 0.008 + t * 0.8 + phase) * 30;
+    const dg = ctx.createRadialGradient(dotX, dotY, 0, dotX, dotY, 12);
+    dg.addColorStop(0, col + (0.5 * alpha) + ')');
+    dg.addColorStop(1, 'transparent');
+    ctx.fillStyle = dg;
+    ctx.fillRect(dotX - 12, dotY - 12, 24, 24);
+  }
 
-    // Bright spine
+  for (let d = 0; d < 5; d++) {
+    const progress = ((t * 0.15 + d * 0.2) % 1);
+    const x1 = -W * 0.2 + W * 1.4 * progress;
     ctx.beginPath();
-    for (let x = 0; x <= W; x += 4) {
-      const y = baseY + bandH * 0.5
-        + Math.sin(x * band.freq + t * band.speed) * H * band.amp * 0.9
-        + Math.sin(x * band.freq * 1.7 + t * band.speed * 0.6 + bi * 0.8) * H * band.amp * 0.3;
-      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    ctx.moveTo(x1, 0);
+    ctx.lineTo(x1 - W * 0.1, H);
+    ctx.strokeStyle = WHITE + (0.015 * alpha) + ')';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+}
+
+/* ─── PROJECTS: Floating geometric shapes ─── */
+const projectShapes = [];
+(function initProjects() {
+  for (let i = 0; i < 18; i++) {
+    projectShapes.push({
+      x: Math.random() * 1920,
+      y: Math.random() * 1080,
+      size: Math.random() * 50 + 20,
+      type: Math.floor(Math.random() * 3),
+      rot: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.01,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      color: Math.random() > 0.5 ? ORANGE : BLUE,
+      opacity: Math.random() * 0.07 + 0.02,
+    });
+  }
+})();
+
+function drawProjects(alpha) {
+  const t = Date.now() * 0.001;
+
+  const gr = ctx.createRadialGradient(W * 0.5, H, 0, W * 0.5, H, W * 0.6);
+  gr.addColorStop(0, PURPLE + (0.08 * alpha) + ')');
+  gr.addColorStop(1, 'transparent');
+  ctx.fillStyle = gr;
+  ctx.fillRect(0, 0, W, H);
+
+  const gr2 = ctx.createRadialGradient(W * 0.9, H * 0.1, 0, W * 0.9, H * 0.1, W * 0.35);
+  gr2.addColorStop(0, ORANGE + (0.06 * alpha) + ')');
+  gr2.addColorStop(1, 'transparent');
+  ctx.fillStyle = gr2;
+  ctx.fillRect(0, 0, W, H);
+
+  projectShapes.forEach(s => {
+    s.x += s.vx; s.y += s.vy; s.rot += s.rotSpeed;
+    if (s.x < -100) s.x = 1920 + 100;
+    if (s.x > 1920 + 100) s.x = -100;
+    if (s.y < -100) s.y = 1080 + 100;
+    if (s.y > 1080 + 100) s.y = -100;
+
+    const sx = s.x * (W / 1920);
+    const sy = s.y * (H / 1080);
+
+    ctx.save();
+    ctx.translate(sx, sy);
+    ctx.rotate(s.rot);
+    ctx.globalAlpha = s.opacity * alpha;
+
+    if (s.type === 0) {
+      ctx.beginPath();
+      ctx.arc(0, 0, s.size, 0, Math.PI * 2);
+      ctx.strokeStyle = s.color + '1)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    } else if (s.type === 1) {
+      ctx.beginPath();
+      ctx.moveTo(0, -s.size);
+      ctx.lineTo(s.size * 0.866, s.size * 0.5);
+      ctx.lineTo(-s.size * 0.866, s.size * 0.5);
+      ctx.closePath();
+      ctx.strokeStyle = s.color + '1)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    } else {
+      ctx.beginPath();
+      ctx.strokeRect(-s.size / 2, -s.size / 2, s.size, s.size);
+      ctx.strokeStyle = s.color + '1)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
     }
-    ctx.strokeStyle = `rgba(${rgb},0.22)`;
-    ctx.lineWidth   = 2;
+
+    ctx.globalAlpha = 1;
+    ctx.restore();
+  });
+
+  const scanY = (t * 60) % H;
+  const scanGrad = ctx.createLinearGradient(0, scanY - 60, 0, scanY + 60);
+  scanGrad.addColorStop(0, 'transparent');
+  scanGrad.addColorStop(0.5, BLUE + (0.03 * alpha) + ')');
+  scanGrad.addColorStop(1, 'transparent');
+  ctx.fillStyle = scanGrad;
+  ctx.fillRect(0, scanY - 60, W, 120);
+}
+
+/* ─── CONTACT: Pulsing ripple rings ─── */
+const ripples = [];
+let lastRipple = 0;
+
+function spawnRipple() {
+  ripples.push({
+    x: W * (0.3 + Math.random() * 0.4),
+    y: H * (0.2 + Math.random() * 0.6),
+    r: 0,
+    maxR: 180 + Math.random() * 120,
+    opacity: 0.15,
+    color: Math.random() > 0.5 ? ORANGE : BLUE,
+  });
+}
+
+function drawContact(alpha) {
+  const now = Date.now();
+  if (now - lastRipple > 1200) { spawnRipple(); lastRipple = now; }
+
+  const gr = ctx.createRadialGradient(W * 0.5, H * 0.5, 0, W * 0.5, H * 0.5, W * 0.5);
+  gr.addColorStop(0, ORANGE + (0.06 * alpha) + ')');
+  gr.addColorStop(0.5, BLUE + (0.04 * alpha) + ')');
+  gr.addColorStop(1, 'transparent');
+  ctx.fillStyle = gr;
+  ctx.fillRect(0, 0, W, H);
+
+  for (let i = ripples.length - 1; i >= 0; i--) {
+    const rip = ripples[i];
+    rip.r += 1.2;
+    rip.opacity = 0.15 * (1 - rip.r / rip.maxR) * alpha;
+
+    if (rip.r >= rip.maxR) { ripples.splice(i, 1); continue; }
+
+    ctx.beginPath();
+    ctx.arc(rip.x, rip.y, rip.r, 0, Math.PI * 2);
+    ctx.strokeStyle = rip.color + rip.opacity + ')';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    if (rip.r > 30) {
+      ctx.beginPath();
+      ctx.arc(rip.x, rip.y, rip.r * 0.6, 0, Math.PI * 2);
+      ctx.strokeStyle = rip.color + (rip.opacity * 0.5) + ')';
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+    }
+  }
+
+  const t = Date.now() * 0.001;
+  [[0.1,0.1],[0.9,0.1],[0.1,0.9],[0.9,0.9]].forEach(([cx,cy],idx) => {
+    const r = 60 + Math.sin(t * 0.5 + idx) * 10;
+    ctx.beginPath();
+    ctx.arc(W * cx, H * cy, r, 0, Math.PI * 2);
+    ctx.strokeStyle = ORANGE + (0.06 * alpha) + ')';
+    ctx.lineWidth = 0.8;
     ctx.stroke();
   });
 }
 
-/* ══════════════════════════════════════════
-   PARTICLES  — glowing drifting dots
-   ══════════════════════════════════════════ */
-const MAX_P   = 100;
-const parts   = [];
+/* ══════════════════════════════════════
+   SECTION STATE MANAGER
+   ══════════════════════════════════════ */
+const sectionRenderers = {
+  home:         drawHome,
+  about:        drawAbout,
+  services:     drawServices,
+  experience:   drawExperience,
+  projects:     drawProjects,
+  testimonials: drawAbout,
+  contact:      drawContact,
+};
 
-function spawnPart() {
-  const col = hexToRgb(currentTheme.aurora[Math.floor(Math.random() * 3)]);
-  parts.push({
-    x:  Math.random() * W,
-    y:  H + 10,
-    r:  Math.random() * 2.0 + 0.5,
-    vy: -(Math.random() * 0.55 + 0.2),
-    vx: (Math.random() - 0.5) * 0.25,
-    op: Math.random() * 0.65 + 0.35,
-    ph: Math.random() * Math.PI * 2,
-    col,
-    life: 0,
-    maxLife: 320 + Math.random() * 380,
-  });
+let currentRenderer = drawHome;
+let nextRenderer    = null;
+
+function initSection(id) {
+  nextRenderer = sectionRenderers[id] || drawHome;
 }
 
-for (let i = 0; i < MAX_P; i++) {
-  spawnPart();
-  parts[i].y    = Math.random() * H;
-  parts[i].life = Math.random() * parts[i].maxLife;
-}
-
-function drawParticles(t) {
-  if (parts.length < MAX_P && Math.random() < 0.5) spawnPart();
-
-  for (let i = parts.length - 1; i >= 0; i--) {
-    const p = parts[i];
-    p.x += p.vx + Math.sin(t * 0.45 + p.ph) * 0.12;
-    p.y += p.vy;
-    p.life++;
-    p.ph += 0.018;
-
-    if (p.life >= p.maxLife || p.y < -20) { parts.splice(i,1); continue; }
-
-    const lr   = p.life / p.maxLife;
-    const fade = lr < 0.12 ? lr * 8.3 : lr > 0.78 ? (1 - lr) * 4.5 : 1;
-    const glow = Math.sin(p.ph) * 0.28 + 0.72;
-    const [r,g,b] = p.col;
-
-    // Soft glow halo
-    const pg = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 6);
-    pg.addColorStop(0, `rgba(${r},${g},${b},${0.18 * fade * glow})`);
-    pg.addColorStop(1, 'transparent');
-    ctx.fillStyle = pg;
-    ctx.fillRect(p.x - p.r * 6, p.y - p.r * 6, p.r * 12, p.r * 12);
-
-    // Core
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r * glow, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(${r},${g},${b},${p.op * fade})`;
-    ctx.fill();
-  }
-}
-
-/* ══════════════════════════════════════════
-   AMBIENT CORNER GLOWS
-   ══════════════════════════════════════════ */
-function drawAmbient(t) {
-  const pulse = Math.sin(t * 0.28) * 0.03;
-
-  const g1 = ctx.createRadialGradient(W, 0, 0, W, 0, W * 0.55);
-  g1.addColorStop(0, currentTheme.glowA + (0.14 + pulse) + ')');
-  g1.addColorStop(1, 'transparent');
-  ctx.fillStyle = g1; ctx.fillRect(0,0,W,H);
-
-  const g2 = ctx.createRadialGradient(0, H, 0, 0, H, W * 0.48);
-  g2.addColorStop(0, currentTheme.glowB + (0.11 + pulse) + ')');
-  g2.addColorStop(1, 'transparent');
-  ctx.fillStyle = g2; ctx.fillRect(0,0,W,H);
-
-  const g3 = ctx.createRadialGradient(W*0.5, H*0.5, 0, W*0.5, H*0.5, W*0.38);
-  g3.addColorStop(0, currentTheme.glowA + (0.04 + Math.sin(t*0.4)*0.02) + ')');
-  g3.addColorStop(1, 'transparent');
-  ctx.fillStyle = g3; ctx.fillRect(0,0,W,H);
-}
-
-/* ══════════════════════════════════════════
-   SECTION OBSERVER
-   ══════════════════════════════════════════ */
-['home','about','services','experience','projects','testimonials','contact'].forEach(id => {
-  const el = document.getElementById(id);
-  if (!el) return;
-  new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) setTheme(id);
-  }, { threshold: 0.25 }).observe(el);
-});
-
-/* ══════════════════════════════════════════
-   RENDER LOOP
-   ══════════════════════════════════════════ */
-const startTime = Date.now();
-
+/* ══════════════════════════════════════
+   MAIN RENDER LOOP
+   ══════════════════════════════════════ */
 function render() {
-  const t = (Date.now() - startTime) * 0.001;
-
-  // Ease theme transition
-  if (themeProgress < 1) {
-    themeProgress = Math.min(1, themeProgress + 0.011);
-    const p = themeProgress < 0.5
-      ? 2 * themeProgress * themeProgress
-      : 1 - Math.pow(-2 * themeProgress + 2, 2) / 2;
-    currentTheme = {
-      aurora: fromTheme.aurora.map((c, i) => lerpColor(c, toTheme.aurora[i], p)),
-      glowA:  p < 0.5 ? fromTheme.glowA : toTheme.glowA,
-      glowB:  p < 0.5 ? fromTheme.glowB : toTheme.glowB,
-    };
-  }
-
   ctx.clearRect(0, 0, W, H);
 
-  drawMesh(t);       // Layer 1 — deep liquid gradient mesh
-  drawAmbient(t);    // Layer 2 — corner & center ambient glows
-  drawAurora(t);     // Layer 3 — aurora bands (main wow effect)
-  drawParticles(t);  // Layer 4 — floating glowing particles
+  if (nextRenderer && transitionProgress < 1) {
+    currentRenderer(1 - transitionProgress);
+    nextRenderer(transitionProgress);
+    transitionProgress = Math.min(1, transitionProgress + transitionSpeed);
+
+    if (transitionProgress >= 1) {
+      currentSection  = targetSection;
+      currentRenderer = nextRenderer;
+      nextRenderer    = null;
+    }
+  } else {
+    currentRenderer(1);
+  }
 
   requestAnimationFrame(render);
 }
 
-resize();
 render();
