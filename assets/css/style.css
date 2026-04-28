@@ -137,30 +137,14 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
   flex-shrink: 0;
 }
-.logo-box {
-  width: 40px; height: 40px;
-  background: linear-gradient(135deg, var(--orange), var(--blue));
-  border-radius: 10px;
-  display: grid; place-items: center;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 0.9rem;
-  color: #fff;
-}
-.logo-name {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--text-1);
-}
-.logo-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--orange);
-  animation: pulse 2s infinite;
+
+.logo-img {
+  height: 120px; /* match your navbar height */
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 .nav-menu { margin-left: auto; }
 .nav-list {
