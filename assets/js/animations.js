@@ -8,7 +8,7 @@
 
 /* ---- TYPEWRITER EFFECT ---- */
 const typedEl = document.getElementById('typed-text');
-const words = ['rule.', 'grow.', 'convert.', 'lead.'];
+const words = ['dominate.', 'grow.', 'convert.', 'lead.'];
 let wordIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
@@ -67,7 +67,7 @@ function initCounters() {
 }
 
 // Trigger counters when stats card enters view
-const statsCard = document.querySelector('.stats-card');
+const statsCard = document.querySelector('.stats-card-vertical');
 if (statsCard) {
   const statsObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {

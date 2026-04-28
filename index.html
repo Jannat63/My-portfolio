@@ -67,7 +67,7 @@
     <div class="nav-container">
 
       <a href="#home" class="nav-logo">
-  <img src="assets/images/logo.png" alt="Ahsan Jannat Logo" class="logo-img">
+        <img src="assets/images/logo.png" alt="Ahsan Jannat Logo" class="logo-img">
       </a>
 
       <nav class="nav-menu" id="navMenu">
@@ -98,6 +98,7 @@
 
     <div class="hero-container">
 
+      <!-- LEFT: Text Content -->
       <div class="hero-left" data-reveal="left">
         <p class="hero-tag">
           <span class="tag-pill">SEO · AEO · GEO</span>
@@ -130,35 +131,67 @@
         </div>
       </div>
 
-      <div class="hero-right" data-reveal="right">
+      <!-- CENTER: Portrait + decorative lines -->
+      <div class="hero-center" data-reveal="up">
         <div class="portrait-wrap">
-          <div class="portrait-glow"></div>
-          <!--
-            IMPORTANT: Place your oil painting image at:
-            assets/images/portrait.png
-          -->
-          <img src="./assets/images/portrait.png" alt="Ahsan Jannat – SEO AEO GEO Expert" class="portrait-img" id="portraitImg">
-          <div class="portrait-ring"></div>
-        </div>
+          <!-- Decorative flowing SVG lines -->
+          <svg class="deco-lines" viewBox="0 0 700 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 350 50 Q 600 200 580 420 Q 560 600 350 700" stroke="url(#lineGrad1)" stroke-width="1.5" opacity="0.6"/>
+            <path d="M 350 80 Q 120 220 140 430 Q 160 610 350 720" stroke="url(#lineGrad2)" stroke-width="1" opacity="0.4"/>
+            <path d="M 200 30 Q 680 300 650 500 Q 620 650 400 730" stroke="url(#lineGrad1)" stroke-width="1" opacity="0.3"/>
+            <circle cx="580" cy="200" r="5" fill="#f97316" opacity="0.8"/>
+            <circle cx="140" cy="430" r="4" fill="#3b82f6" opacity="0.7"/>
+            <circle cx="620" cy="480" r="3" fill="#f97316" opacity="0.5"/>
+            <defs>
+              <linearGradient id="lineGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f97316" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.3"/>
+              </linearGradient>
+              <linearGradient id="lineGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#f97316" stop-opacity="0.2"/>
+              </linearGradient>
+            </defs>
+          </svg>
 
-        <div class="stats-card" data-reveal="up">
-          <div class="stat-item">
-            <i class="fa-solid fa-briefcase stat-icon"></i>
-            <div class="stat-num-row"><strong class="stat-num" data-target="3">0</strong><span class="stat-plus">+</span></div>
+          <div class="portrait-glow"></div>
+          <img src="./assets/images/portrait.png" alt="Ahsan Jannat – SEO AEO GEO Expert" class="portrait-img" id="portraitImg">
+          <p class="portrait-sig">Ahsan Jannat</p>
+        </div>
+      </div>
+
+      <!-- RIGHT: Vertical Stats Card -->
+      <div class="hero-right" data-reveal="right">
+        <div class="stats-card-vertical">
+
+          <div class="stat-item-v">
+            <div class="stat-top-row">
+              <div class="stat-icon-wrap"><i class="fa-solid fa-briefcase"></i></div>
+              <div class="stat-num-row"><strong class="stat-num" data-target="3">0</strong><span class="stat-plus">+</span></div>
+            </div>
             <p class="stat-label">Years Experience</p>
           </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <i class="fa-solid fa-chart-line stat-icon"></i>
-            <div class="stat-num-row"><strong class="stat-num" data-target="50">0</strong><span class="stat-plus">+</span></div>
+
+          <div class="stat-divider-h"></div>
+
+          <div class="stat-item-v">
+            <div class="stat-top-row">
+              <div class="stat-icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
+              <div class="stat-num-row"><strong class="stat-num" data-target="50">0</strong><span class="stat-plus">+</span></div>
+            </div>
             <p class="stat-label">Projects Completed</p>
           </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <i class="fa-solid fa-ranking-star stat-icon"></i>
-            <div class="stat-num-row"><strong class="stat-num" data-target="300">0</strong><span class="stat-plus">+</span></div>
+
+          <div class="stat-divider-h"></div>
+
+          <div class="stat-item-v">
+            <div class="stat-top-row">
+              <div class="stat-icon-wrap"><i class="fa-solid fa-ranking-star"></i></div>
+              <div class="stat-num-row"><strong class="stat-num" data-target="300">0</strong><span class="stat-plus">+</span></div>
+            </div>
             <p class="stat-label">Keywords Ranked</p>
           </div>
+
         </div>
       </div>
 
