@@ -64,11 +64,33 @@
 .faq-item.open .faq-a { max-height:240px; padding-bottom:18px; }
 .faq-a p { font-size:.9rem; color:var(--muted); line-height:1.8; }
 
-.map-wrap { border-radius:16px; overflow:hidden; border:1px solid var(--border); margin-top:3rem; height:280px; background:var(--bg2); position:relative; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; }
-.map-wrap i { font-size:2.5rem; color:var(--sage); opacity:.4; }
-.map-wrap p { font-size:13.5px; color:var(--muted); }
-.map-link { display:inline-flex; align-items:center; gap:7px; color:var(--sage); font-size:13px; font-weight:500; margin-top:4px; transition:gap .2s; }
-.map-link:hover { gap:11px; }
+
 
 @media(max-width:860px) { .contact-wrap { grid-template-columns:1fr; } }
 @media(max-width:600px) { .form-row,.budget-row { grid-template-columns:1fr; } .form-outer { padding:24px; } .contact-socials-row { flex-wrap:wrap; } .trust-strip { gap:1.5rem; } }
+
+/* ── REAL GOOGLE MAP EMBED ── */
+.map-wrap {
+  border-radius: 16px; overflow: hidden;
+  border: 1px solid var(--border); margin-top: 3rem;
+  height: 320px; position: relative;
+  box-shadow: var(--shadow);
+}
+.map-wrap iframe {
+  width: 100%; height: 100%;
+  display: block; border: 0;
+  filter: grayscale(20%) contrast(1.05);
+  transition: filter .3s;
+}
+.map-wrap:hover iframe { filter: grayscale(0%) contrast(1); }
+.map-open-link {
+  position: absolute; bottom: 14px; right: 14px;
+  display: inline-flex; align-items: center; gap: 7px;
+  background: #fff; color: var(--ink);
+  padding: 8px 14px; border-radius: 8px;
+  font-size: 12.5px; font-weight: 500;
+  box-shadow: 0 2px 12px rgba(0,0,0,.15);
+  transition: all .2s; text-decoration: none;
+}
+.map-open-link:hover { background: var(--sage); color: #fff; }
+[data-theme="dark"] .map-open-link { background: var(--card); color: var(--ink); }

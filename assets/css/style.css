@@ -444,3 +444,27 @@ button { font-family: var(--sans); cursor: pointer; }
 .cta-band-dark h2 { color: #fff !important; }
 #cta-band p,
 .cta-band-dark p  { color: rgba(255,255,255,.55) !important; }
+
+/* ── MOBILE NAV — Let's Talk button readable in dark mode ── */
+@media (max-width: 860px) {
+  .n-right .btn-dark {
+    background: var(--sage) !important;
+    color: #fff !important;
+    border: none !important;
+  }
+  .n-right .btn-dark:hover {
+    background: var(--sage2) !important;
+  }
+  /* Mobile menu CTA button */
+  .mob-menu .btn-dark {
+    background: var(--sage);
+    color: #fff !important;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+    border: none;
+  }
+  .mob-menu .btn-dark:hover {
+    background: var(--sage2);
+  }
+}
