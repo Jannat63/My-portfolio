@@ -51,6 +51,7 @@
 
 /* ── FEATURED IMAGE ── */
 .post-featured-image {
+  position: relative;
   max-width: 900px; margin: 0 auto;
   border-radius: 16px; overflow: hidden;
   box-shadow: var(--shadow2);
@@ -60,7 +61,12 @@
   position: relative;
 }
 .post-featured-image img {
-  width: 100%; height: 100%; object-fit: cover;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   display: block;
 }
 .post-image-placeholder {
@@ -379,7 +385,8 @@
 }
 @media(max-width:860px) {
   .post-hero-inner { padding: 0 1.5rem 2rem; }
-  .post-featured-image { margin: 0 1.5rem; border-radius: 12px; }
+  .post-featured-image {
+  position: relative; margin: 0 1.5rem; border-radius: 12px; }
   .post-layout { margin-top: 40px; padding: 0 1.5rem; }
   .post-sidebar { grid-template-columns: 1fr; }
   .post-title { font-size: clamp(1.8rem, 5vw, 2.8rem); }
@@ -390,7 +397,8 @@
 }
 @media(max-width:600px) {
   .post-hero-inner { padding: 0 1rem 1.5rem; }
-  .post-featured-image { margin: 0 1rem; aspect-ratio: 4/3; }
+  .post-featured-image {
+  position: relative; margin: 0 1rem; aspect-ratio: 4/3; }
   .post-layout { padding: 0 1rem; margin-top: 28px; }
   .post-title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
   .post-meta-row { gap: 8px; flex-wrap: wrap; }
