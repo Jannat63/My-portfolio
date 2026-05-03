@@ -373,15 +373,45 @@
 }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 1024px) {
-  .post-layout { grid-template-columns: 1fr; }
-  .post-sidebar { position: static; }
+@media(max-width:1024px) {
+  .post-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .post-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 }
-@media (max-width: 600px) {
-  .post-hero-inner { padding: 0 1.25rem 2rem; }
-  .post-layout { padding: 0 1.25rem; }
+@media(max-width:860px) {
+  .post-hero-inner { padding: 0 1.5rem 2rem; }
+  .post-featured-image { margin: 0 1.5rem; border-radius: 12px; }
+  .post-layout { margin-top: 40px; padding: 0 1.5rem; }
+  .post-sidebar { grid-template-columns: 1fr; }
+  .post-title { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+  .post-meta-row { gap: 10px; font-size: 12px; }
   .post-nav { grid-template-columns: 1fr; }
-  .post-author-box { flex-direction: column; }
-  .author-avatar { width: 60px; height: 60px; font-size: 1.4rem; }
-  .post-meta-row { gap: 12px; font-size: 12px; }
+  .post-author-box { flex-direction: column; gap: 16px; }
+  .author-avatar { width: 56px; height: 56px; font-size: 1.3rem; }
+}
+@media(max-width:600px) {
+  .post-hero-inner { padding: 0 1rem 1.5rem; }
+  .post-featured-image { margin: 0 1rem; aspect-ratio: 4/3; }
+  .post-layout { padding: 0 1rem; margin-top: 28px; }
+  .post-title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+  .post-meta-row { gap: 8px; flex-wrap: wrap; }
+  .post-body h2 { font-size: clamp(1.3rem, 4vw, 1.7rem); }
+  .post-body h3 { font-size: 1.1rem; }
+  .post-body p, .post-body ul li, .post-body ol li { font-size: .975rem; }
+  .post-table { font-size: .8rem; }
+  .post-table th, .post-table td { padding: 8px 10px; }
+  .post-stat { flex-direction: column; gap: 8px; }
+  .post-stat-num { font-size: 2rem; }
+  .post-cta { padding: 1.5rem; }
+  .post-cta h3 { font-size: 1.3rem; }
+  .toc { padding: 16px; }
+  .share-btns { gap: 6px; }
+  .share-btn { padding: 8px 12px; font-size: 12px; }
+  .post-author-box { padding: 20px; }
+  .author-links { flex-wrap: wrap; }
+}
+@media(max-width:400px) {
+  .post-nav .post-nav-item { padding: 14px; }
+  .post-nav-title { font-size: 13px; }
+  .post-tags { gap: 6px; }
+  .post-tag { font-size: 11px; padding: 4px 10px; }
 }

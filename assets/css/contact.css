@@ -66,20 +66,21 @@
 
 
 
-@media(max-width:860px) { .contact-wrap { grid-template-columns:1fr; } }
-@media(max-width:600px) { .form-row,.budget-row { grid-template-columns:1fr; } .form-outer { padding:24px; } .contact-socials-row { flex-wrap:wrap; } .trust-strip { gap:1.5rem; } }
 
-/* ── REAL GOOGLE MAP EMBED ── */
+/* ── FULL-WIDTH MAP ── */
 .map-wrap {
   border-radius: 16px; overflow: hidden;
-  border: 1px solid var(--border); margin-top: 3rem;
-  height: 320px; position: relative;
-  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  position: relative; box-shadow: var(--shadow);
+  height: 420px; /* taller since it's full width now */
+}
+.map-full {
+  width: 100%; /* spans full contact section width */
 }
 .map-wrap iframe {
   width: 100%; height: 100%;
   display: block; border: 0;
-  filter: grayscale(20%) contrast(1.05);
+  filter: grayscale(15%) contrast(1.05);
   transition: filter .3s;
 }
 .map-wrap:hover iframe { filter: grayscale(0%) contrast(1); }
@@ -87,10 +88,38 @@
   position: absolute; bottom: 14px; right: 14px;
   display: inline-flex; align-items: center; gap: 7px;
   background: #fff; color: var(--ink);
-  padding: 8px 14px; border-radius: 8px;
-  font-size: 12.5px; font-weight: 500;
-  box-shadow: 0 2px 12px rgba(0,0,0,.15);
-  transition: all .2s; text-decoration: none;
+  padding: 9px 16px; border-radius: 8px;
+  font-size: 13px; font-weight: 500;
+  box-shadow: 0 2px 16px rgba(0,0,0,.15);
+  transition: all .2s; text-decoration: none; z-index: 10;
 }
 .map-open-link:hover { background: var(--sage); color: #fff; }
 [data-theme="dark"] .map-open-link { background: var(--card); color: var(--ink); }
+
+@media(max-width:860px) {
+  .map-wrap { height: 300px; }
+}
+@media(max-width:600px) {
+  .map-wrap { height: 240px; border-radius: 12px; }
+  .map-open-link { font-size: 12px; padding: 7px 12px; }
+}
+
+/* ── CONTACT EXTRA RESPONSIVE ── */
+@media(max-width:860px) {
+  .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+  .trust-strip { gap: 1.2rem; padding: 20px; }
+  .trust-item span { font-size: 12px; }
+  .contact-socials-row { flex-wrap: wrap; gap: 8px; }
+  .faq-simple { margin-top: 1.5rem; }
+}
+@media(max-width:600px) {
+  .form-row, .budget-row { grid-template-columns: 1fr; }
+  .form-outer { padding: 20px 16px; }
+  .trust-strip { flex-wrap: wrap; justify-content: flex-start; }
+  .trust-item { width: calc(50% - 0.6rem); }
+  .avail-card { flex-wrap: wrap; }
+}
+@media(max-width:400px) {
+  .trust-item { width: 100%; }
+  .cs-btn { font-size: 12px; padding: 8px 12px; }
+}

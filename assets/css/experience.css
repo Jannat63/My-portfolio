@@ -41,5 +41,21 @@
 .achieve-card h4 { font-size:.975rem; font-weight:600; color:var(--ink); margin-bottom:8px; }
 .achieve-card p { font-size:.85rem; color:var(--muted); line-height:1.75; }
 
-@media(max-width:860px) { .exp-layout { grid-template-columns:1fr; gap:3rem; } .stats-row { grid-template-columns:repeat(2,1fr); } .tools-big { grid-template-columns:repeat(2,1fr); } .achieve-grid { grid-template-columns:1fr 1fr; } }
-@media(max-width:600px) { .stats-row { grid-template-columns:1fr 1fr; } .achieve-grid { grid-template-columns:1fr; } }
+/* ── EXPERIENCE EXTRA RESPONSIVE ── */
+@media(max-width:860px) {
+  .exp-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .stats-row { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .tools-big { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .achieve-grid { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:600px) {
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .achieve-grid { grid-template-columns: 1fr; }
+  .tools-big { grid-template-columns: 1fr 1fr; }
+  .tl-card { padding: 16px; }
+  .stat-box .num { font-size: 1.8rem; }
+}
+@media(max-width:400px) {
+  .stats-row { grid-template-columns: 1fr; }
+  .tools-big { grid-template-columns: 1fr 1fr; }
+}

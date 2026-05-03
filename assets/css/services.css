@@ -48,5 +48,19 @@
 .faq-item.open .faq-a { max-height:300px; padding-bottom:20px; }
 .faq-a p { font-size:.9rem; color:var(--muted); line-height:1.8; }
 
-@media(max-width:860px) { .svc-full { grid-template-columns:1fr; } .process-steps { grid-template-columns:1fr 1fr; gap:2rem; } .process-steps::before { display:none; } .pricing-grid { grid-template-columns:1fr; } }
-@media(max-width:600px) { .process-steps { grid-template-columns:1fr; } .svc-big-body,.svc-big-header { padding:20px; } .svc-big-footer { padding:16px 20px; flex-direction:column; gap:10px; } }
+/* ── SERVICES EXTRA RESPONSIVE ── */
+@media(max-width:860px) {
+  .svc-full { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .process-steps::before { display: none; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .faq-list { margin-top: 1.5rem; }
+}
+@media(max-width:600px) {
+  .process-steps { grid-template-columns: 1fr; }
+  .svc-big-header { padding: 20px; gap: 12px; }
+  .svc-big-body { padding: 16px 20px; }
+  .svc-big-footer { padding: 14px 20px; flex-direction: column; gap: 10px; align-items: flex-start; }
+  .price-card { padding: 24px 20px; }
+  .faq-q { font-size: .9rem; }
+}

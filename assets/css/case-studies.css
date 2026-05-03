@@ -49,5 +49,21 @@
 .proj-info-bar h3 { font-size:14px; font-weight:500; color:var(--ink); }
 .proj-cat-dot { font-size:10px; color:var(--sage); font-weight:500; }
 
-@media(max-width:860px) { .case-big-inner { grid-template-columns:1fr; } .metrics-inner { grid-template-columns:repeat(2,1fr); } .proj-gallery { grid-template-columns:repeat(2,1fr); } }
-@media(max-width:600px) { .proj-gallery { grid-template-columns:1fr; } .case-big-content { padding:24px; } .case-big-chart { padding:24px; } .case-footer { padding:16px 24px; } .metrics-inner { grid-template-columns:1fr 1fr; } }
+/* ── CASE STUDIES EXTRA RESPONSIVE ── */
+@media(max-width:860px) {
+  .case-big-inner { grid-template-columns: 1fr; }
+  .metrics-inner { grid-template-columns: 1fr 1fr; }
+  .met-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.15); }
+  .met-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,.15); }
+  .met-item:last-child { border-bottom: none; }
+  .proj-gallery { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:600px) {
+  .proj-gallery { grid-template-columns: 1fr; }
+  .metrics-inner { grid-template-columns: 1fr 1fr; }
+  .case-big-content { padding: 20px 16px; }
+  .case-big-chart { padding: 20px 16px; }
+  .case-footer { padding: 14px 16px; flex-direction: column; gap: 10px; }
+  .case-big-num { font-size: 2.8rem; }
+  .pf-btn { padding: 7px 14px; font-size: 12px; }
+}

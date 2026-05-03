@@ -24,7 +24,7 @@
 .post-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.25rem; }
 .post-card { background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:all .3s; }
 .post-card:hover { transform:translateY(-4px); box-shadow:var(--shadow2); border-color:var(--border2); }
-.post-card-thumb { aspect-ratio:16/9; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.post-card-thumb { aspect-ratio:16/9; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; background:var(--bg2); }
 .post-thumb-icon { font-size:3rem; opacity:.2; color:var(--sage); }
 .post-cat-pill { position:absolute; top:12px; left:12px; font-size:9px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; background:var(--sage); color:#fff; padding:3px 10px; border-radius:4px; }
 .post-card-body { padding:18px 20px 20px; }
@@ -77,6 +77,21 @@
 .nl-form button { padding:11px; background:var(--sage); color:#fff; border:none; border-radius:8px; font-size:13.5px; font-weight:500; cursor:pointer; transition:background .2s; font-family:var(--sans); }
 .nl-form button:hover { background:var(--sage2); }
 
-@media(max-width:1024px) { .blog-layout { grid-template-columns:1fr; } .sidebar { position:static; } }
-@media(max-width:860px) { .post-featured { grid-template-columns:1fr; } .post-featured-thumb { min-height:200px; } }
-@media(max-width:600px) { .post-grid { grid-template-columns:1fr; } }
+/* ── BLOG EXTRA RESPONSIVE ── */
+@media(max-width:1024px) {
+  .blog-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+}
+@media(max-width:860px) {
+  .post-featured { grid-template-columns: 1fr; }
+  .post-featured-thumb { min-height: 200px; }
+  .post-grid { grid-template-columns: 1fr 1fr; }
+  .sidebar { grid-template-columns: 1fr; }
+}
+@media(max-width:600px) {
+  .post-grid { grid-template-columns: 1fr; }
+  .blog-filter { gap: 6px; }
+  .bf-btn { padding: 6px 12px; font-size: 12px; }
+  .pagination { gap: 4px; }
+  .pg-btn { width: 34px; height: 34px; font-size: 12px; }
+}
