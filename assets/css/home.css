@@ -119,15 +119,77 @@
 .hero-blob-1 { width: 320px; height: 320px; background: radial-gradient(circle,rgba(107,140,110,.08) 0%,transparent 70%); top: -60px; right: 300px; }
 .hero-blob-2 { width: 200px; height: 200px; background: radial-gradient(circle,rgba(201,160,172,.06) 0%,transparent 70%); bottom: 40px; left: 60px; animation-delay: -3.5s; }
 
-/* ══ TRUSTED BY ══ */
-#trusted { padding: 32px 0; background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.trusted-inner { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; justify-content: space-between; }
-.trusted-label { font-size: 10.5px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-.trusted-logos { display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap; }
-.trusted-logo { font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); transition: color .2s; opacity: .7; }
-.trusted-logo:hover { color: var(--sage); opacity: 1; }
+/* ══ TRUSTED BY — MARQUEE TICKER ══ */
+#trusted {
+  padding: 0;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.trusted-header {
+  text-align: center;
+  padding: 18px 0 10px;
+}
+.trusted-label-new {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 10px; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted);
+}
+.trusted-label-new i { color: var(--sage); font-size: 12px; }
+
+/* Ticker wrapper — clips the scroll */
+.trusted-ticker-wrap {
+  position: relative;
+  overflow: hidden;
+  padding: 14px 0 20px;
+  /* fade edges */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+/* The scrolling strip */
+.trusted-ticker {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: tickerScroll 18s linear infinite;
+}
+.trusted-ticker:hover { animation-play-state: paused; }
+
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Each brand card */
+.ticker-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 32px;
+  margin: 0 8px;
+  background: var(--bg2);
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  white-space: nowrap;
+  transition: all .25s;
+  cursor: default;
+}
+.ticker-item:hover {
+  border-color: var(--border2);
+  background: var(--sage-pal);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.ticker-icon { font-size: 16px; line-height: 1; }
+.ticker-name {
+  font-size: 12.5px; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink2);
+}
+.ticker-item:hover .ticker-name { color: var(--sage); }
 
 /* ══ METRICS BAR ══ */
+
 #metrics { background: var(--sage); padding: 36px 0; }
 .metrics-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
 .metric-item { display: flex; align-items: center; gap: 14px; padding: 12px 22px; border-right: 1px solid rgba(255,255,255,.15); }

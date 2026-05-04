@@ -258,6 +258,32 @@ button { font-family: var(--sans); cursor: pointer; }
 }
 .mob-menu a:hover { color: var(--sage); padding-left: 8px; }
 
+/* Mobile menu CTA button — always visible */
+.mob-menu .btn-dark,
+.mob-menu a.btn-dark {
+  background: var(--sage) !important;
+  color: #fff !important;
+  border: none !important;
+  width: 100%;
+  justify-content: center;
+  margin-top: 1rem;
+  padding: 14px 22px !important;
+  border-radius: 8px !important;
+  font-size: 15px !important;
+  font-weight: 500;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  border-bottom: none !important;
+  padding-left: 22px !important;
+}
+.mob-menu .btn-dark:hover,
+.mob-menu a.btn-dark:hover {
+  background: var(--sage2) !important;
+  color: #fff !important;
+  padding-left: 22px !important;
+}
+
 /* ═══════════════════════════════════
    PAGE HERO (all inner pages)
 ═══════════════════════════════════ */

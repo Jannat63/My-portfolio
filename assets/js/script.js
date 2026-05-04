@@ -198,7 +198,7 @@
   /* ── TYPING EFFECT (Hero only) ── */
   const typedEl = document.getElementById('typedText');
   if (typedEl) {
-    const words = ['Locally', 'Digitally', 'Globally', 'Powerfully'];
+    const words = ['Answered', 'Discovered', 'Found', 'Cited by AI'];
     let wi = 0, ci = 0, deleting = false;
     function type() {
       const word = words[wi];
