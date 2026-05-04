@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xsi:schemaLocation="
+          http://www.sitemaps.org/schemas/sitemap/0.9
+          http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd
+          http://www.google.com/schemas/sitemap-image/1.1
+          http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd">
+
+  <!-- ══════════════════════════════════════════
+       MAIN PAGES
+       Priority scale: 1.0 = highest, 0.1 = lowest
+       Changefreq: always / hourly / daily / weekly / monthly / yearly / never
+  ══════════════════════════════════════════ -->
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/assets/images/portrait.png</image:loc>
+      <image:title>Ahsan Jannat — SEO, AEO & GEO Expert</image:title>
+      <image:caption>Ahsan Jannat — SEO, AEO & GEO Specialist based in Dhaka, Bangladesh</image:caption>
+    </image:image>
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/about.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/assets/images/portrait.png</image:loc>
+      <image:title>About Ahsan Jannat</image:title>
+      <image:caption>Ahsan Jannat — B.Sc. CSE, SEO AEO & GEO Expert, Dhaka Bangladesh</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Services -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/services.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Experience -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/experience.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Case Studies -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/case-studies.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/assets/images/projects/project-1.jpg</image:loc>
+      <image:title>SEO Case Study — Union Agrovet</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/assets/images/projects/project-5.png</image:loc>
+      <image:title>SEO Case Study — Vassker</image:title>
+    </image:image>
+  </url>
+
+  <!-- Blog Listing -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/contact.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ══════════════════════════════════════════
+       BLOG POSTS
+  ══════════════════════════════════════════ -->
+
+  <!-- Post 1: SEO vs AEO vs GEO -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/seo-vs-aeo-vs-geo.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/seo-vs-aeo-vs-geo.jpg</image:loc>
+      <image:title>SEO vs AEO vs GEO: What's the Difference?</image:title>
+      <image:caption>A comparison of SEO, AEO and GEO — the three layers of modern search visibility</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Post 2: How to Rank in AI Overviews -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/how-to-rank-in-ai-overviews.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/how-to-rank-in-ai-overviews.jpg</image:loc>
+      <image:title>How to Rank in Google's AI Overviews & SGE</image:title>
+      <image:caption>Step-by-step guide to getting cited in Google AI Overviews</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Post 3: Technical SEO Checklist 2026 -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/technical-seo-checklist-2026.html</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/technical-seo-checklist-2026.jpg</image:loc>
+      <image:title>Technical SEO Checklist 2026: 30-Point Complete Guide</image:title>
+      <image:caption>The definitive technical SEO checklist covering Core Web Vitals, schema and crawlability</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Post 4: What is GEO -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/what-is-geo.html</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/what-is-geo.jpg</image:loc>
+      <image:title>What Is Generative Engine Optimization (GEO)?</image:title>
+      <image:caption>GEO explained — how to get your brand cited by ChatGPT, Gemini and Perplexity</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Post 5: Google Business Profile Optimization -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/google-business-profile-optimization.html</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/google-business-profile-optimization.jpg</image:loc>
+      <image:title>Google Business Profile Optimization: Complete 2026 Guide</image:title>
+      <image:caption>How to dominate the Google Map Pack with a fully optimized GBP</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Post 6: Link Building 2026 -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/link-building-2026.html</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/link-building-2026.jpg</image:loc>
+      <image:title>Link Building in 2026: What Still Works</image:title>
+      <image:caption>What link building tactics work in 2026 and what will earn you a Google penalty</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Post 7: Core Web Vitals 2026 -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/core-web-vitals-2026.html</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/core-web-vitals-2026.jpg</image:loc>
+      <image:title>Core Web Vitals 2026: How to Pass LCP, INP & CLS</image:title>
+      <image:caption>Complete guide to passing Google's Core Web Vitals — LCP, INP and CLS</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Post 8: How to Win PAA Boxes -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/how-to-win-paa-boxes.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/how-to-win-paa-boxes.jpg</image:loc>
+      <image:title>How to Win People Also Ask Boxes with FAQ Schema</image:title>
+      <image:caption>PAA boxes appear on 75% of searches — here's how to capture them</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Post 9: Website Security & SEO -->
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/website-security-seo-factor.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/website-security-seo-factor.jpg</image:loc>
+      <image:title>Why Website Security is an SEO Factor</image:title>
+      <image:caption>The connection between cybersecurity and search rankings — and how to fix it</image:caption>
+    </image:image>
+  </url>
+
+</urlset>
