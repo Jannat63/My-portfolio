@@ -168,4 +168,37 @@
     </image:image>
   </url>
 
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/how-to-do-keyword-research-for-seo.html</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/how-to-do-keyword-research-for-seo.jpg</image:loc>
+      <image:title>How to Do Keyword Research for SEO in 2026</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/on-page-seo-complete-guide.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/on-page-seo-complete-guide.jpg</image:loc>
+      <image:title>What is On-Page SEO - Complete Beginners Guide 2026</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/seo-vs-sem.html</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/seo-vs-sem.jpg</image:loc>
+      <image:title>SEO vs SEM - What is the Difference</image:title>
+    </image:image>
+  </url>
+
 </urlset>
