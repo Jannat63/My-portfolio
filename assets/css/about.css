@@ -41,8 +41,40 @@
 .cta-strip { background:var(--sage); border-radius:20px; padding:52px 48px; display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap; margin-top:3rem; }
 .cta-strip h3 { font-family:var(--disp); font-size:1.8rem; color:#fff; }
 .cta-strip p { font-size:.9rem; color:rgba(255,255,255,.65); margin-top:6px; }
-.btn-wht { background:rgba(255,255,255,.15); color:#fff; border:1.5px solid rgba(255,255,255,.3); backdrop-filter:blur(8px); display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:7px; font-size:13.5px; font-weight:500; transition:all .25s; }
-.btn-wht:hover { background:#fff; color:var(--sage); transform:translateY(-2px); }
+.btn-wht {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  border: 2px solid rgba(255,255,255,.7);
+  backdrop-filter: blur(8px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all .25s;
+  text-decoration: none;
+  letter-spacing: .01em;
+}
+.btn-wht:hover {
+  background: #fff;
+  color: var(--sage);
+  border-color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.15);
+}
+/* First button (Start a Project) — solid white for maximum visibility */
+.cta-strip-btns .btn-wht:first-child {
+  background: #fff;
+  color: var(--sage);
+  border-color: #fff;
+}
+.cta-strip-btns .btn-wht:first-child:hover {
+  background: var(--sage2);
+  color: #fff;
+  border-color: var(--sage2);
+}
 
 /* ── ABOUT EXTRA RESPONSIVE ── */
 @media(max-width:860px) {
@@ -62,4 +94,32 @@
   .info-grid { grid-template-columns: 1fr; }
   .skills-section { padding: 20px; }
   .portrait-frame { max-height: 300px; }
+}
+
+/* ── CTA STRIP BUTTONS — clearly visible on sage green ── */
+.about-cta-primary {
+  background: #fff;
+  color: var(--sage) !important;
+  border: 2px solid #fff;
+  font-weight: 600;
+}
+.about-cta-primary:hover {
+  background: var(--ink);
+  color: #fff !important;
+  border-color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.2);
+}
+.about-cta-secondary {
+  background: rgba(255,255,255,.15);
+  color: #fff !important;
+  border: 2px solid rgba(255,255,255,.75);
+  font-weight: 500;
+  backdrop-filter: blur(6px);
+}
+.about-cta-secondary:hover {
+  background: #fff;
+  color: var(--sage) !important;
+  border-color: #fff;
+  transform: translateY(-2px);
 }
