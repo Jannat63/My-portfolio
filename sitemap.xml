@@ -201,4 +201,15 @@
     </image:image>
   </url>
 
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/how-to-use-ai-in-content-writing.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/how-to-use-ai-in-content-writing.jpg</image:loc>
+      <image:title>How to Use AI in Content Writing - Claude ChatGPT and the Tools That Work 2026</image:title>
+    </image:image>
+  </url>
+
 </urlset>
