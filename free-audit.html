@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<title>Free SEO Audit Tool | Ahsan Jannat</title>
+<meta name="description" content="Get a free instant SEO audit for any website. Check Performance, Core Web Vitals, SEO score and more — powered by Google PageSpeed Insights.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ahsan-jannat.netlify.app/free-audit.html">
+<meta property="og:title" content="Free SEO Audit Tool — Instant Website Analysis">
+<meta property="og:description" content="Enter any URL and get a real SEO audit in seconds powered by Google PageSpeed Insights.">
+<meta property="og:url" content="https://ahsan-jannat.netlify.app/free-audit.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Free SEO Audit Tool by Ahsan Jannat",
+  "url": "https://ahsan-jannat.netlify.app/free-audit.html",
+  "description": "Free instant SEO audit powered by Google PageSpeed Insights API",
+  "applicationCategory": "SEO Tool",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Ahsan Jannat", "url": "https://ahsan-jannat.netlify.app" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<style>
+/* ══ AUDIT PAGE STYLES ══ */
+:root {
+  --good:  #22C55E;
+  --warn:  #F59E0B;
+  --poor:  #EF4444;
+  --info:  #3B82F6;
+}
+
+/* HERO */
+.audit-hero {
+  padding: 120px 0 60px;
+  background: linear-gradient(135deg, var(--sage-pal) 0%, var(--blush-pal) 100%);
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+.audit-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(107,140,110,.12) 0%, transparent 60%),
+              radial-gradient(circle at 70% 50%, rgba(201,160,172,.10) 0%, transparent 60%);
+}
+.audit-hero-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+.audit-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--sage); color: #fff;
+  font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 50px; margin-bottom: 20px;
+}
+.audit-hero h1 {
+  font-family: var(--disp);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--ink); line-height: 1.15; margin-bottom: 14px;
+}
+.audit-hero h1 span { color: var(--sage); }
+.audit-hero p {
+  font-size: 1rem; color: var(--muted);
+  max-width: 520px; margin: 0 auto 32px; line-height: 1.75;
+}
+
+/* URL INPUT FORM */
+.audit-form-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 8px 8px 8px 20px;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: var(--shadow2); max-width: 640px; margin: 0 auto 16px;
+}
+.audit-url-input {
+  flex: 1; border: none; background: transparent;
+  font-family: var(--sans); font-size: 15px; color: var(--ink);
+  outline: none; padding: 6px 0; min-width: 0;
+}
+.audit-url-input::placeholder { color: var(--muted); }
+.audit-btn {
+  background: var(--sage); color: #fff; border: none;
+  padding: 12px 24px; border-radius: 10px;
+  font-family: var(--sans); font-size: 14px; font-weight: 600;
+  cursor: pointer; white-space: nowrap; flex-shrink: 0;
+  display: flex; align-items: center; gap: 8px;
+  transition: all .25s;
+}
+.audit-btn:hover { background: var(--sage2); transform: translateY(-1px); }
+.audit-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+/* Strategy toggle */
+.strategy-toggle {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; margin-bottom: 8px;
+}
+.st-btn {
+  padding: 6px 16px; border-radius: 6px; font-size: 12.5px; font-weight: 500;
+  border: 1.5px solid var(--border); background: transparent;
+  color: var(--muted); cursor: pointer; font-family: var(--sans);
+  display: flex; align-items: center; gap: 6px; transition: all .2s;
+}
+.st-btn.act { border-color: var(--sage); color: var(--sage); background: var(--sage-pal); }
+.audit-note { font-size: 12px; color: var(--muted); text-align: center; }
+.audit-note i { color: var(--sage); margin-right: 4px; }
+
+/* LOADING */
+.audit-loading {
+  display: none; text-align: center; padding: 60px 20px;
+}
+.audit-loading.show { display: block; }
+.spinner {
+  width: 56px; height: 56px; border-radius: 50%;
+  border: 4px solid var(--border);
+  border-top-color: var(--sage);
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-steps { display: flex; flex-direction: column; gap: 10px; max-width: 300px; margin: 0 auto; }
+.loading-step {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13.5px; color: var(--muted); text-align: left;
+  padding: 8px 14px; border-radius: 8px; background: var(--bg2);
+  transition: all .3s;
+}
+.loading-step.done { color: var(--sage); background: var(--sage-pal); }
+.loading-step.active { color: var(--ink); border: 1px solid var(--border2); }
+.loading-step i { font-size: 14px; width: 18px; text-align: center; }
+
+/* ERROR */
+.audit-error {
+  display: none; background: #FEF2F2; border: 1px solid #FECACA;
+  border-radius: 12px; padding: 18px 22px; max-width: 640px;
+  margin: 16px auto 0; text-align: center; color: #DC2626;
+  font-size: 14px;
+}
+.audit-error.show { display: block; }
+
+/* RESULTS */
+.audit-results { display: none; padding: 60px 0 80px; }
+.audit-results.show { display: block; animation: fadeIn .5s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+
+.results-header {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem;
+}
+.audited-url {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; color: var(--muted);
+}
+.audited-url strong { color: var(--ink); font-weight: 600; }
+.audited-url a { color: var(--sage); font-size: 12px; margin-left: 6px; }
+.audit-strategy-badge {
+  font-size: 11px; padding: 4px 10px; border-radius: 4px;
+  background: var(--sage-pal); color: var(--sage); font-weight: 600; text-transform: uppercase;
+}
+
+/* SCORE RINGS */
+.score-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+.score-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px 16px; text-align: center;
+  transition: all .3s;
+}
+.score-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--border2); }
+.score-ring-wrap {
+  position: relative; width: 90px; height: 90px; margin: 0 auto 14px;
+}
+.score-ring {
+  width: 90px; height: 90px;
+  transform: rotate(-90deg);
+}
+.score-ring-bg { fill: none; stroke: var(--bg2); stroke-width: 8; }
+.score-ring-fill {
+  fill: none; stroke-width: 8; stroke-linecap: round;
+  stroke-dasharray: 226; stroke-dashoffset: 226;
+  transition: stroke-dashoffset 1.5s cubic-bezier(.25,.8,.25,1);
+}
+.score-ring-num {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: var(--disp); font-size: 1.4rem; font-weight: 700;
+}
+.score-card-name { font-size: 12.5px; font-weight: 600; color: var(--ink2); margin-bottom: 4px; }
+.score-card-desc { font-size: 11px; color: var(--muted); }
+
+/* CWV */
+.cwv-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.cwv-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px;
+  display: flex; align-items: center; gap: 14px;
+  transition: all .3s;
+}
+.cwv-card:hover { border-color: var(--border2); box-shadow: var(--shadow); }
+.cwv-icon {
+  width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.cwv-icon.good  { background: #DCFCE7; color: var(--good); }
+.cwv-icon.warn  { background: #FEF3C7; color: var(--warn); }
+.cwv-icon.poor  { background: #FEE2E2; color: var(--poor); }
+.cwv-icon.info  { background: #DBEAFE; color: var(--info); }
+.cwv-name  { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
+.cwv-value { font-family: var(--disp); font-size: 1.4rem; color: var(--ink); line-height: 1; }
+.cwv-label { font-size: 11px; margin-top: 2px; font-weight: 600; }
+.cwv-label.good  { color: var(--good); }
+.cwv-label.warn  { color: var(--warn); }
+.cwv-label.poor  { color: var(--poor); }
+
+/* OPPORTUNITIES & DIAGNOSTICS */
+.issues-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2.5rem; }
+.issues-col { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+.issues-col-head {
+  padding: 16px 20px; font-size: 12px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .08em;
+  display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border);
+}
+.issues-col-head.red   { color: var(--poor);  background: #FEF2F2; }
+.issues-col-head.amber { color: var(--warn); background: #FFFBEB; }
+.issues-col-head.green { color: var(--good); background: #F0FDF4; }
+.issues-col-head.blue  { color: var(--info); background: #EFF6FF; }
+.issue-item {
+  padding: 12px 20px; border-bottom: 1px solid var(--border);
+  font-size: 13px; color: var(--ink2); line-height: 1.5;
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.issue-item:last-child { border-bottom: none; }
+.issue-item i { flex-shrink: 0; margin-top: 2px; font-size: 12px; }
+.issue-item .i-red   { color: var(--poor); }
+.issue-item .i-amber { color: var(--warn); }
+.issue-item .i-green { color: var(--good); }
+.issue-saving { font-size: 11px; color: var(--sage); font-weight: 500; margin-top: 2px; display: block; }
+
+/* SEO CHECKLIST */
+.seo-checks {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; margin-bottom: 2.5rem; overflow: hidden;
+}
+.seo-checks-head {
+  padding: 18px 24px; border-bottom: 1px solid var(--border);
+  font-size: 13px; font-weight: 600; color: var(--ink);
+  display: flex; align-items: center; gap: 10px;
+}
+.seo-checks-head i { color: var(--sage); }
+.seo-check-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 24px; border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+.seo-check-row:last-child { border-bottom: none; }
+.seo-check-name { color: var(--ink2); display: flex; align-items: center; gap: 10px; }
+.seo-check-name i { font-size: 14px; color: var(--sage); }
+.seo-check-val { font-weight: 500; font-size: 12.5px; }
+.seo-check-val.pass { color: var(--good); }
+.seo-check-val.fail { color: var(--poor); }
+.seo-check-val.warn { color: var(--warn); }
+.seo-check-val.info { color: var(--info); }
+
+/* CTA DOWNLOAD */
+.audit-cta {
+  background: linear-gradient(135deg, var(--ink) 0%, #2D1F3D 100%);
+  border-radius: 20px; padding: 48px 40px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.audit-cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(107,140,110,.2) 0%, transparent 60%),
+              radial-gradient(circle at 80% 50%, rgba(201,160,172,.15) 0%, transparent 60%);
+}
+.audit-cta-inner { position: relative; z-index: 1; }
+.audit-cta h2 {
+  font-family: var(--disp); font-size: clamp(1.6rem,3.5vw,2.4rem);
+  color: #fff; line-height: 1.2; margin-bottom: 12px;
+}
+.audit-cta h2 span { color: var(--sage); }
+.audit-cta p { font-size: .975rem; color: rgba(255,255,255,.6); max-width: 480px; margin: 0 auto 28px; line-height: 1.75; }
+.download-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--sage); color: #fff;
+  padding: 16px 36px; border-radius: 10px;
+  font-family: var(--sans); font-size: 15px; font-weight: 600;
+  cursor: pointer; border: none; transition: all .3s;
+  box-shadow: 0 8px 32px rgba(107,140,110,.45);
+  text-decoration: none;
+}
+.download-btn:hover {
+  background: var(--sage2); transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(107,140,110,.55);
+}
+.download-btn i { font-size: 18px; }
+.cta-note { font-size: 12px; color: rgba(255,255,255,.4); margin-top: 14px; }
+.cta-features {
+  display: flex; justify-content: center; gap: 2rem;
+  margin-top: 24px; flex-wrap: wrap;
+}
+.cta-feat {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 12.5px; color: rgba(255,255,255,.6);
+}
+.cta-feat i { color: var(--sage); font-size: 12px; }
+
+/* RE-AUDIT */
+.re-audit-btn {
+  background: transparent; border: 1.5px solid var(--border);
+  color: var(--muted); padding: 10px 20px; border-radius: 8px;
+  font-family: var(--sans); font-size: 13px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 7px;
+  transition: all .2s;
+}
+.re-audit-btn:hover { border-color: var(--sage); color: var(--sage); }
+
+/* OVERALL GRADE */
+.overall-grade {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 12px 20px;
+  font-size: 14px;
+}
+.grade-letter {
+  font-family: var(--disp); font-size: 2rem; line-height: 1;
+  width: 48px; height: 48px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+}
+.grade-A  { background: #DCFCE7; color: #15803D; }
+.grade-B  { background: #D1FAE5; color: #065F46; }
+.grade-C  { background: #FEF3C7; color: #92400E; }
+.grade-D  { background: #FEE2E2; color: #991B1B; }
+.grade-F  { background: #FEE2E2; color: #7F1D1D; }
+
+/* RESPONSIVE */
+@media(max-width:860px) {
+  .score-grid { grid-template-columns: repeat(2,1fr); }
+  .cwv-grid   { grid-template-columns: repeat(2,1fr); }
+  .issues-grid { grid-template-columns: 1fr; }
+  .audit-cta { padding: 36px 24px; }
+}
+@media(max-width:600px) {
+  .score-grid { grid-template-columns: repeat(2,1fr); }
+  .cwv-grid   { grid-template-columns: 1fr; }
+  .audit-form-wrap { flex-wrap: wrap; padding: 12px; }
+  .audit-btn  { width: 100%; justify-content: center; }
+  .cta-features { gap: 1rem; }
+  .results-header { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="progress-bar" id="progressBar"></div>
+<div class="loader" id="loader"><span class="loader-logo">AJ</span></div>
+<button class="btt" id="btt"><i class="fa-solid fa-arrow-up"></i></button>
+<a href="https://wa.me/8801643644550" target="_blank" rel="noopener" class="wa-float"><i class="fa-brands fa-whatsapp"></i></a>
+
+<header id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="n-logo">
+      <div class="n-box">AJ</div>
+      <div class="n-info"><strong>Ahsan Jannat</strong><em>SEO · AEO · GEO · Cybersecurity</em></div>
+    </a>
+    <nav class="n-links">
+      <a href="index.html">Home</a><a href="about.html">About</a>
+      <a href="services.html">Services</a><a href="experience.html">Experience</a>
+      <a href="case-studies.html">Case Studies</a><a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="n-right">
+      <button class="theme-toggle" id="themeBtn"><i class="fa-solid fa-moon"></i></button>
+      <a href="contact.html" class="btn btn-dark" style="padding:9px 18px;font-size:13px">Let's Talk <i class="fa-solid fa-arrow-right"></i></a>
+      <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav class="mob-menu" id="mobMenu">
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+  <a href="experience.html">Experience</a><a href="case-studies.html">Case Studies</a>
+  <a href="blog.html">Blog</a><a href="contact.html">Contact</a>
+  <a href="contact.html" class="btn btn-dark">Let's Talk →</a>
+</nav>
+
+<!-- HERO -->
+<div class="audit-hero">
+  <div class="audit-hero-inner">
+    <div class="audit-badge"><i class="fa-solid fa-bolt"></i> 100% Free · Powered by Google</div>
+    <h1>Instant <span>SEO Audit</span><br>for Any Website</h1>
+    <p>Enter any URL and get a real performance audit in seconds — powered by Google PageSpeed Insights. Performance score, Core Web Vitals, SEO checks and top fixes.</p>
+
+    <div class="strategy-toggle">
+      <button class="st-btn act" id="btnMobile" onclick="setStrategy('mobile')">
+        <i class="fa-solid fa-mobile-screen"></i> Mobile
+      </button>
+      <button class="st-btn" id="btnDesktop" onclick="setStrategy('desktop')">
+        <i class="fa-solid fa-desktop"></i> Desktop
+      </button>
+    </div>
+
+    <div class="audit-form-wrap">
+      <i class="fa-solid fa-globe" style="color:var(--muted);flex-shrink:0"></i>
+      <input type="url" class="audit-url-input" id="auditUrl"
+             placeholder="https://yourwebsite.com" autocomplete="off">
+      <button class="audit-btn" id="auditBtn" onclick="runAudit()">
+        <i class="fa-solid fa-magnifying-glass-chart"></i> Audit Now
+      </button>
+    </div>
+    <p class="audit-note"><i class="fa-solid fa-shield-halved"></i> We never store your URL. Results are generated in real-time and shown only to you.</p>
+
+    <div class="audit-error" id="auditError"></div>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div class="audit-loading" id="auditLoading">
+  <div class="wrap" style="max-width:400px">
+    <div class="spinner"></div>
+    <p style="font-size:15px;font-weight:500;color:var(--ink);margin-bottom:20px">Analysing your website...</p>
+    <div class="loading-steps">
+      <div class="loading-step active" id="step1"><i class="fa-solid fa-globe"></i> Connecting to PageSpeed API</div>
+      <div class="loading-step" id="step2"><i class="fa-solid fa-gauge-high"></i> Measuring performance metrics</div>
+      <div class="loading-step" id="step3"><i class="fa-solid fa-code"></i> Checking Core Web Vitals</div>
+      <div class="loading-step" id="step4"><i class="fa-solid fa-magnifying-glass"></i> Running SEO checks</div>
+      <div class="loading-step" id="step5"><i class="fa-solid fa-file-chart-column"></i> Preparing your report</div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="audit-results" id="auditResults">
+  <div class="wrap">
+
+    <!-- Header -->
+    <div class="results-header" data-reveal="up">
+      <div>
+        <div class="audited-url">
+          <i class="fa-solid fa-circle-check" style="color:var(--good)"></i>
+          <span>Audit complete for <strong id="resultUrl"></strong>
+          <a href="#" id="resultUrlLink" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></span>
+          <span class="audit-strategy-badge" id="strategyBadge">Mobile</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div class="overall-grade">
+          <div class="grade-letter" id="gradeLetter">A</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--ink)" id="gradeText">Excellent</div>
+            <div style="font-size:11px;color:var(--muted)">Overall Score</div>
+          </div>
+        </div>
+        <button class="re-audit-btn" onclick="resetAudit()">
+          <i class="fa-solid fa-rotate-right"></i> New Audit
+        </button>
+      </div>
+    </div>
+
+    <!-- Score Rings -->
+    <div class="score-grid" data-reveal="up" style="transition-delay:.1s">
+      <div class="score-card">
+        <div class="score-ring-wrap">
+          <svg class="score-ring" viewBox="0 0 90 90">
+            <circle class="score-ring-bg" cx="45" cy="45" r="36"/>
+            <circle class="score-ring-fill" id="ringPerf" cx="45" cy="45" r="36"/>
+          </svg>
+          <div class="score-ring-num" id="numPerf" style="color:var(--good)">—</div>
+        </div>
+        <div class="score-card-name">Performance</div>
+        <div class="score-card-desc">Speed & loading</div>
+      </div>
+      <div class="score-card">
+        <div class="score-ring-wrap">
+          <svg class="score-ring" viewBox="0 0 90 90">
+            <circle class="score-ring-bg" cx="45" cy="45" r="36"/>
+            <circle class="score-ring-fill" id="ringSeo" cx="45" cy="45" r="36"/>
+          </svg>
+          <div class="score-ring-num" id="numSeo" style="color:var(--good)">—</div>
+        </div>
+        <div class="score-card-name">SEO</div>
+        <div class="score-card-desc">Search optimisation</div>
+      </div>
+      <div class="score-card">
+        <div class="score-ring-wrap">
+          <svg class="score-ring" viewBox="0 0 90 90">
+            <circle class="score-ring-bg" cx="45" cy="45" r="36"/>
+            <circle class="score-ring-fill" id="ringAcc" cx="45" cy="45" r="36"/>
+          </svg>
+          <div class="score-ring-num" id="numAcc" style="color:var(--good)">—</div>
+        </div>
+        <div class="score-card-name">Accessibility</div>
+        <div class="score-card-desc">Usability for all</div>
+      </div>
+      <div class="score-card">
+        <div class="score-ring-wrap">
+          <svg class="score-ring" viewBox="0 0 90 90">
+            <circle class="score-ring-bg" cx="45" cy="45" r="36"/>
+            <circle class="score-ring-fill" id="ringBp" cx="45" cy="45" r="36"/>
+          </svg>
+          <div class="score-ring-num" id="numBp" style="color:var(--good)">—</div>
+        </div>
+        <div class="score-card-name">Best Practices</div>
+        <div class="score-card-desc">Modern standards</div>
+      </div>
+    </div>
+
+    <!-- Core Web Vitals -->
+    <h3 style="font-family:var(--disp);font-size:1.3rem;color:var(--ink);margin-bottom:1rem" data-reveal="up">
+      <i class="fa-solid fa-gauge-high" style="color:var(--sage);margin-right:8px"></i>Core Web Vitals
+    </h3>
+    <div class="cwv-grid" data-reveal="up" style="transition-delay:.15s" id="cwvGrid">
+      <!-- filled by JS -->
+    </div>
+
+    <!-- Opportunities & Passed Audits -->
+    <h3 style="font-family:var(--disp);font-size:1.3rem;color:var(--ink);margin-bottom:1rem" data-reveal="up">
+      <i class="fa-solid fa-list-check" style="color:var(--sage);margin-right:8px"></i>Issues & Opportunities
+    </h3>
+    <div class="issues-grid" data-reveal="up" style="transition-delay:.2s">
+      <div class="issues-col">
+        <div class="issues-col-head red"><i class="fa-solid fa-circle-xmark"></i> Fix These First</div>
+        <div id="issuesFail"><!-- JS --></div>
+      </div>
+      <div class="issues-col">
+        <div class="issues-col-head amber"><i class="fa-solid fa-triangle-exclamation"></i> Improvements</div>
+        <div id="issuesWarn"><!-- JS --></div>
+      </div>
+    </div>
+
+    <!-- SEO Checks -->
+    <h3 style="font-family:var(--disp);font-size:1.3rem;color:var(--ink);margin-bottom:1rem" data-reveal="up">
+      <i class="fa-solid fa-magnifying-glass" style="color:var(--sage);margin-right:8px"></i>SEO Check Details
+    </h3>
+    <div class="seo-checks" data-reveal="up" style="transition-delay:.25s">
+      <div class="seo-checks-head"><i class="fa-solid fa-list"></i> On-Page SEO Signals</div>
+      <div id="seoCheckRows"><!-- JS --></div>
+    </div>
+
+    <!-- CTA Download -->
+    <div class="audit-cta" data-reveal="up" style="transition-delay:.3s">
+      <div class="audit-cta-inner">
+        <h2>Want a <span>Full Professional Audit</span><br>With a Fix Plan?</h2>
+        <p>Your automated report shows the issues. I'll personally analyse your site, prioritise every fix by impact, and build a step-by-step action plan tailored to your business goals.</p>
+        <a href="contact.html?ref=audit" class="download-btn" id="downloadBtn">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          Download Full Audit Report
+        </a>
+        <p class="cta-note">Clicking "Download" connects you with Ahsan directly — get a personalised PDF report within 24 hours.</p>
+        <div class="cta-features">
+          <span class="cta-feat"><i class="fa-solid fa-check"></i> Free 30-min strategy call</span>
+          <span class="cta-feat"><i class="fa-solid fa-check"></i> Personalised PDF report</span>
+          <span class="cta-feat"><i class="fa-solid fa-check"></i> Priority fix roadmap</span>
+          <span class="cta-feat"><i class="fa-solid fa-check"></i> No commitment needed</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-box-f">AJ</div>
+        <p>Driving organic growth through Search, Answer &amp; Generative Engine Optimization.</p>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/in/ahsan-jannat/" target="_blank" rel="noopener" class="footer-soc"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://web.facebook.com/ahsan.jnat.2024/" target="_blank" rel="noopener" class="footer-soc"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.youtube.com/@AhsanJannat" target="_blank" rel="noopener" class="footer-soc"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Navigation</h4><ul>
+        <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li><li><a href="case-studies.html">Case Studies</a></li>
+        <li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Free Tools</h4><ul>
+        <li><a href="free-audit.html">SEO Audit Tool</a></li>
+        <li><a href="services.html">SEO Services</a></li>
+        <li><a href="services.html#aeo">AEO Services</a></li>
+        <li><a href="services.html#geo">GEO Services</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 <a href="index.html">Ahsan Jannat</a>. All rights reserved.</span>
+      <span class="footer-copy">Dhaka, Bangladesh</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/script.js"></script>
+<script>
+(function() {
+  let currentStrategy = 'mobile';
+  let auditData = null;
+
+  window.setStrategy = function(s) {
+    currentStrategy = s;
+    document.getElementById('btnMobile').classList.toggle('act', s === 'mobile');
+    document.getElementById('btnDesktop').classList.toggle('act', s === 'desktop');
+  };
+
+  // Score color helper
+  function scoreColor(v) {
+    if (v >= 90) return '#22C55E';
+    if (v >= 50) return '#F59E0B';
+    return '#EF4444';
+  }
+  function scoreClass(v) {
+    if (v >= 90) return 'good';
+    if (v >= 50) return 'warn';
+    return 'poor';
+  }
+  function scoreLabelText(v) {
+    if (v >= 90) return 'Good';
+    if (v >= 50) return 'Needs Work';
+    return 'Poor';
+  }
+
+  // Animate ring
+  function animateRing(ringId, numId, score) {
+    const ring = document.getElementById(ringId);
+    const num  = document.getElementById(numId);
+    const circumference = 226;
+    const color = scoreColor(score);
+    ring.style.stroke = color;
+    num.style.color   = color;
+    const offset = circumference - (score / 100) * circumference;
+    setTimeout(() => {
+      ring.style.strokeDashoffset = offset;
+      num.textContent = score;
+    }, 200);
+  }
+
+  // CWV value formatter
+  function fmtCwv(val, unit) {
+    if (val === null || val === undefined) return 'N/A';
+    if (unit === 'ms')  return (val < 1000) ? val + 'ms' : (val/1000).toFixed(1) + 's';
+    if (unit === 's')   return (val/1000).toFixed(1) + 's';
+    if (unit === 'cls') return val.toFixed(3);
+    return val;
+  }
+
+  function cwvClass(metric, val) {
+    if (val === null) return 'info';
+    const thresholds = {
+      lcp:  [2500, 4000],
+      fid:  [100, 300],
+      cls:  [0.1, 0.25],
+      tbt:  [200, 600],
+      fcp:  [1800, 3000],
+      si:   [3400, 5800],
+      tti:  [3800, 7300],
+      inp:  [200, 500],
+    };
+    const t = thresholds[metric];
+    if (!t) return 'info';
+    if (val <= t[0]) return 'good';
+    if (val <= t[1]) return 'warn';
+    return 'poor';
+  }
+
+  // Overall grade
+  function calcGrade(avg) {
+    if (avg >= 90) return ['A', 'Excellent', 'grade-A'];
+    if (avg >= 80) return ['B', 'Good', 'grade-B'];
+    if (avg >= 60) return ['C', 'Average', 'grade-C'];
+    if (avg >= 40) return ['D', 'Poor', 'grade-D'];
+    return ['F', 'Critical', 'grade-F'];
+  }
+
+  // Animate loading steps
+  function animateSteps() {
+    const steps = ['step1','step2','step3','step4','step5'];
+    let i = 0;
+    return setInterval(() => {
+      if (i > 0) {
+        document.getElementById(steps[i-1]).classList.remove('active');
+        document.getElementById(steps[i-1]).classList.add('done');
+        const icon = document.getElementById(steps[i-1]).querySelector('i');
+        if (icon) icon.className = 'fa-solid fa-circle-check';
+      }
+      if (i < steps.length) {
+        document.getElementById(steps[i]).classList.add('active');
+        i++;
+      }
+    }, 900);
+  }
+
+  window.runAudit = async function() {
+    const urlInput = document.getElementById('auditUrl').value.trim();
+    const errEl    = document.getElementById('auditError');
+
+    // Validate URL
+    if (!urlInput) {
+      showError('Please enter a website URL to audit.');
+      return;
+    }
+    let url = urlInput;
+    if (!url.startsWith('http')) url = 'https://' + url;
+    try { new URL(url); } catch { showError('Please enter a valid URL (e.g. https://yourwebsite.com)'); return; }
+
+    // Show loading
+    errEl.classList.remove('show');
+    document.getElementById('auditResults').classList.remove('show');
+    document.getElementById('auditLoading').classList.add('show');
+    document.getElementById('auditBtn').disabled = true;
+    const stepTimer = animateSteps();
+
+    try {
+      const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=${currentStrategy}&category=performance&category=seo&category=accessibility&category=best-practices`;
+      const resp = await fetch(apiUrl);
+      if (!resp.ok) throw new Error(`API error: ${resp.status}`);
+      const data = await resp.json();
+
+      clearInterval(stepTimer);
+      // Mark all steps done
+      ['step1','step2','step3','step4','step5'].forEach(id => {
+        const el = document.getElementById(id);
+        el.classList.remove('active');
+        el.classList.add('done');
+        const icon = el.querySelector('i');
+        if (icon) icon.className = 'fa-solid fa-circle-check';
+      });
+
+      setTimeout(() => {
+        document.getElementById('auditLoading').classList.remove('show');
+        renderResults(data, url);
+      }, 600);
+
+    } catch(e) {
+      clearInterval(stepTimer);
+      document.getElementById('auditLoading').classList.remove('show');
+      document.getElementById('auditBtn').disabled = false;
+      showError('Could not fetch audit data. Please check the URL and try again. Make sure the site is publicly accessible.');
+    }
+  };
+
+  function showError(msg) {
+    const el = document.getElementById('auditError');
+    el.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${msg}`;
+    el.classList.add('show');
+    document.getElementById('auditBtn').disabled = false;
+  }
+
+  function renderResults(data, url) {
+    auditData = data;
+    const cats = data.lighthouseResult?.categories || {};
+    const audits = data.lighthouseResult?.audits || {};
+
+    // Scores
+    const perf = Math.round((cats.performance?.score || 0) * 100);
+    const seo  = Math.round((cats.seo?.score || 0) * 100);
+    const acc  = Math.round((cats.accessibility?.score || 0) * 100);
+    const bp   = Math.round((cats['best-practices']?.score || 0) * 100);
+    const avg  = Math.round((perf + seo + acc + bp) / 4);
+
+    // Header
+    const shortUrl = url.replace(/^https?:\/\/(www\.)?/,'').replace(/\/$/,'');
+    document.getElementById('resultUrl').textContent = shortUrl;
+    document.getElementById('resultUrlLink').href = url;
+    document.getElementById('strategyBadge').textContent = currentStrategy === 'mobile' ? '📱 Mobile' : '🖥️ Desktop';
+
+    // Grade
+    const [gl, gt, gc] = calcGrade(avg);
+    const gradeEl = document.getElementById('gradeLetter');
+    gradeEl.textContent = gl;
+    gradeEl.className = `grade-letter ${gc}`;
+    document.getElementById('gradeText').textContent = gt;
+
+    // Animate rings
+    animateRing('ringPerf','numPerf', perf);
+    animateRing('ringSeo', 'numSeo',  seo);
+    animateRing('ringAcc', 'numAcc',  acc);
+    animateRing('ringBp',  'numBp',   bp);
+
+    // CWV
+    const cwvMap = [
+      { key:'largest-contentful-paint', name:'LCP', icon:'fa-image', unit:'s',  metric:'lcp',  tip:'Largest Contentful Paint' },
+      { key:'total-blocking-time',      name:'TBT', icon:'fa-clock', unit:'ms', metric:'tbt',  tip:'Total Blocking Time (proxy for FID/INP)' },
+      { key:'cumulative-layout-shift',  name:'CLS', icon:'fa-arrows-to-dot', unit:'cls', metric:'cls', tip:'Cumulative Layout Shift' },
+      { key:'first-contentful-paint',   name:'FCP', icon:'fa-paintbrush', unit:'s',  metric:'fcp', tip:'First Contentful Paint' },
+      { key:'speed-index',              name:'SI',  icon:'fa-gauge', unit:'s',  metric:'si',   tip:'Speed Index' },
+      { key:'interactive',              name:'TTI', icon:'fa-hand-pointer', unit:'s', metric:'tti', tip:'Time to Interactive' },
+    ];
+    const cwvHtml = cwvMap.map(m => {
+      const a = audits[m.key];
+      const rawVal = a?.numericValue ?? null;
+      const val = m.unit === 's' ? rawVal : m.unit === 'cls' ? rawVal : rawVal;
+      const cls = rawVal !== null ? cwvClass(m.metric, m.unit === 's' ? rawVal : rawVal) : 'info';
+      const display = a?.displayValue || 'N/A';
+      return `<div class="cwv-card">
+        <div class="cwv-icon ${cls}"><i class="fa-solid ${m.icon}"></i></div>
+        <div>
+          <div class="cwv-name">${m.name} <span style="font-size:10px;color:var(--muted)" title="${m.tip}">(?)</span></div>
+          <div class="cwv-value">${display}</div>
+          <div class="cwv-label ${cls}">${cls === 'good' ? 'Good' : cls === 'warn' ? 'Needs Improvement' : cls === 'poor' ? 'Poor' : 'Info'}</div>
+        </div>
+      </div>`;
+    }).join('');
+    document.getElementById('cwvGrid').innerHTML = cwvHtml;
+
+    // Opportunities (failures and warnings)
+    const allAudits = Object.values(audits);
+    const failed = allAudits.filter(a => a.score !== null && a.score < 0.5 && a.details?.type !== 'table' || (a.score !== null && a.score < 0.5))
+      .filter(a => a.title && a.description)
+      .slice(0, 6);
+    const warnings = allAudits.filter(a => a.score !== null && a.score >= 0.5 && a.score < 0.9 && a.title)
+      .slice(0, 6);
+
+    document.getElementById('issuesFail').innerHTML = failed.length
+      ? failed.map(a => `<div class="issue-item">
+          <i class="fa-solid fa-circle-xmark i-red"></i>
+          <div>
+            <div>${a.title}</div>
+            ${a.displayValue ? `<span class="issue-saving">${a.displayValue}</span>` : ''}
+          </div>
+        </div>`).join('')
+      : '<div class="issue-item"><i class="fa-solid fa-circle-check i-green"></i> No critical issues found</div>';
+
+    document.getElementById('issuesWarn').innerHTML = warnings.length
+      ? warnings.map(a => `<div class="issue-item">
+          <i class="fa-solid fa-triangle-exclamation i-amber"></i>
+          <div>
+            <div>${a.title}</div>
+            ${a.displayValue ? `<span class="issue-saving">${a.displayValue}</span>` : ''}
+          </div>
+        </div>`).join('')
+      : '<div class="issue-item"><i class="fa-solid fa-circle-check i-green"></i> No major warnings</div>';
+
+    // SEO Checks
+    const seoKeys = [
+      { key:'viewport',               name:'Viewport Meta Tag',         icon:'fa-mobile-screen' },
+      { key:'document-title',         name:'Page Title',                icon:'fa-heading' },
+      { key:'meta-description',       name:'Meta Description',          icon:'fa-file-lines' },
+      { key:'link-text',              name:'Descriptive Link Text',     icon:'fa-link' },
+      { key:'image-alt',              name:'Image Alt Attributes',      icon:'fa-image' },
+      { key:'canonical',              name:'Canonical URL',             icon:'fa-circle-check' },
+      { key:'robots-txt',             name:'robots.txt',                icon:'fa-robot' },
+      { key:'structured-data',        name:'Structured Data / Schema',  icon:'fa-code' },
+      { key:'hreflang',               name:'hreflang',                  icon:'fa-globe' },
+      { key:'is-crawlable',           name:'Page is Crawlable',         icon:'fa-spider' },
+      { key:'font-size',              name:'Legible Font Size',         icon:'fa-font' },
+      { key:'tap-targets',            name:'Tap Target Size',           icon:'fa-hand-pointer' },
+    ];
+    const seoRowsHtml = seoKeys.map(({ key, name, icon }) => {
+      const a = audits[key];
+      if (!a) return '';
+      const pass = a.score === 1;
+      const warn = a.score !== null && a.score > 0 && a.score < 1;
+      const cls  = pass ? 'pass' : warn ? 'warn' : 'fail';
+      const label = pass ? '✓ Pass' : warn ? '⚠ Warning' : '✗ Fail';
+      return `<div class="seo-check-row">
+        <div class="seo-check-name"><i class="fa-solid ${icon}"></i>${name}</div>
+        <div class="seo-check-val ${cls}">${label}</div>
+      </div>`;
+    }).filter(Boolean).join('');
+    document.getElementById('seoCheckRows').innerHTML = seoRowsHtml || '<div class="seo-check-row" style="color:var(--muted)">SEO check data not available for this URL.</div>';
+
+    // Add audit URL to contact CTA
+    const ctaLink = document.getElementById('downloadBtn');
+    ctaLink.href = `contact.html?ref=audit&url=${encodeURIComponent(url)}&score=${avg}`;
+
+    // Show results
+    document.getElementById('auditResults').classList.add('show');
+    document.getElementById('auditBtn').disabled = false;
+    // Scroll to results
+    setTimeout(() => {
+      document.getElementById('auditResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+
+    // Trigger reveal animations
+    document.querySelectorAll('#auditResults [data-reveal]').forEach(el => {
+      setTimeout(() => el.classList.add('in'), 300);
+    });
+  }
+
+  window.resetAudit = function() {
+    document.getElementById('auditResults').classList.remove('show');
+    document.getElementById('auditUrl').value = '';
+    document.getElementById('auditUrl').focus();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Reset loading steps
+    ['step1','step2','step3','step4','step5'].forEach((id, i) => {
+      const el = document.getElementById(id);
+      el.classList.remove('done','active');
+      if (i === 0) el.classList.add('active');
+    });
+  };
+
+  // Enter key submit
+  document.getElementById('auditUrl').addEventListener('keydown', e => {
+    if (e.key === 'Enter') window.runAudit();
+  });
+
+  // Pre-fill URL from query string if coming from another page
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('url')) {
+    document.getElementById('auditUrl').value = params.get('url');
+  }
+})();
+</script>
+</body>
+</html>
