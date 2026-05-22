@@ -724,9 +724,13 @@
     const stepTimer = animateSteps();
 
     try {
-      const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=${currentStrategy}&category=performance&category=seo&category=accessibility&category=best-practices`;
+      const API_KEY = 'AIzaSyDT_WNUwd98eiTAKCEABM14ySy4dUvUIl8';
+      const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=${currentStrategy}&category=performance&category=seo&category=accessibility&category=best-practices&key=${API_KEY}`;
       const resp = await fetch(apiUrl);
-      if (!resp.ok) throw new Error(`API error: ${resp.status}`);
+      if (!resp.ok) {
+        const errData = await resp.json().catch(() => ({}));
+        throw new Error(`API error: ${resp.status} — ${errData?.error?.message || 'Unknown error'}`);
+      }
       const data = await resp.json();
 
       clearInterval(stepTimer);

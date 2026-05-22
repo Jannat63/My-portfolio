@@ -64,3 +64,17 @@
   .price-card { padding: 24px 20px; }
   .faq-q { font-size: .9rem; }
 }
+
+/* Meta Ads full-width card */
+#meta.svc-big {
+  border-color: var(--blush);
+}
+#meta.svc-big:hover {
+  border-color: var(--blush2);
+}
+/* Inline pair rows responsive */
+@media(max-width:860px) {
+  .svc-full > div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}

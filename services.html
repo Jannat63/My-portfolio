@@ -214,7 +214,8 @@
   <div class="wrap">
     <span class="tag-label" data-reveal="up"><i class="fa-solid fa-layer-group"></i> All Services</span>
     <h2 class="h2" data-reveal="up" style="transition-delay:.1s">Detailed Service Breakdown</h2>
-    <div class="svc-full">
+    <div class="svc-full" style="display:flex;flex-direction:column;gap:1.5rem">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
       <!-- SEO -->
       <div class="svc-big" id="seo" data-reveal="up" style="transition-delay:.1s">
         <div class="svc-big-header">
@@ -302,49 +303,112 @@
         </div>
         <div class="svc-big-footer"><span>One-time or ongoing</span><a href="contact.html" class="btn btn-dark" style="padding:9px 18px;font-size:13px">Get Started</a></div>
       </div>
+      </div><!-- end GEO+Tech row -->
 
       <!-- Meta Ads -->
       <div class="svc-big" id="meta" data-reveal="up" style="transition-delay:.5s">
         <div class="svc-big-header">
-          <div class="svc-big-icon"><i class="fa-brands fa-meta"></i></div>
+          <div class="svc-big-icon" style="background:var(--blush-pal);color:var(--blush2)"><i class="fa-brands fa-meta"></i></div>
           <div>
-            <div class="svc-big-title">Meta Ads</div>
-            <div class="svc-big-sub">Facebook &amp; Instagram Advertising</div>
+            <div class="svc-big-title">Meta Ads Management</div>
+            <div class="svc-big-sub">Facebook &amp; Instagram Paid Advertising</div>
           </div>
         </div>
         <div class="svc-big-body">
-          <p class="svc-big-desc">Drive targeted traffic, leads and sales through strategic Facebook and Instagram advertising. From audience research and creative strategy to campaign optimisation and ROAS tracking — I manage Meta Ads campaigns that deliver measurable results for businesses of all sizes.</p>
+          <p class="svc-big-desc">Most businesses waste their Meta Ads budget on broad targeting and generic creatives. I take a data-first approach — every campaign is built on deep audience research, clear funnel architecture, and relentless creative testing. The result is paid social that actually converts, not just reaches.</p>
+
+          <!-- Campaign Types -->
+          <div class="svc-deliverables" style="margin-bottom:1.5rem">
+            <h4>Campaign Types I Manage</h4>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+              <div style="padding:14px 16px;background:var(--bg2);border-radius:10px;border:1px solid var(--border)">
+                <div style="font-size:12px;font-weight:700;color:var(--blush2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px"><i class="fa-solid fa-eye"></i> Awareness</div>
+                <p style="font-size:12.5px;color:var(--muted);line-height:1.65;margin:0">Brand awareness, reach campaigns. Put your brand in front of your ideal audience before they start searching.</p>
+              </div>
+              <div style="padding:14px 16px;background:var(--bg2);border-radius:10px;border:1px solid var(--border)">
+                <div style="font-size:12px;font-weight:700;color:var(--blush2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px"><i class="fa-solid fa-users"></i> Lead Generation</div>
+                <p style="font-size:12.5px;color:var(--muted);line-height:1.65;margin:0">Instant forms, Messenger leads and landing page campaigns. Qualified leads directly into your CRM or inbox.</p>
+              </div>
+              <div style="padding:14px 16px;background:var(--bg2);border-radius:10px;border:1px solid var(--border)">
+                <div style="font-size:12px;font-weight:700;color:var(--blush2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px"><i class="fa-solid fa-cart-shopping"></i> Conversions &amp; Sales</div>
+                <p style="font-size:12.5px;color:var(--muted);line-height:1.65;margin:0">ROAS-optimised sales campaigns with Pixel &amp; Conversions API tracking. For e-commerce and service businesses.</p>
+              </div>
+              <div style="padding:14px 16px;background:var(--bg2);border-radius:10px;border:1px solid var(--border)">
+                <div style="font-size:12px;font-weight:700;color:var(--blush2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px"><i class="fa-solid fa-rotate"></i> Retargeting</div>
+                <p style="font-size:12.5px;color:var(--muted);line-height:1.65;margin:0">Re-engage warm audiences — website visitors, video viewers, past customers. The highest-converting campaign type.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Full Deliverables -->
           <div class="svc-deliverables">
-            <h4>What's Included</h4>
+            <h4>Full Service — What's Included</h4>
             <ul class="deliver-list">
-              <li><i class="fa-solid fa-check"></i>Audience research &amp; targeting strategy</li>
-              <li><i class="fa-solid fa-check"></i>Campaign setup (Awareness, Traffic, Leads, Sales)</li>
-              <li><i class="fa-solid fa-check"></i>Ad creative brief &amp; copywriting</li>
-              <li><i class="fa-solid fa-check"></i>A/B testing (audiences, creatives, placements)</li>
-              <li><i class="fa-solid fa-check"></i>Facebook Pixel &amp; Conversions API setup</li>
-              <li><i class="fa-solid fa-check"></i>Retargeting &amp; lookalike audience campaigns</li>
-              <li><i class="fa-solid fa-check"></i>Weekly performance reports &amp; ROAS tracking</li>
-              <li><i class="fa-solid fa-check"></i>Budget optimisation &amp; bid strategy management</li>
+              <li><i class="fa-solid fa-check"></i>Business Manager &amp; Ads account audit / setup</li>
+              <li><i class="fa-solid fa-check"></i>Facebook Pixel installation &amp; Conversions API configuration</li>
+              <li><i class="fa-solid fa-check"></i>Deep audience research — interest, behavioural &amp; demographic targeting</li>
+              <li><i class="fa-solid fa-check"></i>Lookalike audience creation from your existing customers</li>
+              <li><i class="fa-solid fa-check"></i>Custom audience setup (website visitors, email lists, video viewers)</li>
+              <li><i class="fa-solid fa-check"></i>Full-funnel campaign architecture (awareness → consideration → conversion)</li>
+              <li><i class="fa-solid fa-check"></i>Ad creative brief &amp; conversion-focused copywriting</li>
+              <li><i class="fa-solid fa-check"></i>A/B testing — audiences, creatives, placements &amp; copy</li>
+              <li><i class="fa-solid fa-check"></i>Budget allocation &amp; bid strategy optimisation</li>
+              <li><i class="fa-solid fa-check"></i>Weekly performance review &amp; ROAS / CPA / CPL tracking</li>
+              <li><i class="fa-solid fa-check"></i>Monthly strategy report with insights &amp; next-month plan</li>
             </ul>
           </div>
-          <div class="svc-deliverables" style="margin-top:1.2rem">
-            <h4>Best For</h4>
-            <ul class="deliver-list">
-              <li><i class="fa-solid fa-arrow-right" style="color:var(--blush2)"></i>E-commerce brands wanting more sales</li>
-              <li><i class="fa-solid fa-arrow-right" style="color:var(--blush2)"></i>Service businesses needing qualified leads</li>
-              <li><i class="fa-solid fa-arrow-right" style="color:var(--blush2)"></i>Local businesses wanting Map &amp; store traffic</li>
-              <li><i class="fa-solid fa-arrow-right" style="color:var(--blush2)"></i>Brands scaling beyond organic reach</li>
-            </ul>
+
+          <!-- My Meta Ads Process -->
+          <div class="svc-deliverables" style="margin-top:1.5rem">
+            <h4>My Meta Ads Process</h4>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px;padding-left:4px">
+              <div style="display:flex;gap:14px;align-items:flex-start">
+                <div style="min-width:28px;height:28px;border-radius:50%;background:var(--blush);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">1</div>
+                <div><strong style="font-size:13.5px;color:var(--ink)">Discovery &amp; Goal Setting</strong><br><span style="font-size:12.5px;color:var(--muted)">Understand your business, audience, offer and success metrics. Define target CPA, ROAS or CPL before touching the account.</span></div>
+              </div>
+              <div style="display:flex;gap:14px;align-items:flex-start">
+                <div style="min-width:28px;height:28px;border-radius:50%;background:var(--blush);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">2</div>
+                <div><strong style="font-size:13.5px;color:var(--ink)">Technical Setup &amp; Tracking</strong><br><span style="font-size:12.5px;color:var(--muted)">Pixel installation, Conversions API, custom events and UTM tracking configured before any spend begins.</span></div>
+              </div>
+              <div style="display:flex;gap:14px;align-items:flex-start">
+                <div style="min-width:28px;height:28px;border-radius:50%;background:var(--blush);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">3</div>
+                <div><strong style="font-size:13.5px;color:var(--ink)">Audience &amp; Creative Strategy</strong><br><span style="font-size:12.5px;color:var(--muted)">Research your ideal audience, build targeting layers, and create a testing matrix for creatives, copy and calls-to-action.</span></div>
+              </div>
+              <div style="display:flex;gap:14px;align-items:flex-start">
+                <div style="min-width:28px;height:28px;border-radius:50%;background:var(--blush);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">4</div>
+                <div><strong style="font-size:13.5px;color:var(--ink)">Launch &amp; Optimise</strong><br><span style="font-size:12.5px;color:var(--muted)">Campaign goes live with daily monitoring for the first 2 weeks. Scale winners, cut losers, adjust bids based on real data — not gut feel.</span></div>
+              </div>
+              <div style="display:flex;gap:14px;align-items:flex-start">
+                <div style="min-width:28px;height:28px;border-radius:50%;background:var(--blush);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">5</div>
+                <div><strong style="font-size:13.5px;color:var(--ink)">Report &amp; Scale</strong><br><span style="font-size:12.5px;color:var(--muted)">Monthly report with ROAS, CPA, CPL and full attribution. Clear recommendations for the next month's strategy and budget.</span></div>
+              </div>
+            </div>
           </div>
-          <div class="callout-box" style="margin-top:1.5rem;padding:16px 18px;background:var(--sage-pal);border-radius:10px;border-left:3px solid var(--sage)">
-            <p style="font-size:13.5px;color:var(--ink2);margin:0"><i class="fa-solid fa-bolt" style="color:var(--sage);margin-right:7px"></i><strong>Pro tip:</strong> Combining Meta Ads with SEO creates a powerful full-funnel strategy — paid ads drive immediate traffic while SEO builds long-term authority. The data from your ad campaigns also sharpens your organic keyword strategy.</p>
+
+          <!-- Best for + SEO Synergy -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem">
+            <div style="padding:18px;background:var(--bg2);border-radius:12px;border:1px solid var(--border)">
+              <h4 style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:10px"><i class="fa-solid fa-bullseye" style="color:var(--blush2);margin-right:6px"></i>Best For</h4>
+              <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px">
+                <li style="font-size:13px;color:var(--muted)"><i class="fa-solid fa-check" style="color:var(--blush2);margin-right:7px"></i>E-commerce brands scaling sales</li>
+                <li style="font-size:13px;color:var(--muted)"><i class="fa-solid fa-check" style="color:var(--blush2);margin-right:7px"></i>Service businesses needing leads</li>
+                <li style="font-size:13px;color:var(--muted)"><i class="fa-solid fa-check" style="color:var(--blush2);margin-right:7px"></i>Local businesses building awareness</li>
+                <li style="font-size:13px;color:var(--muted)"><i class="fa-solid fa-check" style="color:var(--blush2);margin-right:7px"></i>Brands launching new products</li>
+                <li style="font-size:13px;color:var(--muted)"><i class="fa-solid fa-check" style="color:var(--blush2);margin-right:7px"></i>Any business wanting results now</li>
+              </ul>
+            </div>
+            <div style="padding:18px;background:var(--sage-pal);border-radius:12px;border:1px solid var(--border2)">
+              <h4 style="font-size:13px;font-weight:600;color:var(--sage);margin-bottom:10px"><i class="fa-solid fa-link" style="margin-right:6px"></i>Stronger With SEO</h4>
+              <p style="font-size:12.5px;color:var(--muted);line-height:1.7;margin:0">Meta Ads and SEO are more powerful together. Paid ads drive immediate traffic while SEO builds long-term authority. The keyword conversion data from your ad campaigns directly informs your SEO content strategy — reducing your cost-per-acquisition over time as organic traffic grows.</p>
+            </div>
           </div>
         </div>
         <div class="svc-big-footer">
-          <span>Monthly retainer or project-based</span>
-          <a href="contact.html" class="btn btn-dark" style="padding:9px 18px;font-size:13px">Get Started</a>
+          <span>Monthly retainer · Budget from $300+/mo ad spend</span>
+          <a href="contact.html" class="btn btn-dark" style="padding:9px 18px;font-size:13px">Get Started <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
       <!-- Cybersecurity -->
       <div class="svc-big" id="cyber" data-reveal="up" style="transition-delay:.5s">
         <div class="svc-big-header">
@@ -414,35 +478,48 @@
     <div style="text-align:center">
       <span class="tag-label" data-reveal="up"><i class="fa-solid fa-tags"></i> Investment</span>
       <h2 class="h2" data-reveal="up" style="transition-delay:.1s;text-align:center">Transparent Pricing</h2>
-      <p class="sub" style="margin:10px auto 0;text-align:center" data-reveal="up" style="transition-delay:.2s">All plans are customizable. Final pricing depends on project scope. <a href="contact.html" style="color:var(--sage)">Contact me</a> for a custom quote.</p>
+      <p class="sub" style="margin:10px auto 0;text-align:center" data-reveal="up" style="transition-delay:.2s">No surprises, no lock-in contracts. Every engagement is scoped to your actual goals — <a href="contact.html" style="color:var(--sage)">talk to me first</a> and we'll find what fits.</p>
     </div>
-    <div class="pricing-grid">
+    <!-- Pricing Tabs -->
+    <div style="display:flex;justify-content:center;gap:8px;margin-bottom:2rem" data-reveal="up">
+      <button class="price-tab act" id="tabSeo" onclick="switchPricing('seo')">
+        <i class="fa-brands fa-google"></i> SEO / AEO / GEO
+      </button>
+      <button class="price-tab" id="tabMeta" onclick="switchPricing('meta')" style="border-color:var(--blush);color:var(--blush2)">
+        <i class="fa-brands fa-meta"></i> Meta Ads
+      </button>
+    </div>
+
+    <!-- SEO Pricing -->
+    <div id="priceSeo" class="pricing-grid">
       <div class="price-card" data-reveal="up" style="transition-delay:.1s">
         <div class="price-name">Starter</div>
         <div class="price-amount"><sup>$</sup>299</div>
         <div class="price-period">/ month</div>
-        <p class="price-desc">For small businesses wanting to establish search presence and fix foundational issues.</p>
+        <p class="price-desc">You've been putting SEO off. This gets you started right — fixing what's broken and putting the right keywords in the right places.</p>
         <ul class="price-features">
           <li><i class="fa-solid fa-check"></i>Technical SEO audit</li>
           <li><i class="fa-solid fa-check"></i>5 pages optimized/month</li>
-          <li><i class="fa-solid fa-check"></i>Keyword research</li>
+          <li><i class="fa-solid fa-check"></i>Keyword research &amp; strategy</li>
           <li><i class="fa-solid fa-check"></i>Monthly GSC report</li>
+          <li><i class="fa-solid fa-check"></i>Schema markup basics</li>
           <li><i class="fa-solid fa-check"></i>Email support</li>
         </ul>
         <a href="contact.html" class="btn btn-ghost price-cta">Get Started</a>
       </div>
       <div class="price-card popular" data-reveal="up" style="transition-delay:.2s">
+        <div class="price-popular-badge">Most Popular</div>
         <div class="price-name">Growth</div>
         <div class="price-amount"><sup>$</sup>599</div>
         <div class="price-period">/ month</div>
-        <p class="price-desc">For businesses serious about organic growth — includes SEO, AEO and content strategy.</p>
+        <p class="price-desc">You want real organic growth, not just rankings. This is where most of my clients see the biggest traffic jumps within 90 days.</p>
         <ul class="price-features">
           <li><i class="fa-solid fa-check"></i>Everything in Starter</li>
           <li><i class="fa-solid fa-check"></i>AEO &amp; featured snippet targeting</li>
           <li><i class="fa-solid fa-check"></i>10 pages optimized/month</li>
-          <li><i class="fa-solid fa-check"></i>Schema markup implementation</li>
-          <li><i class="fa-solid fa-check"></i>2 x monthly strategy calls</li>
+          <li><i class="fa-solid fa-check"></i>Full schema markup implementation</li>
           <li><i class="fa-solid fa-check"></i>Competitor gap analysis</li>
+          <li><i class="fa-solid fa-check"></i>2 x monthly strategy calls</li>
         </ul>
         <a href="contact.html" class="btn btn-olive price-cta">Get Started</a>
       </div>
@@ -450,17 +527,80 @@
         <div class="price-name">Authority</div>
         <div class="price-amount"><sup>$</sup>999</div>
         <div class="price-period">/ month</div>
-        <p class="price-desc">Full-stack digital visibility: SEO + AEO + GEO + cybersecurity for ambitious brands.</p>
+        <p class="price-desc">You want to dominate — Google page 1, AI Overviews, ChatGPT citations and a secure website. Everything, done properly.</p>
         <ul class="price-features">
           <li><i class="fa-solid fa-check"></i>Everything in Growth</li>
           <li><i class="fa-solid fa-check"></i>GEO / LLM visibility strategy</li>
-          <li><i class="fa-solid fa-check"></i>Unlimited pages</li>
+          <li><i class="fa-solid fa-check"></i>Unlimited pages optimized</li>
           <li><i class="fa-solid fa-check"></i>Security audit included</li>
           <li><i class="fa-solid fa-check"></i>Weekly progress calls</li>
           <li><i class="fa-solid fa-check"></i>Priority WhatsApp support</li>
         </ul>
         <a href="contact.html" class="btn btn-ghost price-cta">Get Started</a>
       </div>
+    </div>
+
+    <!-- Meta Ads Pricing -->
+    <div id="priceMeta" class="pricing-grid" style="display:none">
+      <div class="price-card" data-reveal="up" style="transition-delay:.1s;border-color:var(--blush)">
+        <div class="price-name">Launch</div>
+        <div class="price-amount" style="color:var(--blush2)"><sup>$</sup>299</div>
+        <div class="price-period">/ month + ad spend</div>
+        <p class="price-desc">Never run Facebook Ads before? This gets your account set up cleanly, your first campaign live, and tells us exactly what your audience responds to.</p>
+        <ul class="price-features">
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Account &amp; Pixel setup</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>1 campaign (1 objective)</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Audience research &amp; targeting</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Ad copywriting (3 variants)</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Basic A/B testing</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Bi-weekly performance report</li>
+          <li style="color:var(--muted)"><i class="fa-solid fa-circle-minus" style="color:var(--border2)"></i>Recommended ad spend: $300–$600/mo</li>
+        </ul>
+        <a href="contact.html" class="btn btn-ghost price-cta" style="border-color:var(--blush);color:var(--blush2)">Get Started</a>
+      </div>
+      <div class="price-card popular" data-reveal="up" style="transition-delay:.2s;border-color:var(--blush2)">
+        <div class="price-popular-badge" style="background:var(--blush2)">Most Popular</div>
+        <div class="price-name">Scale</div>
+        <div class="price-amount" style="color:var(--blush2)"><sup>$</sup>599</div>
+        <div class="price-period">/ month + ad spend</div>
+        <p class="price-desc">You've got a budget, you know your offer works, and you're ready to pour fuel on it. Full-funnel, retargeting, lookalikes — the works.</p>
+        <ul class="price-features">
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Everything in Launch</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>3 campaigns (multi-objective funnel)</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Retargeting &amp; lookalike audiences</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Conversions API setup</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Ad copy + creative brief (6 variants)</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Weekly optimisation &amp; reporting</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Monthly strategy call</li>
+          <li style="color:var(--muted)"><i class="fa-solid fa-circle-minus" style="color:var(--border2)"></i>Recommended ad spend: $600–$1,500/mo</li>
+        </ul>
+        <a href="contact.html" class="btn price-cta" style="background:var(--blush2);color:#fff">Get Started</a>
+      </div>
+      <div class="price-card" data-reveal="up" style="transition-delay:.3s;border-color:var(--blush)">
+        <div class="price-name">Dominate</div>
+        <div class="price-amount" style="color:var(--blush2)"><sup>$</sup>999</div>
+        <div class="price-period">/ month + ad spend</div>
+        <p class="price-desc">You want Meta Ads and SEO working as one machine. Paid drives immediate results. Organic builds permanent authority. This is the full picture.</p>
+        <ul class="price-features">
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Everything in Scale</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Unlimited campaigns</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Custom audience strategy</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Full creative testing framework</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>CRM integration support</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>Weekly strategy calls</li>
+          <li><i class="fa-solid fa-check" style="color:var(--blush2)"></i>SEO + Meta Ads combo available</li>
+          <li style="color:var(--muted)"><i class="fa-solid fa-circle-minus" style="color:var(--border2)"></i>Recommended ad spend: $1,500+/mo</li>
+        </ul>
+        <a href="contact.html" class="btn btn-ghost price-cta" style="border-color:var(--blush);color:var(--blush2)">Get Started</a>
+      </div>
+    </div>
+
+    <!-- Custom note -->
+    <div style="text-align:center;margin-top:2rem;padding:20px;background:var(--bg2);border-radius:12px;border:1px solid var(--border)" data-reveal="up">
+      <p style="font-size:14px;color:var(--muted);margin:0">
+        <i class="fa-solid fa-circle-info" style="color:var(--sage);margin-right:6px"></i>
+        Management fees only — your ad spend goes directly to Meta and stays 100% yours. Prices above are starting points. Scope, industry and goals all affect final pricing. <a href="contact.html" style="color:var(--sage);font-weight:500;margin-left:6px">Let's talk numbers →</a>
+      </p>
     </div>
   </div>
 </section>
@@ -521,4 +661,36 @@
 
 
 <script src="assets/js/script.js"></script>
+<style>
+.price-tab {
+  padding: 10px 22px; border-radius: 8px; font-size: 13.5px; font-weight: 600;
+  border: 2px solid var(--border); background: transparent;
+  color: var(--muted); cursor: pointer; font-family: var(--sans);
+  display: inline-flex; align-items: center; gap: 7px; transition: all .25s;
+}
+.price-tab.act { background: var(--sage); color: #fff; border-color: var(--sage); }
+.price-tab:hover:not(.act) { border-color: var(--sage); color: var(--sage); }
+.price-popular-badge {
+  display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; background: var(--sage); color: #fff;
+  padding: 3px 10px; border-radius: 4px; margin-bottom: 10px;
+}
+</style>
+<script>
+function switchPricing(tab) {
+  document.getElementById('priceSeo').style.display  = tab === 'seo'  ? '' : 'none';
+  document.getElementById('priceMeta').style.display = tab === 'meta' ? '' : 'none';
+  document.getElementById('tabSeo').classList.toggle('act',  tab === 'seo');
+  document.getElementById('tabMeta').classList.toggle('act', tab === 'meta');
+  if(tab === 'meta') {
+    document.getElementById('tabMeta').style.background = 'var(--blush2)';
+    document.getElementById('tabMeta').style.color = '#fff';
+    document.getElementById('tabMeta').style.borderColor = 'var(--blush2)';
+  } else {
+    document.getElementById('tabMeta').style.background = '';
+    document.getElementById('tabMeta').style.color = 'var(--blush2)';
+    document.getElementById('tabMeta').style.borderColor = 'var(--blush)';
+  }
+}
+</script>
 </body></html>
