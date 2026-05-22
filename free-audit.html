@@ -30,6 +30,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
 /* ══ AUDIT PAGE STYLES ══ */
@@ -550,21 +551,27 @@
       <div id="seoCheckRows"><!-- JS --></div>
     </div>
 
-    <!-- CTA Download -->
+    <!-- PDF Download -->
     <div class="audit-cta" data-reveal="up" style="transition-delay:.3s">
       <div class="audit-cta-inner">
-        <h2>Want a <span>Full Professional Audit</span><br>With a Fix Plan?</h2>
-        <p>Your automated report shows the issues. I'll personally analyse your site, prioritise every fix by impact, and build a step-by-step action plan tailored to your business goals.</p>
-        <a href="contact.html?ref=audit" class="download-btn" id="downloadBtn">
+        <h2>Your <span>Audit Report</span> is Ready</h2>
+        <p>Download a fully branded PDF report with all scores, Core Web Vitals, issues and recommendations — generated from your live audit results.</p>
+        <button class="download-btn" id="downloadBtn" onclick="downloadPDF()">
           <i class="fa-solid fa-file-arrow-down"></i>
-          Download Full Audit Report
-        </a>
-        <p class="cta-note">Clicking "Download" connects you with Ahsan directly — get a personalised PDF report within 24 hours.</p>
+          <span id="downloadBtnText">Download PDF Report</span>
+        </button>
+        <p class="cta-note">Your branded SEO audit report — ready in seconds. No email required.</p>
         <div class="cta-features">
-          <span class="cta-feat"><i class="fa-solid fa-check"></i> Free 30-min strategy call</span>
-          <span class="cta-feat"><i class="fa-solid fa-check"></i> Personalised PDF report</span>
-          <span class="cta-feat"><i class="fa-solid fa-check"></i> Priority fix roadmap</span>
-          <span class="cta-feat"><i class="fa-solid fa-check"></i> No commitment needed</span>
+          <span class="cta-feat"><i class="fa-solid fa-check"></i> Fully branded PDF</span>
+          <span class="cta-feat"><i class="fa-solid fa-check"></i> All scores included</span>
+          <span class="cta-feat"><i class="fa-solid fa-check"></i> Issues &amp; recommendations</span>
+          <span class="cta-feat"><i class="fa-solid fa-check"></i> Shareable with your team</span>
+        </div>
+        <div style="margin-top:28px;padding:20px 24px;background:rgba(255,255,255,.06);border-radius:12px;border:1px solid rgba(255,255,255,.12)">
+          <p style="font-size:13px;color:rgba(255,255,255,.7);margin-bottom:12px"><i class="fa-solid fa-bolt" style="color:var(--sage);margin-right:6px"></i><strong style="color:#fff">Want a deeper audit?</strong> This report shows what the tools find. I can show you what they miss.</p>
+          <a href="contact.html?ref=audit" style="display:inline-flex;align-items:center;gap:7px;background:transparent;color:rgba(255,255,255,.75);border:1.5px solid rgba(255,255,255,.3);padding:9px 18px;border-radius:8px;font-size:13px;font-weight:500;text-decoration:none;transition:all .2s">
+            <i class="fa-solid fa-envelope"></i> Book a Free Strategy Call
+          </a>
         </div>
       </div>
     </div>
@@ -765,6 +772,7 @@
 
   function renderResults(data, url) {
     auditData = data;
+    window.auditData = data;
     const cats = data.lighthouseResult?.categories || {};
     const audits = data.lighthouseResult?.audits || {};
 
@@ -877,9 +885,9 @@
     }).filter(Boolean).join('');
     document.getElementById('seoCheckRows').innerHTML = seoRowsHtml || '<div class="seo-check-row" style="color:var(--muted)">SEO check data not available for this URL.</div>';
 
-    // Add audit URL to contact CTA
-    const ctaLink = document.getElementById('downloadBtn');
-    ctaLink.href = `contact.html?ref=audit&url=${encodeURIComponent(url)}&score=${avg}`;
+    // Store audit URL for PDF
+    window._auditUrl = url;
+    window._auditStrategy = currentStrategy;
 
     // Show results
     document.getElementById('auditResults').classList.add('show');
@@ -919,6 +927,470 @@
     document.getElementById('auditUrl').value = params.get('url');
   }
 })();
+
+/* ══════════════════════════════════════════════════════
+   PDF REPORT GENERATOR
+══════════════════════════════════════════════════════ */
+window.downloadPDF = async function() {
+  const btn = document.getElementById('downloadBtn');
+  const btnText = document.getElementById('downloadBtnText');
+  if (!window.auditData) { alert('Please run an audit first.'); return; }
+
+  btn.disabled = true;
+  btnText.textContent = 'Generating PDF...';
+
+  try {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    const W = 210, H = 297;
+    const data  = window.auditData;
+    const cats  = data.lighthouseResult?.categories || {};
+    const audits = data.lighthouseResult?.audits || {};
+    const url   = window._auditUrl || 'Unknown';
+    const strat = window._auditStrategy || 'mobile';
+    const today = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'long', year:'numeric' });
+
+    const perf = Math.round((cats.performance?.score  || 0) * 100);
+    const seo  = Math.round((cats.seo?.score          || 0) * 100);
+    const acc  = Math.round((cats.accessibility?.score || 0) * 100);
+    const bp   = Math.round((cats['best-practices']?.score || 0) * 100);
+    const avg  = Math.round((perf + seo + acc + bp) / 4);
+
+    // ── COLOURS ──
+    const SAGE   = [107, 140, 110];
+    const BLUSH  = [201, 160, 172];
+    const INK    = [30,  22,  30];
+    const MUTED  = [120, 105, 115];
+    const LIGHT  = [248, 245, 247];
+    const WHITE  = [255, 255, 255];
+    const BORDER = [220, 210, 215];
+    const GOOD   = [34,  197, 94];
+    const WARN   = [245, 158, 11];
+    const POOR   = [239, 68,  68];
+
+    function scoreColor(v) {
+      if (v >= 90) return GOOD;
+      if (v >= 50) return WARN;
+      return POOR;
+    }
+    function scoreLabel(v) {
+      if (v >= 90) return 'Good';
+      if (v >= 50) return 'Needs Work';
+      return 'Poor';
+    }
+    function rgb(col) { return `rgb(${col[0]},${col[1]},${col[2]})`; }
+    function setFill(col) { doc.setFillColor(col[0], col[1], col[2]); }
+    function setDraw(col) { doc.setDrawColor(col[0], col[1], col[2]); }
+    function setTxt(col)  { doc.setTextColor(col[0], col[1], col[2]); }
+
+    let y = 0;
+
+    // ════════════════════════════════════
+    // PAGE 1 HEADER / LETTERHEAD
+    // ════════════════════════════════════
+
+    // Dark header band
+    setFill(INK);
+    doc.rect(0, 0, W, 42, 'F');
+
+    // Sage accent strip
+    setFill(SAGE);
+    doc.rect(0, 42, W, 3, 'F');
+
+    // AJ monogram circle
+    setFill(SAGE);
+    doc.circle(20, 21, 10, 'F');
+    setTxt(WHITE);
+    doc.setFontSize(11); doc.setFont('helvetica','bold');
+    doc.text('AJ', 20, 23.5, { align: 'center' });
+
+    // Name + title
+    setTxt(WHITE);
+    doc.setFontSize(14); doc.setFont('helvetica','bold');
+    doc.text('Ahsan Jannat', 35, 17);
+    doc.setFontSize(8.5); doc.setFont('helvetica','normal');
+    setTxt([200, 190, 200]);
+    doc.text('SEO  ·  AEO  ·  GEO  ·  Meta Ads  ·  Cybersecurity', 35, 23.5);
+    doc.text('ahsan-jannat.netlify.app', 35, 30);
+
+    // Report label top right
+    setTxt(WHITE);
+    doc.setFontSize(9); doc.setFont('helvetica','bold');
+    doc.text('SEO AUDIT REPORT', W - 15, 17, { align: 'right' });
+    setTxt([180, 170, 180]);
+    doc.setFontSize(8); doc.setFont('helvetica','normal');
+    doc.text(`Generated: ${today}`, W - 15, 24, { align: 'right' });
+    doc.text(`Strategy: ${strat.toUpperCase()}`, W - 15, 30, { align: 'right' });
+
+    y = 55;
+
+    // ── Audited URL box ──
+    setFill(LIGHT);
+    setDraw(BORDER);
+    doc.setLineWidth(0.3);
+    doc.roundedRect(14, y - 5, W - 28, 14, 3, 3, 'FD');
+    setTxt(MUTED);
+    doc.setFontSize(7.5); doc.setFont('helvetica','bold');
+    doc.text('AUDITED URL', 20, y + 1.5);
+    setTxt(INK);
+    doc.setFontSize(9); doc.setFont('helvetica','normal');
+    const shortUrl = url.length > 65 ? url.substring(0, 65) + '...' : url;
+    doc.text(shortUrl, 20, y + 6.5);
+    y += 18;
+
+    // ── Overall Grade ──
+    const [gl] = avg >= 90 ? ['A'] : avg >= 80 ? ['B'] : avg >= 60 ? ['C'] : avg >= 40 ? ['D'] : ['F'];
+    const gradeCol = scoreColor(avg);
+    setFill(gradeCol);
+    doc.roundedRect(W/2 - 25, y, 50, 16, 3, 3, 'F');
+    setTxt(WHITE);
+    doc.setFontSize(8); doc.setFont('helvetica','bold');
+    doc.text(`Overall Grade: ${gl}  (${avg}/100)`, W/2, y + 10, { align: 'center' });
+    y += 24;
+
+    // ════════════════════════════════════
+    // SCORES SECTION
+    // ════════════════════════════════════
+    setTxt(INK);
+    doc.setFontSize(11); doc.setFont('helvetica','bold');
+    doc.text('Lighthouse Scores', 14, y);
+    setFill(SAGE);
+    doc.rect(14, y + 2, 30, 1, 'F');
+    y += 10;
+
+    const scores = [
+      { label: 'Performance',    val: perf },
+      { label: 'SEO',            val: seo  },
+      { label: 'Accessibility',  val: acc  },
+      { label: 'Best Practices', val: bp   },
+    ];
+    const cardW = (W - 28 - 9) / 4;
+
+    scores.forEach((s, i) => {
+      const x = 14 + i * (cardW + 3);
+      const col = scoreColor(s.val);
+
+      setFill(LIGHT);
+      setDraw(BORDER);
+      doc.setLineWidth(0.3);
+      doc.roundedRect(x, y, cardW, 28, 3, 3, 'FD');
+
+      // Score number
+      setFill(col);
+      doc.roundedRect(x + cardW/2 - 8, y + 3, 16, 12, 2, 2, 'F');
+      setTxt(WHITE);
+      doc.setFontSize(11); doc.setFont('helvetica','bold');
+      doc.text(String(s.val), x + cardW/2, y + 11.5, { align: 'center' });
+
+      // Label
+      setTxt(INK);
+      doc.setFontSize(7.5); doc.setFont('helvetica','bold');
+      doc.text(s.label, x + cardW/2, y + 20, { align: 'center' });
+
+      // Status
+      setTxt(col);
+      doc.setFontSize(7); doc.setFont('helvetica','normal');
+      doc.text(scoreLabel(s.val), x + cardW/2, y + 25, { align: 'center' });
+    });
+    y += 36;
+
+    // ════════════════════════════════════
+    // CORE WEB VITALS
+    // ════════════════════════════════════
+    setTxt(INK);
+    doc.setFontSize(11); doc.setFont('helvetica','bold');
+    doc.text('Core Web Vitals', 14, y);
+    setFill(SAGE);
+    doc.rect(14, y + 2, 30, 1, 'F');
+    y += 10;
+
+    const cwvItems = [
+      { key: 'largest-contentful-paint', name: 'LCP', full: 'Largest Contentful Paint', good: 2500, warn: 4000 },
+      { key: 'total-blocking-time',      name: 'TBT', full: 'Total Blocking Time',       good: 200,  warn: 600  },
+      { key: 'cumulative-layout-shift',  name: 'CLS', full: 'Cumulative Layout Shift',   good: 0.1,  warn: 0.25 },
+      { key: 'first-contentful-paint',   name: 'FCP', full: 'First Contentful Paint',    good: 1800, warn: 3000 },
+      { key: 'speed-index',              name: 'SI',  full: 'Speed Index',                good: 3400, warn: 5800 },
+      { key: 'interactive',              name: 'TTI', full: 'Time to Interactive',        good: 3800, warn: 7300 },
+    ];
+
+    const cwvColW = (W - 28 - 5) / 3;
+    cwvItems.forEach((m, i) => {
+      const row = Math.floor(i / 3);
+      const col = i % 3;
+      const x = 14 + col * (cwvColW + 2.5);
+      const cy = y + row * 18;
+      const a = audits[m.key];
+      const val = a?.numericValue ?? null;
+      const display = a?.displayValue || 'N/A';
+      let cls = MUTED;
+      if (val !== null) {
+        cls = val <= m.good ? GOOD : val <= m.warn ? WARN : POOR;
+      }
+
+      setFill(LIGHT);
+      setDraw(BORDER);
+      doc.setLineWidth(0.2);
+      doc.roundedRect(x, cy, cwvColW, 15, 2, 2, 'FD');
+
+      // Colour strip left edge
+      setFill(cls);
+      doc.roundedRect(x, cy, 3, 15, 1, 1, 'F');
+
+      setTxt(MUTED);
+      doc.setFontSize(7); doc.setFont('helvetica','normal');
+      doc.text(m.full, x + 6, cy + 5);
+
+      setTxt(INK);
+      doc.setFontSize(10); doc.setFont('helvetica','bold');
+      doc.text(display, x + 6, cy + 11.5);
+
+      setTxt(cls);
+      doc.setFontSize(6.5); doc.setFont('helvetica','bold');
+      doc.text(val !== null ? (val <= m.good ? 'GOOD' : val <= m.warn ? 'IMPROVE' : 'POOR') : 'N/A', x + cwvColW - 4, cy + 11.5, { align: 'right' });
+    });
+    y += 40;
+
+    // ════════════════════════════════════
+    // ISSUES & OPPORTUNITIES
+    // ════════════════════════════════════
+    setTxt(INK);
+    doc.setFontSize(11); doc.setFont('helvetica','bold');
+    doc.text('Issues & Opportunities', 14, y);
+    setFill(SAGE);
+    doc.rect(14, y + 2, 45, 1, 'F');
+    y += 10;
+
+    const allA = Object.values(audits);
+    const failed  = allA.filter(a => a.score !== null && a.score < 0.5 && a.title).slice(0, 5);
+    const passing = allA.filter(a => a.score === 1 && a.title).slice(0, 5);
+
+    const colW2 = (W - 28 - 6) / 2;
+
+    // Failures column
+    setFill([255, 240, 240]);
+    setDraw([255, 180, 180]);
+    doc.setLineWidth(0.3);
+    doc.roundedRect(14, y, colW2, 8, 2, 2, 'FD');
+    setTxt(POOR);
+    doc.setFontSize(8); doc.setFont('helvetica','bold');
+    doc.text('✗  Fix These First', 18, y + 5.5);
+    y += 11;
+
+    failed.forEach((a, i) => {
+      setFill(i % 2 === 0 ? [255, 248, 248] : WHITE);
+      setDraw(BORDER);
+      doc.setLineWidth(0.2);
+      doc.roundedRect(14, y, colW2, 10, 1, 1, 'FD');
+      setTxt(POOR);
+      doc.setFontSize(7.5); doc.setFont('helvetica','bold');
+      doc.text('✗', 18, y + 6.5);
+      setTxt(INK);
+      doc.setFontSize(7.5); doc.setFont('helvetica','normal');
+      const title = a.title.length > 42 ? a.title.substring(0, 42) + '…' : a.title;
+      doc.text(title, 23, y + 6.5);
+      if (a.displayValue) {
+        setTxt(MUTED); doc.setFontSize(6.5);
+        doc.text(a.displayValue, colW2, y + 6.5, { align: 'right' });
+      }
+      y += 11;
+    });
+
+    y -= (failed.length * 11) + 11;
+    const x2 = 14 + colW2 + 6;
+
+    // Passing column
+    setFill([240, 253, 244]);
+    setDraw([180, 230, 190]);
+    doc.setLineWidth(0.3);
+    doc.roundedRect(x2, y, colW2, 8, 2, 2, 'FD');
+    setTxt(GOOD);
+    doc.setFontSize(8); doc.setFont('helvetica','bold');
+    doc.text('✓  Passing Checks', x2 + 4, y + 5.5);
+    y += 11;
+
+    passing.forEach((a, i) => {
+      setFill(i % 2 === 0 ? [245, 255, 248] : WHITE);
+      setDraw(BORDER);
+      doc.setLineWidth(0.2);
+      doc.roundedRect(x2, y, colW2, 10, 1, 1, 'FD');
+      setTxt(GOOD);
+      doc.setFontSize(7.5); doc.setFont('helvetica','bold');
+      doc.text('✓', x2 + 4, y + 6.5);
+      setTxt(INK);
+      doc.setFontSize(7.5); doc.setFont('helvetica','normal');
+      const title = a.title.length > 42 ? a.title.substring(0, 42) + '…' : a.title;
+      doc.text(title, x2 + 9, y + 6.5);
+      y += 11;
+    });
+    y = Math.max(y, y + (failed.length - passing.length) * 11);
+    y += 8;
+
+    // ════════════════════════════════════
+    // SEO CHECKS TABLE
+    // ════════════════════════════════════
+    if (y > 210) { doc.addPage(); y = 20; }
+
+    setTxt(INK);
+    doc.setFontSize(11); doc.setFont('helvetica','bold');
+    doc.text('SEO Technical Checks', 14, y);
+    setFill(SAGE);
+    doc.rect(14, y + 2, 42, 1, 'F');
+    y += 10;
+
+    const seoChecks = [
+      { key:'viewport',            name:'Viewport Meta Tag'       },
+      { key:'document-title',      name:'Page Title'              },
+      { key:'meta-description',    name:'Meta Description'        },
+      { key:'link-text',           name:'Descriptive Link Text'   },
+      { key:'image-alt',           name:'Image Alt Attributes'    },
+      { key:'canonical',           name:'Canonical URL'           },
+      { key:'robots-txt',          name:'robots.txt'              },
+      { key:'structured-data',     name:'Structured Data / Schema'},
+      { key:'is-crawlable',        name:'Page is Crawlable'       },
+      { key:'font-size',           name:'Legible Font Sizes'      },
+      { key:'tap-targets',         name:'Tap Target Sizes'        },
+      { key:'hreflang',            name:'hreflang'                },
+    ];
+
+    // Table header
+    setFill(INK);
+    doc.rect(14, y, W - 28, 8, 'F');
+    setTxt(WHITE);
+    doc.setFontSize(7.5); doc.setFont('helvetica','bold');
+    doc.text('SEO Check', 18, y + 5.5);
+    doc.text('Status', W - 18, y + 5.5, { align: 'right' });
+    y += 9;
+
+    seoChecks.forEach((ch, i) => {
+      const a = audits[ch.key];
+      if (!a) return;
+      const pass = a.score === 1;
+      const warn = a.score !== null && a.score > 0 && a.score < 1;
+      const col  = pass ? GOOD : warn ? WARN : POOR;
+      const label = pass ? 'PASS' : warn ? 'WARN' : 'FAIL';
+
+      setFill(i % 2 === 0 ? LIGHT : WHITE);
+      setDraw(BORDER);
+      doc.setLineWidth(0.2);
+      doc.rect(14, y, W - 28, 9, 'FD');
+
+      setTxt(INK);
+      doc.setFontSize(8); doc.setFont('helvetica','normal');
+      doc.text(ch.name, 18, y + 6);
+
+      setFill(col);
+      doc.roundedRect(W - 32, y + 1.5, 16, 6, 1, 1, 'F');
+      setTxt(WHITE);
+      doc.setFontSize(6.5); doc.setFont('helvetica','bold');
+      doc.text(label, W - 24, y + 5.8, { align: 'center' });
+      y += 9;
+    });
+    y += 8;
+
+    // ════════════════════════════════════
+    // RECOMMENDATIONS
+    // ════════════════════════════════════
+    if (y > 230) { doc.addPage(); y = 20; }
+
+    setTxt(INK);
+    doc.setFontSize(11); doc.setFont('helvetica','bold');
+    doc.text('Top Recommendations', 14, y);
+    setFill(SAGE);
+    doc.rect(14, y + 2, 45, 1, 'F');
+    y += 12;
+
+    const recs = [
+      { n:1, title:'Fix critical performance issues first',   desc:`Your Performance score is ${perf}. ${perf < 50 ? 'Significant improvements needed — focus on LCP and render-blocking resources.' : perf < 90 ? 'Good foundation — optimise images and defer non-critical JS to push into the green zone.' : 'Excellent performance. Maintain current optimisations.'}` },
+      { n:2, title:'Strengthen on-page SEO signals',          desc:`Your SEO score is ${seo}. ${seo < 80 ? 'Review title tags, meta descriptions, and heading structure across key pages.' : 'SEO fundamentals are solid. Focus on content depth and E-E-A-T signals to maintain rankings.'}` },
+      { n:3, title:'Improve accessibility',                   desc:`Your Accessibility score is ${acc}. ${acc < 80 ? 'Fix image alt text, contrast ratios and ARIA labels — these also improve SEO.' : 'Accessibility is good. Audit new content regularly to maintain standards.'}` },
+      { n:4, title:'Implement schema markup',                 desc:'Add FAQPage, Article/BlogPosting, BreadcrumbList and Person schema to improve rich result eligibility and AI search visibility.' },
+      { n:5, title:'Book a full manual SEO audit',            desc:'Automated tools miss 40% of SEO issues. A manual audit by Ahsan Jannat will identify content gaps, link opportunities and GEO/AEO strategies specific to your business.' },
+    ];
+
+    recs.forEach((r, i) => {
+      if (y > 255) { doc.addPage(); y = 20; }
+      setFill(LIGHT);
+      setDraw(BORDER);
+      doc.setLineWidth(0.3);
+      const boxH = 18;
+      doc.roundedRect(14, y, W - 28, boxH, 2, 2, 'FD');
+
+      setFill(SAGE);
+      doc.circle(22, y + boxH/2, 5, 'F');
+      setTxt(WHITE);
+      doc.setFontSize(8); doc.setFont('helvetica','bold');
+      doc.text(String(r.n), 22, y + boxH/2 + 2.5, { align:'center' });
+
+      setTxt(INK);
+      doc.setFontSize(8.5); doc.setFont('helvetica','bold');
+      doc.text(r.title, 30, y + 6);
+      setTxt(MUTED);
+      doc.setFontSize(7.5); doc.setFont('helvetica','normal');
+      const lines = doc.splitTextToSize(r.desc, W - 50);
+      doc.text(lines[0], 30, y + 12.5);
+      if (lines[1]) doc.text(lines[1], 30, y + 17);
+      y += boxH + 4;
+    });
+
+    // ════════════════════════════════════
+    // FOOTER — CONTACT INFO
+    // ════════════════════════════════════
+    const footerY = H - 30;
+
+    // Footer background
+    setFill(INK);
+    doc.rect(0, footerY, W, 30, 'F');
+
+    // Sage top line
+    setFill(SAGE);
+    doc.rect(0, footerY, W, 2, 'F');
+
+    // Left — branding
+    setTxt(WHITE);
+    doc.setFontSize(9); doc.setFont('helvetica','bold');
+    doc.text('Ahsan Jannat', 14, footerY + 10);
+    setTxt([180, 170, 185]);
+    doc.setFontSize(7.5); doc.setFont('helvetica','normal');
+    doc.text('SEO · AEO · GEO · Meta Ads · Cybersecurity', 14, footerY + 16);
+    doc.text('Dhaka, Bangladesh', 14, footerY + 22);
+
+    // Center divider
+    setDraw([80, 70, 80]);
+    doc.setLineWidth(0.4);
+    doc.line(W/2, footerY + 5, W/2, footerY + 25);
+
+    // Right — contact details
+    setTxt([180, 170, 185]);
+    doc.setFontSize(7.5); doc.setFont('helvetica','normal');
+    doc.text('ajbmix63@gmail.com', W - 14, footerY + 10, { align: 'right' });
+    doc.text('+880 1643644550', W - 14, footerY + 16, { align: 'right' });
+    doc.text('ahsan-jannat.netlify.app', W - 14, footerY + 22, { align: 'right' });
+
+    // Page number
+    setTxt([100, 90, 100]);
+    doc.setFontSize(7); doc.setFont('helvetica','normal');
+    doc.text('This report was generated automatically by the free SEO audit tool at ahsan-jannat.netlify.app', W/2, footerY + 27, { align: 'center' });
+
+    // ── SAVE ──
+    const domain = url.replace(/^https?:\/\/(www\.)?/,'').replace(/[^a-zA-Z0-9]/g,'_').substring(0, 30);
+    const filename = `SEO-Audit-${domain}-${new Date().toISOString().slice(0,10)}.pdf`;
+    doc.save(filename);
+
+    btnText.textContent = 'PDF Downloaded!';
+    setTimeout(() => {
+      btn.disabled = false;
+      btnText.textContent = 'Download PDF Report';
+    }, 3000);
+
+  } catch(err) {
+    console.error('PDF error:', err);
+    btn.disabled = false;
+    btnText.textContent = 'Download PDF Report';
+    alert('Could not generate PDF. Please try again.');
+  }
+};
+/* ══ END PDF GENERATOR ══ */
+
 </script>
 </body>
 </html>
