@@ -43,88 +43,133 @@
     body.cd #aj-cur .cr { width:20px;height:20px; }
 
     /* Page transition wipe */
-    /* ── Sci-fi page transition ── */
+    /* ── Blur Dissolve Sci-Fi Transition ── */
     #aj-wipe {
-      position:fixed;inset:0;z-index:2147483647;
-      pointer-events:none;
-      display:flex;align-items:center;justify-content:center;
-      overflow:hidden;
+      position: fixed; inset: 0; z-index: 2147483647;
+      pointer-events: none;
+      display: flex; align-items: center; justify-content: center;
     }
-    #aj-wipe .w-panel {
-      position:absolute;inset:0;
-      background:#0D0D10;
-      transform:translateY(100%);
-      transition:transform .55s cubic-bezier(.76,0,.24,1);
+
+    /* Frosted glass overlay */
+    #aj-wipe .w-blur {
+      position: absolute; inset: 0;
+      backdrop-filter: blur(0px) brightness(1);
+      -webkit-backdrop-filter: blur(0px) brightness(1);
+      background: rgba(13,13,16,0);
+      transition:
+        backdrop-filter 0s,
+        -webkit-backdrop-filter 0s,
+        background 0s;
     }
-    #aj-wipe .w-grid {
-      position:absolute;inset:0;
-      background-image:
-        linear-gradient(rgba(107,140,110,.07) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(107,140,110,.07) 1px,transparent 1px);
-      background-size:40px 40px;
-      opacity:0;transition:opacity .2s ease;
+
+    /* Scanline texture */
+    #aj-wipe .w-scanlines {
+      position: absolute; inset: 0; opacity: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(107,140,110,0.03) 2px,
+        rgba(107,140,110,0.03) 4px
+      );
+      transition: opacity 0.2s ease;
     }
-    #aj-wipe .w-scan {
-      position:absolute;left:0;right:0;height:2px;top:-2px;
-      background:linear-gradient(90deg,transparent,#6B8C6E,#9DCCAA,#6B8C6E,transparent);
-      box-shadow:0 0 18px 4px rgba(107,140,110,.55);
-      opacity:0;transition:opacity .15s ease;
+
+    /* Glitch slice — horizontal bar that sweeps once */
+    #aj-wipe .w-glitch {
+      position: absolute; left: 0; right: 0;
+      height: 3px; top: 50%;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(107,140,110,0) 10%,
+        #6B8C6E 30%, #9DCCAA 50%, #6B8C6E 70%,
+        rgba(107,140,110,0) 90%, transparent 100%
+      );
+      box-shadow: 0 0 12px 2px rgba(107,140,110,0.5);
+      opacity: 0;
+      transform: scaleX(0);
+      transform-origin: left;
     }
-    #aj-wipe .w-corner {
-      position:absolute;width:26px;height:26px;
-      opacity:0;transition:opacity .2s ease,transform .4s cubic-bezier(.16,1,.3,1);
+
+    /* Corner reticle marks */
+    #aj-wipe .w-reticle {
+      position: absolute; inset: 20px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
     }
-    #aj-wipe .w-corner::before,#aj-wipe .w-corner::after {
-      content:'';position:absolute;background:#6B8C6E;
-      box-shadow:0 0 6px rgba(107,140,110,.8);
+    #aj-wipe .w-reticle::before,
+    #aj-wipe .w-reticle::after,
+    #aj-wipe .w-rc::before,
+    #aj-wipe .w-rc::after {
+      content: ''; position: absolute;
+      background: #6B8C6E;
+      box-shadow: 0 0 6px rgba(107,140,110,0.8);
     }
-    #aj-wipe .w-corner::before{width:2px;height:100%;top:0;}
-    #aj-wipe .w-corner::after {height:2px;width:100%;}
-    #aj-wipe .w-corner.tl{top:22px;left:22px;}
-    #aj-wipe .w-corner.tl::before{left:0}#aj-wipe .w-corner.tl::after{top:0;left:0}
-    #aj-wipe .w-corner.tr{top:22px;right:22px;transform:scaleX(-1);}
-    #aj-wipe .w-corner.bl{bottom:22px;left:22px;transform:scaleY(-1);}
-    #aj-wipe .w-corner.br{bottom:22px;right:22px;transform:scale(-1,-1);}
+    /* top-left */
+    #aj-wipe .w-reticle::before { top:0; left:0; width:20px; height:2px; }
+    #aj-wipe .w-reticle::after  { top:0; left:0; width:2px; height:20px; }
+    /* bottom-right */
+    #aj-wipe .w-rc::before { bottom:0; right:0; width:20px; height:2px; }
+    #aj-wipe .w-rc::after  { bottom:0; right:0; width:2px; height:20px; }
+
+    /* Center monogram */
     #aj-wipe .w-logo {
-      position:relative;z-index:2;
-      font-family:'DM Serif Display',Georgia,serif;
-      font-size:3rem;letter-spacing:.35em;
-      color:#6B8C6E;
-      text-shadow:0 0 20px rgba(107,140,110,.7),0 0 55px rgba(107,140,110,.25);
-      opacity:0;transform:scale(.88) translateY(6px);
-      transition:opacity .3s ease,transform .4s cubic-bezier(.16,1,.3,1);
-      user-select:none;
+      position: relative; z-index: 2;
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 2.4rem; letter-spacing: 0.4em;
+      color: rgba(107,140,110,0);
+      text-shadow: none;
+      opacity: 0;
+      transition: opacity 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+      user-select: none;
     }
+
+    /* Status line */
     #aj-wipe .w-status {
-      position:absolute;bottom:28px;right:28px;
-      font-family:'DM Sans',system-ui,sans-serif;
-      font-size:9px;letter-spacing:.2em;text-transform:uppercase;
-      color:rgba(107,140,110,.5);
-      opacity:0;transition:opacity .25s ease;
+      position: absolute; bottom: 24px; right: 24px;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(107,140,110,0);
+      opacity: 0;
+      transition: opacity 0.3s ease, color 0.3s ease;
     }
-    #aj-wipe .w-lines{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
-    #aj-wipe .w-line {
-      position:absolute;left:0;right:0;height:1px;opacity:0;
-      background:linear-gradient(90deg,transparent,rgba(107,140,110,.2) 30%,rgba(107,140,110,.2) 70%,transparent);
+
+    /* ── ENTER: blur up → hold → reveal ── */
+    #aj-wipe.in .w-blur {
+      backdrop-filter: blur(18px) brightness(0.35) saturate(0.4);
+      -webkit-backdrop-filter: blur(18px) brightness(0.35) saturate(0.4);
+      background: rgba(13,13,16,0.55);
+      transition:
+        backdrop-filter 0.45s cubic-bezier(.4,0,.2,1),
+        -webkit-backdrop-filter 0.45s cubic-bezier(.4,0,.2,1),
+        background 0.45s ease;
     }
-    #aj-wipe.in .w-panel{transform:translateY(0);}
-    #aj-wipe.in .w-grid{opacity:1;transition-delay:.28s;}
-    #aj-wipe.in .w-scan{opacity:1;transition-delay:.32s;animation:ajScan .95s linear infinite;}
-    #aj-wipe.in .w-corner{opacity:1;}
-    #aj-wipe.in .w-corner.tl{transition-delay:.30s;}
-    #aj-wipe.in .w-corner.tr{transition-delay:.34s;}
-    #aj-wipe.in .w-corner.bl{transition-delay:.36s;}
-    #aj-wipe.in .w-corner.br{transition-delay:.38s;}
-    #aj-wipe.in .w-logo{opacity:1;transform:scale(1) translateY(0);transition-delay:.36s;}
-    #aj-wipe.in .w-status{opacity:1;transition-delay:.42s;}
-    #aj-wipe.out .w-panel{transform:translateY(-100%);transition:transform .5s cubic-bezier(.76,0,.24,1);}
-    #aj-wipe.out .w-grid,#aj-wipe.out .w-logo,
-    #aj-wipe.out .w-corner,#aj-wipe.out .w-status{opacity:0;transition-delay:0s;}
-    @keyframes ajScan{
-      0%  {top:0%;opacity:1;}
-      90% {top:100%;opacity:1;}
-      100%{top:100%;opacity:0;}
+    #aj-wipe.in .w-scanlines { opacity: 1; transition-delay: 0.2s; }
+    #aj-wipe.in .w-reticle   { opacity: 1; transition-delay: 0.25s; }
+    #aj-wipe.in .w-logo {
+      opacity: 1; color: #6B8C6E;
+      text-shadow: 0 0 24px rgba(107,140,110,0.6);
+      transition-delay: 0.28s;
     }
+    #aj-wipe.in .w-status {
+      opacity: 1; color: rgba(107,140,110,0.55);
+      transition-delay: 0.32s;
+    }
+
+    /* ── EXIT: un-blur, fade clear ── */
+    #aj-wipe.out .w-blur {
+      backdrop-filter: blur(0px) brightness(1) saturate(1);
+      -webkit-backdrop-filter: blur(0px) brightness(1) saturate(1);
+      background: rgba(13,13,16,0);
+      transition:
+        backdrop-filter 0.4s cubic-bezier(.4,0,.2,1),
+        -webkit-backdrop-filter 0.4s cubic-bezier(.4,0,.2,1),
+        background 0.4s ease;
+    }
+    #aj-wipe.out .w-scanlines,
+    #aj-wipe.out .w-reticle,
+    #aj-wipe.out .w-logo,
+    #aj-wipe.out .w-status { opacity: 0; transition-delay: 0s; }
 
     /* Three.js canvas behind hero */
     #aj-canvas {
@@ -275,38 +320,35 @@
   /* ══════════════════════════════════════
      PAGE WIPE TRANSITION
   ══════════════════════════════════════ */
-  /* ── Build sci-fi wipe overlay ── */
+  /* ── Blur dissolve sci-fi overlay ── */
   const wipe = document.createElement('div');
   wipe.id = 'aj-wipe';
   wipe.innerHTML = `
-    <div class="w-panel"></div>
-    <div class="w-grid"></div>
-    <div class="w-lines" id="aj-wlines"></div>
-    <div class="w-scan"></div>
-    <div class="w-corner tl"></div>
-    <div class="w-corner tr"></div>
-    <div class="w-corner bl"></div>
-    <div class="w-corner br"></div>
+    <div class="w-blur"></div>
+    <div class="w-scanlines"></div>
+    <div class="w-reticle"><div class="w-rc"></div></div>
+    <div class="w-glitch"></div>
     <div class="w-logo">AJ</div>
-    <div class="w-status">Loading…</div>
+    <div class="w-status">Navigating…</div>
   `;
   document.body.appendChild(wipe);
 
-  function spawnScanLines() {
-    const c = document.getElementById('aj-wlines');
-    if (!c) return;
-    c.innerHTML = '';
-    for (let i = 0; i < 10; i++) {
-      const ln = document.createElement('div');
-      ln.className = 'w-line';
-      ln.style.top = (Math.random() * 100) + '%';
-      c.appendChild(ln);
+  function runGlitch() {
+    const g = wipe.querySelector('.w-glitch');
+    if (!g) return;
+    g.style.transition = 'none';
+    g.style.opacity = '0';
+    g.style.transform = 'scaleX(0)';
+    g.style.top = (20 + Math.random() * 60) + '%';
+    requestAnimationFrame(() => {
+      g.style.transition = 'transform 0.25s cubic-bezier(.16,1,.3,1), opacity 0.1s ease';
+      g.style.opacity = '0.9';
+      g.style.transform = 'scaleX(1)';
       setTimeout(() => {
-        ln.style.transition = 'opacity .35s ease';
-        ln.style.opacity = '1';
-        setTimeout(() => { ln.style.opacity = '0'; }, 180 + Math.random() * 260);
-      }, 280 + i * 38);
-    }
+        g.style.transition = 'opacity 0.2s ease';
+        g.style.opacity = '0';
+      }, 260);
+    });
   }
 
   document.querySelectorAll('a[href]').forEach(link => {
@@ -320,25 +362,21 @@
       document.body.classList.add('aj-transitioning');
       sessionStorage.setItem('aj-nav', '1');
       wipe.classList.add('in');
-      spawnScanLines();
-      /* hide loader on current page */
+      runGlitch();
+      /* hide native loader on current page */
       const ldr = document.getElementById('loader');
-      if (ldr) { ldr.style.cssText += 'z-index:0!important;opacity:0!important;transition:none!important;'; }
-      setTimeout(() => { window.location.href = dest; }, 680);
+      if (ldr) ldr.style.cssText = 'z-index:0!important;opacity:0!important;transition:none!important;';
+      setTimeout(() => { window.location.href = dest; }, 620);
     });
   });
 
-  /* On every page load: if we arrived via a link click,
-     instantly hide the native loader so only our wipe shows */
+  /* Hide native loader instantly when arriving via nav */
   (function() {
     if (sessionStorage.getItem('aj-nav')) {
       sessionStorage.removeItem('aj-nav');
       document.body.classList.add('aj-arriving');
-      /* Also directly nuke loader style */
       const ldr = document.getElementById('loader');
-      if (ldr) {
-        ldr.style.cssText = 'opacity:0!important;visibility:hidden!important;transition:none!important;z-index:0!important;';
-      }
+      if (ldr) ldr.style.cssText = 'opacity:0!important;visibility:hidden!important;transition:none!important;z-index:0!important;';
     }
   })();
 
@@ -346,9 +384,9 @@
     requestAnimationFrame(() => {
       wipe.classList.add('out');
       document.body.classList.remove('aj-transitioning', 'aj-arriving');
-      setTimeout(() => wipe.classList.remove('in', 'out'), 600);
+      setTimeout(() => wipe.classList.remove('in', 'out'), 500);
     });
-  });
+  });;
 
   /* ══════════════════════════════════════
      CUSTOM CURSOR
