@@ -22,6 +22,47 @@
   ══════════════════════════════════════ */
   const css = document.createElement('style');
   css.textContent = `
+    /* ── LIQUID MORPH TRANSITION ── */
+    #aj-morph {
+      position:fixed;inset:0;z-index:2147483646;
+      pointer-events:none;
+      background:linear-gradient(135deg,#1A1018 0%,#2D2035 50%,#1A2820 100%);
+      clip-path:circle(0% at var(--ox,50%) var(--oy,50%));
+      transition:clip-path .72s cubic-bezier(.76,0,.24,1);
+      display:flex;align-items:center;justify-content:center;
+    }
+    #aj-morph::before {
+      content:'AJ';
+      font-family:'DM Serif Display',Georgia,serif;
+      font-size:3.5rem;letter-spacing:.3em;
+      color:#6B8C6E;
+      text-shadow:0 0 30px rgba(107,140,110,.6),0 0 80px rgba(107,140,110,.2);
+      opacity:0;
+      transform:scale(.85);
+      transition:opacity .3s ease .25s,transform .45s cubic-bezier(.16,1,.3,1) .25s;
+    }
+    #aj-morph.in {
+      clip-path:circle(170% at var(--ox,50%) var(--oy,50%));
+      pointer-events:all;
+    }
+    #aj-morph.in::before { opacity:1;transform:scale(1); }
+    #aj-morph.out {
+      clip-path:circle(0% at var(--ox,50%) var(--oy,50%));
+      transition:clip-path .62s cubic-bezier(.76,0,.24,1);
+    }
+    #aj-morph.out::before { opacity:0;transform:scale(.9);transition-delay:0s; }
+    /* Sage ripple ring on expand */
+    #aj-morph::after {
+      content:'';
+      position:absolute;
+      width:200px;height:200px;
+      border:1.5px solid rgba(107,140,110,.25);
+      border-radius:50%;
+      transform:scale(0);opacity:1;
+      transition:transform 1.2s ease .1s,opacity .8s ease .4s;
+    }
+    #aj-morph.in::after { transform:scale(8);opacity:0; }
+
     /* Cursor */
     *, *::before, *::after { cursor: none !important; }
     #aj-cur { position:fixed;top:0;left:0;z-index:99999;pointer-events:none; }
@@ -43,133 +84,9 @@
     body.cd #aj-cur .cr { width:20px;height:20px; }
 
     /* Page transition wipe */
-    /* ── Blur Dissolve Sci-Fi Transition ── */
-    #aj-wipe {
-      position: fixed; inset: 0; z-index: 2147483647;
-      pointer-events: none;
-      display: flex; align-items: center; justify-content: center;
+      90% {top:100%;opacity:1;}
+      100%{top:100%;opacity:0;}
     }
-
-    /* Frosted glass overlay */
-    #aj-wipe .w-blur {
-      position: absolute; inset: 0;
-      backdrop-filter: blur(0px) brightness(1);
-      -webkit-backdrop-filter: blur(0px) brightness(1);
-      background: rgba(13,13,16,0);
-      transition:
-        backdrop-filter 0s,
-        -webkit-backdrop-filter 0s,
-        background 0s;
-    }
-
-    /* Scanline texture */
-    #aj-wipe .w-scanlines {
-      position: absolute; inset: 0; opacity: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(107,140,110,0.03) 2px,
-        rgba(107,140,110,0.03) 4px
-      );
-      transition: opacity 0.2s ease;
-    }
-
-    /* Glitch slice — horizontal bar that sweeps once */
-    #aj-wipe .w-glitch {
-      position: absolute; left: 0; right: 0;
-      height: 3px; top: 50%;
-      background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(107,140,110,0) 10%,
-        #6B8C6E 30%, #9DCCAA 50%, #6B8C6E 70%,
-        rgba(107,140,110,0) 90%, transparent 100%
-      );
-      box-shadow: 0 0 12px 2px rgba(107,140,110,0.5);
-      opacity: 0;
-      transform: scaleX(0);
-      transform-origin: left;
-    }
-
-    /* Corner reticle marks */
-    #aj-wipe .w-reticle {
-      position: absolute; inset: 20px;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    }
-    #aj-wipe .w-reticle::before,
-    #aj-wipe .w-reticle::after,
-    #aj-wipe .w-rc::before,
-    #aj-wipe .w-rc::after {
-      content: ''; position: absolute;
-      background: #6B8C6E;
-      box-shadow: 0 0 6px rgba(107,140,110,0.8);
-    }
-    /* top-left */
-    #aj-wipe .w-reticle::before { top:0; left:0; width:20px; height:2px; }
-    #aj-wipe .w-reticle::after  { top:0; left:0; width:2px; height:20px; }
-    /* bottom-right */
-    #aj-wipe .w-rc::before { bottom:0; right:0; width:20px; height:2px; }
-    #aj-wipe .w-rc::after  { bottom:0; right:0; width:2px; height:20px; }
-
-    /* Center monogram */
-    #aj-wipe .w-logo {
-      position: relative; z-index: 2;
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 2.4rem; letter-spacing: 0.4em;
-      color: rgba(107,140,110,0);
-      text-shadow: none;
-      opacity: 0;
-      transition: opacity 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
-      user-select: none;
-    }
-
-    /* Status line */
-    #aj-wipe .w-status {
-      position: absolute; bottom: 24px; right: 24px;
-      font-family: 'DM Sans', system-ui, sans-serif;
-      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
-      color: rgba(107,140,110,0);
-      opacity: 0;
-      transition: opacity 0.3s ease, color 0.3s ease;
-    }
-
-    /* ── ENTER: blur up → hold → reveal ── */
-    #aj-wipe.in .w-blur {
-      backdrop-filter: blur(18px) brightness(0.35) saturate(0.4);
-      -webkit-backdrop-filter: blur(18px) brightness(0.35) saturate(0.4);
-      background: rgba(13,13,16,0.55);
-      transition:
-        backdrop-filter 0.45s cubic-bezier(.4,0,.2,1),
-        -webkit-backdrop-filter 0.45s cubic-bezier(.4,0,.2,1),
-        background 0.45s ease;
-    }
-    #aj-wipe.in .w-scanlines { opacity: 1; transition-delay: 0.2s; }
-    #aj-wipe.in .w-reticle   { opacity: 1; transition-delay: 0.25s; }
-    #aj-wipe.in .w-logo {
-      opacity: 1; color: #6B8C6E;
-      text-shadow: 0 0 24px rgba(107,140,110,0.6);
-      transition-delay: 0.28s;
-    }
-    #aj-wipe.in .w-status {
-      opacity: 1; color: rgba(107,140,110,0.55);
-      transition-delay: 0.32s;
-    }
-
-    /* ── EXIT: un-blur, fade clear ── */
-    #aj-wipe.out .w-blur {
-      backdrop-filter: blur(0px) brightness(1) saturate(1);
-      -webkit-backdrop-filter: blur(0px) brightness(1) saturate(1);
-      background: rgba(13,13,16,0);
-      transition:
-        backdrop-filter 0.4s cubic-bezier(.4,0,.2,1),
-        -webkit-backdrop-filter 0.4s cubic-bezier(.4,0,.2,1),
-        background 0.4s ease;
-    }
-    #aj-wipe.out .w-scanlines,
-    #aj-wipe.out .w-reticle,
-    #aj-wipe.out .w-logo,
-    #aj-wipe.out .w-status { opacity: 0; transition-delay: 0s; }
 
     /* Three.js canvas behind hero */
     #aj-canvas {
@@ -318,39 +235,29 @@
   document.head.appendChild(css);
 
   /* ══════════════════════════════════════
-     PAGE WIPE TRANSITION
+     LIQUID MORPH TRANSITION
   ══════════════════════════════════════ */
-  /* ── Blur dissolve sci-fi overlay ── */
-  const wipe = document.createElement('div');
-  wipe.id = 'aj-wipe';
-  wipe.innerHTML = `
-    <div class="w-blur"></div>
-    <div class="w-scanlines"></div>
-    <div class="w-reticle"><div class="w-rc"></div></div>
-    <div class="w-glitch"></div>
-    <div class="w-logo">AJ</div>
-    <div class="w-status">Navigating…</div>
-  `;
-  document.body.appendChild(wipe);
+  const morph = document.createElement('div');
+  morph.id = 'aj-morph';
+  document.body.appendChild(morph);
 
-  function runGlitch() {
-    const g = wipe.querySelector('.w-glitch');
-    if (!g) return;
-    g.style.transition = 'none';
-    g.style.opacity = '0';
-    g.style.transform = 'scaleX(0)';
-    g.style.top = (20 + Math.random() * 60) + '%';
+  function triggerMorph(dest, ox, oy) {
+    // Set origin CSS variables
+    morph.style.setProperty('--ox', ox + 'px');
+    morph.style.setProperty('--oy', oy + 'px');
+    // Also update out origin to match
+    sessionStorage.setItem('aj-morph-ox', (ox / window.innerWidth * 100).toFixed(1) + '%');
+    sessionStorage.setItem('aj-morph-oy', (oy / window.innerHeight * 100).toFixed(1) + '%');
+
     requestAnimationFrame(() => {
-      g.style.transition = 'transform 0.25s cubic-bezier(.16,1,.3,1), opacity 0.1s ease';
-      g.style.opacity = '0.9';
-      g.style.transform = 'scaleX(1)';
-      setTimeout(() => {
-        g.style.transition = 'opacity 0.2s ease';
-        g.style.opacity = '0';
-      }, 260);
+      morph.classList.remove('out');
+      morph.classList.add('in');
+      sessionStorage.setItem('aj-nav', '1');
     });
+    setTimeout(() => { window.location.href = dest; }, 750);
   }
 
+  // Intercept all internal links
   document.querySelectorAll('a[href]').forEach(link => {
     const h = link.getAttribute('href') || '';
     if (!h || h.startsWith('#') || h.startsWith('mailto:') ||
@@ -358,35 +265,40 @@
         link.hasAttribute('download') || link.target === '_blank') return;
     link.addEventListener('click', e => {
       e.preventDefault();
-      const dest = h;
-      document.body.classList.add('aj-transitioning');
-      sessionStorage.setItem('aj-nav', '1');
-      wipe.classList.add('in');
-      runGlitch();
-      /* hide native loader on current page */
-      const ldr = document.getElementById('loader');
-      if (ldr) ldr.style.cssText = 'z-index:0!important;opacity:0!important;transition:none!important;';
-      setTimeout(() => { window.location.href = dest; }, 620);
+      const rect = link.getBoundingClientRect();
+      const ox = rect.left + rect.width / 2;
+      const oy = rect.top  + rect.height / 2;
+      triggerMorph(h, ox, oy);
     });
   });
 
-  /* Hide native loader instantly when arriving via nav */
+  // On new page: restore exit origin then contract away
   (function() {
     if (sessionStorage.getItem('aj-nav')) {
       sessionStorage.removeItem('aj-nav');
-      document.body.classList.add('aj-arriving');
+      // Restore the origin of where we came from (center of screen if not set)
+      const ox = sessionStorage.getItem('aj-morph-ox') || '50%';
+      const oy = sessionStorage.getItem('aj-morph-oy') || '50%';
+      morph.style.setProperty('--ox', ox);
+      morph.style.setProperty('--oy', oy);
+      // Start fully expanded
+      morph.style.transition = 'none';
+      morph.classList.add('in');
+      morph.style.removeProperty('transition');
+      // Hide native loader
       const ldr = document.getElementById('loader');
-      if (ldr) ldr.style.cssText = 'opacity:0!important;visibility:hidden!important;transition:none!important;z-index:0!important;';
+      if (ldr) ldr.style.cssText = 'opacity:0!important;visibility:hidden!important;z-index:0!important;';
     }
   })();
 
   window.addEventListener('pageshow', () => {
     requestAnimationFrame(() => {
-      wipe.classList.add('out');
-      document.body.classList.remove('aj-transitioning', 'aj-arriving');
-      setTimeout(() => wipe.classList.remove('in', 'out'), 500);
+      setTimeout(() => {
+        morph.classList.add('out');
+        setTimeout(() => morph.classList.remove('in', 'out'), 700);
+      }, 80);
     });
-  });;
+  });
 
   /* ══════════════════════════════════════
      CUSTOM CURSOR
