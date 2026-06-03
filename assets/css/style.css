@@ -527,3 +527,193 @@ button { font-family: var(--sans); cursor: pointer; }
   .tag-label { font-size: 9.5px; padding: 4px 10px; }
   .h2 { font-size: 1.75rem; }
 }
+
+/* ════════════════════════════════════════════
+   DESIGN POLISH — 10/10 UPGRADES
+════════════════════════════════════════════ */
+
+/* ── 1. Portrait placeholder — premium styled ── */
+.portrait-wrap {
+  background: linear-gradient(135deg, var(--sage-pal) 0%, var(--blush-pal) 100%);
+  border-radius: 24px;
+}
+.portrait-wrap::before {
+  content: 'AJ';
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--disp); font-size: 6rem;
+  color: var(--sage); opacity: .12; z-index: 0;
+  pointer-events: none;
+}
+.portrait-wrap img { position: relative; z-index: 1; }
+
+/* ── 2. Smooth selection highlight ── */
+::selection { background: var(--sage); color: #fff; }
+::-moz-selection { background: var(--sage); color: #fff; }
+
+/* ── 3. Scrollbar styling ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--sage); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--sage2); }
+
+/* ── 4. Focus ring — accessible & on-brand ── */
+:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── 5. Better link hover underline animation ── */
+.n-links a {
+  position: relative;
+}
+.n-links a::after {
+  content: '';
+  position: absolute; bottom: -3px; left: 0;
+  width: 0; height: 1.5px;
+  background: var(--sage);
+  transition: width .3s cubic-bezier(.16,1,.3,1);
+}
+.n-links a:hover::after,
+.n-links a.act::after { width: 100%; }
+
+/* ── 6. Button micro-interaction ── */
+.btn {
+  transition: all .25s cubic-bezier(.16,1,.3,1) !important;
+}
+.btn:active { transform: scale(.97) !important; }
+
+/* ── 7. Card border glow on hover ── */
+.svc-card:hover,
+.blog-card:hover,
+.proj-card:hover,
+.case-card:hover,
+.testi-card:hover,
+.post-card:hover {
+  box-shadow: 0 0 0 1px var(--sage), var(--shadow2) !important;
+}
+
+/* ── 8. Image zoom on card hover — unified ── */
+.blog-thumb,
+.proj-thumb,
+.post-card-thumb {
+  overflow: hidden;
+}
+.blog-thumb img,
+.proj-thumb img,
+.post-card-thumb img {
+  transition: transform .55s cubic-bezier(.16,1,.3,1) !important;
+}
+.blog-card:hover .blog-thumb img,
+.proj-card:hover .proj-thumb img,
+.post-card:hover .post-card-thumb img {
+  transform: scale(1.07) !important;
+}
+
+/* ── 9. Section dividers — subtle gradient lines ── */
+.section + .section {
+  border-top: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+/* ── 10. Form input polish ── */
+input, select, textarea {
+  transition: border-color .2s ease, box-shadow .2s ease !important;
+}
+input:focus, select:focus, textarea:focus {
+  box-shadow: 0 0 0 3.5px rgba(107,140,110,.14) !important;
+}
+
+/* ── 11. Hero availability pill pulse ── */
+@keyframes pulseDot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(107,140,110,.5); }
+  50%       { box-shadow: 0 0 0 6px rgba(107,140,110,.0); }
+}
+.badge-dot, .avail-dot {
+  animation: pulseDot 2s ease-in-out infinite !important;
+}
+
+/* ── 12. Footer link hover ── */
+.footer-col ul li a {
+  transition: color .2s ease, padding-left .2s ease;
+}
+.footer-col ul li a:hover {
+  color: var(--sage) !important;
+  padding-left: 5px;
+}
+
+/* ── 13. WhatsApp float pulse ── */
+.wa-float {
+  box-shadow: 0 4px 20px rgba(37,211,102,.4);
+  animation: waPulse 2.5s ease-in-out infinite;
+}
+@keyframes waPulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,.4); }
+  50%     { box-shadow: 0 4px 32px rgba(37,211,102,.7); }
+}
+
+/* ── 14. Smooth img load fade-in ── */
+img {
+  transition: opacity .4s ease;
+}
+img[loading="lazy"] {
+  opacity: 0;
+}
+img.loaded, img:not([loading]) {
+  opacity: 1;
+}
+
+/* ── 15. Tag label micro animation ── */
+.tag-label {
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.tag-label:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(107,140,110,.2);
+}
+
+/* ── 16. Dark mode transition ── */
+html {
+  transition: background-color .3s ease, color .3s ease;
+}
+
+/* ── 17. Metric/stat counter shimmer ── */
+.metric-num, .post-stat-num, .case-pct {
+  background: linear-gradient(90deg, var(--sage) 0%, var(--blush2) 50%, var(--sage) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+
+/* ── 18. Blog post reading progress gradient ── */
+.reading-progress-fill {
+  background: linear-gradient(90deg, var(--sage), var(--blush2), var(--sage)) !important;
+  background-size: 200% auto !important;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ── 19. Tooltip on nav items ── */
+.n-links a[title]:hover::before {
+  content: attr(title);
+  position: absolute;
+  bottom: -28px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink); color: #fff;
+  font-size: 10px; padding: 3px 8px;
+  border-radius: 4px; white-space: nowrap;
+  pointer-events: none; opacity: .9;
+}
+
+/* ── 20. Gradient border on featured cards ── */
+.price-card.popular,
+.svc-card.featured {
+  background: linear-gradient(var(--card), var(--card)) padding-box,
+              linear-gradient(135deg, var(--sage), var(--blush)) border-box !important;
+  border: 2px solid transparent !important;
+}
