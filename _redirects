@@ -1,0 +1,29 @@
+# Force clean URLs — redirect .html to pretty version
+/index.html         /                301
+/about.html         /about           301
+/services.html      /services        301
+/experience.html    /experience      301
+/case-studies.html  /case-studies    301
+/blog.html          /blog            301
+/contact.html       /contact         301
+/free-audit.html    /free-audit      301
+
+# Blog posts
+/blog/meta-ads-complete-guide-2026.html         /blog/meta-ads-complete-guide-2026         301
+/blog/meta-ads-targeting-options-2026.html       /blog/meta-ads-targeting-options-2026       301
+/blog/meta-ads-campaign-objectives-2026.html     /blog/meta-ads-campaign-objectives-2026     301
+/blog/meta-ads-retargeting-setup-2026.html       /blog/meta-ads-retargeting-setup-2026       301
+/blog/meta-ads-creative-strategy-2026.html       /blog/meta-ads-creative-strategy-2026       301
+/blog/how-to-use-ai-in-content-writing.html      /blog/how-to-use-ai-in-content-writing      301
+/blog/how-to-do-keyword-research-for-seo.html    /blog/how-to-do-keyword-research-for-seo    301
+/blog/on-page-seo-complete-guide.html            /blog/on-page-seo-complete-guide            301
+/blog/seo-vs-sem.html                            /blog/seo-vs-sem                            301
+/blog/seo-vs-aeo-vs-geo.html                     /blog/seo-vs-aeo-vs-geo                     301
+/blog/how-to-rank-in-ai-overviews.html           /blog/how-to-rank-in-ai-overviews           301
+/blog/technical-seo-checklist-2026.html          /blog/technical-seo-checklist-2026          301
+/blog/what-is-geo.html                           /blog/what-is-geo                           301
+/blog/google-business-profile-optimization.html  /blog/google-business-profile-optimization  301
+/blog/link-building-2026.html                    /blog/link-building-2026                    301
+/blog/core-web-vitals-2026.html                  /blog/core-web-vitals-2026                  301
+/blog/how-to-win-paa-boxes.html                  /blog/how-to-win-paa-boxes                  301
+/blog/website-security-seo-factor.html           /blog/website-security-seo-factor           301
