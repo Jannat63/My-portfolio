@@ -138,3 +138,7 @@ Crawl-delay: 5
 # ── SITEMAP ─────────────────────────────────────────
 
 Sitemap: https://ahsan-jannat.netlify.app/sitemap.xml
+
+# IndexNow
+# Key: cc02b558a0bd4a69ae052b226cbe50e5
+# Verification: https://ahsan-jannat.netlify.app/cc02b558a0bd4a69ae052b226cbe50e5.txt

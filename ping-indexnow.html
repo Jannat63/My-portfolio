@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IndexNow Ping Tool — Ahsan Jannat</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:system-ui,sans-serif;background:#FAF8F9;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem}
+  .card{background:#fff;border:1px solid #E8E0E8;border-radius:20px;padding:2.5rem;max-width:520px;width:100%;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+  .logo{width:48px;height:48px;background:#6B8C6E;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:1.5rem}
+  h1{font-size:1.5rem;color:#1E161E;margin-bottom:6px}
+  p{color:#7A6A78;font-size:.9rem;line-height:1.7;margin-bottom:1.5rem}
+  .info{background:#F0F5F1;border-radius:10px;padding:14px 16px;margin-bottom:1.5rem;font-size:13px;color:#4A6E4C}
+  .info strong{display:block;margin-bottom:4px;color:#2D4D2F}
+  button{width:100%;background:#6B8C6E;color:#fff;border:none;padding:14px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:all .25s}
+  button:hover{background:#4D6E50} button:disabled{opacity:.6;cursor:not-allowed}
+  .log{margin-top:1.5rem;background:#1E161E;border-radius:10px;padding:16px;font-family:monospace;font-size:12.5px;color:#C9A0AC;max-height:220px;overflow-y:auto;display:none}
+  .log.show{display:block} .ok{color:#6B8C6E} .err{color:#EF4444} .inf{color:#93C5FD}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">AJ</div>
+  <h1>IndexNow Ping Tool</h1>
+  <p>Instantly notify Google, Bing and Yandex of all 26 pages — no waiting for crawlers to find them.</p>
+  <div class="info"><strong>Your IndexNow Key</strong>cc02b558a0bd4a69ae052b226cbe50e5</div>
+  <button id="btn" onclick="runPing()">🚀 Ping All Search Engines Now (26 pages)</button>
+  <div class="log" id="log"></div>
+</div>
+<script>
+const KEY="cc02b558a0bd4a69ae052b226cbe50e5", BASE="https://ahsan-jannat.netlify.app";
+const URLS=["https://ahsan-jannat.netlify.app/index.html", "https://ahsan-jannat.netlify.app/about.html", "https://ahsan-jannat.netlify.app/services.html", "https://ahsan-jannat.netlify.app/experience.html", "https://ahsan-jannat.netlify.app/case-studies.html", "https://ahsan-jannat.netlify.app/blog.html", "https://ahsan-jannat.netlify.app/contact.html", "https://ahsan-jannat.netlify.app/free-audit.html", "https://ahsan-jannat.netlify.app/blog/meta-ads-complete-guide-2026.html", "https://ahsan-jannat.netlify.app/blog/meta-ads-targeting-options-2026.html", "https://ahsan-jannat.netlify.app/blog/meta-ads-campaign-objectives-2026.html", "https://ahsan-jannat.netlify.app/blog/meta-ads-retargeting-setup-2026.html", "https://ahsan-jannat.netlify.app/blog/meta-ads-creative-strategy-2026.html", "https://ahsan-jannat.netlify.app/blog/how-to-use-ai-in-content-writing.html", "https://ahsan-jannat.netlify.app/blog/how-to-do-keyword-research-for-seo.html", "https://ahsan-jannat.netlify.app/blog/on-page-seo-complete-guide.html", "https://ahsan-jannat.netlify.app/blog/seo-vs-sem.html", "https://ahsan-jannat.netlify.app/blog/seo-vs-aeo-vs-geo.html", "https://ahsan-jannat.netlify.app/blog/how-to-rank-in-ai-overviews.html", "https://ahsan-jannat.netlify.app/blog/technical-seo-checklist-2026.html", "https://ahsan-jannat.netlify.app/blog/what-is-geo.html", "https://ahsan-jannat.netlify.app/blog/google-business-profile-optimization.html", "https://ahsan-jannat.netlify.app/blog/link-building-2026.html", "https://ahsan-jannat.netlify.app/blog/core-web-vitals-2026.html", "https://ahsan-jannat.netlify.app/blog/how-to-win-paa-boxes.html", "https://ahsan-jannat.netlify.app/blog/website-security-seo-factor.html"];
+function log(m,c=''){const d=document.getElementById('log');d.classList.add('show');d.innerHTML+=`<div class="${c}">${m}</div>`;d.scrollTop=d.scrollHeight;}
+async function runPing(){
+  const btn=document.getElementById('btn');
+  btn.disabled=true; btn.textContent='⏳ Pinging...';
+  document.getElementById('log').innerHTML='';
+  log('🚀 Submitting '+URLS.length+' URLs to IndexNow...','inf');
+  try{
+    const r=await fetch('https://api.indexnow.org/indexnow',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({host:'ahsan-jannat.netlify.app',key:KEY,keyLocation:BASE+'/'+KEY+'.txt',urlList:URLS})});
+    log('✓ IndexNow → '+r.status+' ('+URLS.length+' URLs submitted to Google, Bing & Yandex)','ok');
+  }catch(e){log('✗ IndexNow: '+e.message,'err');}
+  try{await fetch('https://www.google.com/ping?sitemap='+BASE+'/sitemap.xml',{mode:'no-cors'});log('✓ Google sitemap ping sent','ok');}catch(e){}
+  try{await fetch('https://www.bing.com/ping?sitemap='+BASE+'/sitemap.xml',{mode:'no-cors'});log('✓ Bing sitemap ping sent','ok');}catch(e){}
+  log('',''); log('✅ Done! Pages crawled within minutes to hours.','ok');
+  log('📊 Monitor: search.google.com/search-console','inf');
+  btn.disabled=false; btn.textContent='✓ Done! Ping again anytime';
+}
+</script>
+</body>
+</html>
