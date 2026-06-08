@@ -136,8 +136,25 @@
   ]
 }
 </script>
+<style>
+/* Blog page — wider layout */
+body.blog-page .wrap {
+  max-width: 98%;
+  padding: 0 1.25rem;
+}
+body.blog-page .blog-layout {
+  gap: 2rem;
+}
+body.blog-page .sidebar {
+  min-width: 260px;
+  max-width: 280px;
+}
+@media(max-width:860px) {
+  body.blog-page .wrap { max-width: 100%; padding: 0 1rem; }
+}
+</style>
 </head>
-<body>
+<body class="blog-page">
 <div class="progress-bar" id="progressBar"></div>
 <div class="loader" id="loader"><span class="loader-logo">AJ</span></div>
 <button class="btt" id="btt" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
