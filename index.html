@@ -204,6 +204,103 @@
   ]
 }
 </script>
+
+<style>
+/* ══ HERO: CONCEPT C — MINIMAL SPLIT ══ */
+.hero-split-grid {
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  align-items:center;
+  min-height:68vh;
+  gap:0;
+}
+.hero-split-left {
+  padding-right:3.5rem;
+  border-right:1px solid var(--border);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding-top:2rem;
+  padding-bottom:2rem;
+}
+.hero-split-right {
+  padding-left:3rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1rem;
+  text-align:center;
+}
+/* Tall rounded portrait card */
+.hero-split-portrait {
+  width:min(100%,240px);
+  height:320px;
+  border-radius:22px;
+  overflow:hidden;
+  flex-shrink:0;
+  box-shadow:0 18px 52px rgba(0,0,0,.12);
+  border:3px solid var(--bg);
+  outline:2px solid var(--border);
+  position:relative;
+}
+.hero-split-portrait img {
+  width:100%;height:100%;object-fit:cover;object-position:top center;display:block;
+}
+/* Subtle sage gradient at bottom of portrait */
+.hero-split-portrait::after {
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(61,107,80,.18) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero-split-identity {
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+}
+.hero-split-identity strong {
+  font-size:1rem;color:var(--ink);font-family:var(--display);
+}
+.hero-split-identity span {
+  font-size:.8rem;color:var(--muted);line-height:1.5;
+}
+.hero-split-avail {
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 16px;background:var(--sage-pal);
+  border-radius:30px;font-size:.8rem;color:var(--sage);font-weight:600;
+}
+/* Socials + CV in a single row */
+.hero-split-bottom {
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;
+}
+.hero-stat-row {
+  display:grid;grid-template-columns:repeat(3,1fr);
+  margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border);
+}
+.hero-stat-col { padding-right:1.5rem; }
+.hero-stat-col--mid {
+  padding-left:1.5rem;padding-right:1.5rem;
+  border-left:1px solid var(--border);border-right:1px solid var(--border);
+}
+.hero-stat-col:last-child { padding-right:0;padding-left:1.5rem; }
+.hero-stat-num {
+  font-size:1.7rem;font-weight:700;color:var(--sage);
+  line-height:1;margin-bottom:5px;font-family:var(--display);
+}
+.hero-stat-lbl { font-size:.78rem;color:var(--muted);line-height:1.4; }
+
+@media(max-width:900px){
+  .hero-split-grid{grid-template-columns:1fr;}
+  .hero-split-left{padding-right:0;border-right:none;border-bottom:1px solid var(--border);padding-bottom:2.5rem;}
+  .hero-split-right{padding-left:0;padding-top:2.5rem;}
+  .hero-split-portrait{width:min(100%,200px);height:260px;}
+}
+@media(max-width:480px){
+  .hero-stat-row{grid-template-columns:1fr;gap:1.2rem;}
+  .hero-stat-col,.hero-stat-col--mid{padding:0 0 1.2rem;border:none;border-bottom:1px solid var(--border);}
+  .hero-stat-col:last-child{border-bottom:none;padding-bottom:0;}
+  .hero-split-portrait{width:min(100%,180px);height:230px;}
+}
+</style>
 </head>
 <body>
 
@@ -289,113 +386,86 @@
   <div class="hero-blob hero-blob-1"></div>
   <div class="hero-blob hero-blob-2"></div>
   <div class="wrap" style="width:100%;position:relative;z-index:1">
-    <div class="hero-grid">
+    <div class="hero-split-grid">
 
-      <!-- Left: Text -->
-      <div>
-        <div class="hero-eyebrow-wrap" data-reveal="up">
-          <span class="hero-pill"><i class="fa-solid fa-circle-check"></i> Available for Projects</span>
+      <!-- LEFT: Content -->
+      <div class="hero-split-left">
+
+        <div class="hero-chips" data-reveal="up" style="margin-bottom:1.5rem;">
+          <span class="hero-chip"><i class="fa-brands fa-google"></i> SEO</span>
+          <span class="hero-chip"><i class="fa-solid fa-robot"></i> AEO</span>
+          <span class="hero-chip"><i class="fa-solid fa-brain"></i> GEO</span>
+          <span class="hero-chip" style="background:var(--blush-pal);color:var(--blush2);"><i class="fa-brands fa-meta"></i> Meta Ads</span>
         </div>
+
         <h1 class="hero-h1" data-reveal="up" style="transition-delay:.1s">
-          Helping Brands <span class="accent">Rank</span>, Get<br>
-          <span class="accent">Discovered</span> &amp; Get<br>
-          <span class="accent" id="typedText">Answered</span><span id="cursor" style="color:var(--sage);animation:cursorBlink .8s step-end infinite">|</span>
+          The specialist who gets<br>
+          brands <span class="accent" id="typedText">Found</span><span id="cursor" style="color:var(--sage);animation:cursorBlink .8s step-end infinite">|</span><br>
+          — everywhere.
         </h1>
+
         <p class="hero-tagline" data-reveal="up" style="transition-delay:.15s">
-          Organically on Google. Visibly in AI. Profitably on Meta.
+          Google page 1. AI Overviews. ChatGPT answers. Instagram feeds.
         </p>
-        <p class="hero-p" data-reveal="up" style="transition-delay:.2s">
-          I'm <strong>Ahsan Jannat</strong> — an SEO, AEO, GEO &amp; Meta Ads specialist based in Dhaka. I help businesses grow through search engine rankings, AI-generated answers, and high-converting paid social campaigns.
+
+        <p class="hero-p" data-reveal="up" style="transition-delay:.2s;max-width:500px;">
+          I'm <strong>Ahsan Jannat</strong> — SEO, AEO, GEO &amp; Meta Ads specialist based in Dhaka. I make sure your brand shows up wherever your customers are looking.
         </p>
-        <div class="hero-chips" data-reveal="up" style="transition-delay:.25s">
-          <span class="hero-chip"><i class="fa-brands fa-google"></i> Google SEO</span>
-          <span class="hero-chip"><i class="fa-solid fa-robot"></i> AEO &amp; GEO</span>
-          <span class="hero-chip"><i class="fa-brands fa-meta"></i> Meta Ads</span>
-          <span class="hero-chip"><i class="fa-solid fa-shield-halved"></i> Cybersecurity</span>
-        </div>
-        <div class="hero-btns" data-reveal="up" style="transition-delay:.3s">
+
+        <div class="hero-btns" data-reveal="up" style="transition-delay:.25s;">
           <a href="contact.html" class="btn btn-dark">Start a Project <i class="fa-solid fa-arrow-right"></i></a>
           <a href="free-audit.html" class="btn btn-ghost" style="border-color:var(--sage);color:var(--sage)"><i class="fa-solid fa-magnifying-glass-chart"></i> Free SEO Audit</a>
           <a href="case-studies.html" class="btn btn-ghost">Case Studies</a>
         </div>
+
+        <div class="hero-stat-row" data-reveal="up" style="transition-delay:.3s;">
+          <div class="hero-stat-col">
+            <div class="hero-stat-num">+<span class="count" data-target="230">0</span>%</div>
+            <div class="hero-stat-lbl">Organic Traffic Growth</div>
+          </div>
+          <div class="hero-stat-col hero-stat-col--mid">
+            <div class="hero-stat-num"><span class="count" data-target="120">0</span>+</div>
+            <div class="hero-stat-lbl">Keywords Ranked Top 10</div>
+          </div>
+          <div class="hero-stat-col">
+            <div class="hero-stat-num" style="color:var(--blush2)">4.2x</div>
+            <div class="hero-stat-lbl">Meta Ads ROAS</div>
+          </div>
+        </div>
+
       </div>
 
-      <!-- Center: Portrait -->
-      <div data-reveal="scale" style="transition-delay:.15s">
-        <div class="portrait-wrap">
+      <!-- RIGHT: Portrait + Identity -->
+      <div class="hero-split-right" data-reveal="right" style="transition-delay:.2s;">
+
+        <div class="hero-split-portrait">
           <img loading="lazy" src="./assets/images/portrait.png" alt="Ahsan Jannat – SEO AEO GEO Expert" id="portraitImg">
-          <div class="portrait-badge">
-            <div class="badge-dot"></div>
-            <div class="badge-text">
-              <strong>Available for Projects</strong>
-              <span>Based in Dhaka, Bangladesh</span>
-            </div>
-          </div>
         </div>
+
+        <div class="hero-split-identity">
+          <strong>Ahsan Jannat</strong>
+          <span>Officer – Digital Marketing Team</span>
+          <span>HATIL · Dhaka, Bangladesh</span>
+        </div>
+
+        <div class="hero-split-avail">
+          <div class="badge-dot"></div>
+          Available for Projects
+        </div>
+
+        <div class="hero-split-bottom">
+          <a href="https://www.linkedin.com/in/ahsan-jannat/" target="_blank" rel="noopener" class="soc-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://web.facebook.com/ahsan.jnat.2024/" target="_blank" rel="noopener" class="soc-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.youtube.com/@AhsanJannat" target="_blank" rel="noopener" class="soc-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="./assets/files/ahsan-jannat-cv.pdf" download class="btn btn-ghost" style="font-size:.8rem;padding:8px 16px;">
+            <i class="fa-solid fa-download"></i> CV
+          </a>
+        </div>
+
       </div>
 
-      <!-- Right: Stats -->
-      <div class="stats-card" data-reveal="right" style="transition-delay:.25s">
-        <div class="stat-row">
-          <div class="stat-icon"><i class="fa-solid fa-briefcase"></i></div>
-          <div>
-            <div class="stat-num"><span class="count" data-target="3">0</span>+</div>
-            <div class="stat-lbl">Years Experience</div>
-          </div>
-        </div>
-        <div class="stat-row">
-          <div class="stat-icon"><i class="fa-solid fa-chart-line"></i></div>
-          <div>
-            <div class="stat-num"><span class="count" data-target="50">0</span>+</div>
-            <div class="stat-lbl">Projects Completed</div>
-          </div>
-        </div>
-        <div class="stat-row">
-          <div class="stat-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
-          <div>
-            <div class="stat-num">100K+</div>
-            <div class="stat-lbl">Organic Traffic Generated</div>
-          </div>
-        </div>
-        <div class="stat-row">
-          <div class="stat-icon"><i class="fa-solid fa-ranking-star"></i></div>
-          <div>
-            <div class="stat-num"><span class="count" data-target="300">0</span>+</div>
-            <div class="stat-lbl">Keywords Ranked</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  
-  <!-- Dual Engine Callout -->
-  <div data-reveal="up" style="margin-top:3.5rem;background:linear-gradient(135deg,var(--sage-pal) 0%,var(--blush-pal) 100%);border-radius:20px;padding:40px 44px;display:grid;grid-template-columns:1fr 1fr;gap:3rem;border:1px solid var(--border)">
-    <div style="display:flex;flex-direction:column;gap:12px">
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="width:40px;height:40px;background:var(--sage);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;flex-shrink:0"><i class="fa-brands fa-google"></i></div>
-        <h4 style="font-size:1rem;font-weight:600;color:var(--ink)">Organic Engine (SEO · AEO · GEO)</h4>
-      </div>
-      <p style="font-size:.9rem;color:var(--muted);line-height:1.8">Build compounding, sustainable traffic that grows month over month — no ad spend required. Appear on Google page 1, inside AI Overviews, and in ChatGPT answers.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">
-        <span style="font-size:11px;padding:4px 10px;border-radius:4px;background:var(--sage-pal);color:var(--sage);font-weight:600">Long-term ROI</span>
-        <span style="font-size:11px;padding:4px 10px;border-radius:4px;background:var(--sage-pal);color:var(--sage);font-weight:600">Zero cost-per-click</span>
-        <span style="font-size:11px;padding:4px 10px;border-radius:4px;background:var(--sage-pal);color:var(--sage);font-weight:600">AI search ready</span>
-      </div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:12px">
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="width:40px;height:40px;background:var(--blush);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;flex-shrink:0"><i class="fa-brands fa-meta"></i></div>
-        <h4 style="font-size:1rem;font-weight:600;color:var(--ink)">Paid Engine (Meta Ads)</h4>
-      </div>
-      <p style="font-size:.9rem;color:var(--muted);line-height:1.8">Drive immediate, targeted traffic from Facebook and Instagram. Reach your exact audience by interest, behaviour, demographics and lookalikes — while your SEO builds in the background.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">
-        <span style="font-size:11px;padding:4px 10px;border-radius:4px;background:var(--blush-pal);color:var(--blush2);font-weight:600">Immediate results</span>
-        <span style="font-size:11px;padding:4px 10px;border-radius:4px;background:var(--blush-pal);color:var(--blush2);font-weight:600">Precise targeting</span>
-        <span style="font-size:11px;padding:4px 10px;border-radius:4px;background:var(--blush-pal);color:var(--blush2);font-weight:600">ROAS-focused</span>
-      </div>
     </div>
   </div>
-</div>
 </section>
 
 <!-- ═══════════════════════════════════
