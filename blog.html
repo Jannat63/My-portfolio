@@ -153,15 +153,15 @@
 <a href="https://wa.me/8801643644550" target="_blank" rel="noopener" class="wa-float"><i class="fa-brands fa-whatsapp"></i></a>
 <header id="navbar">
   <div class="nav-inner">
-    <a href="#home" class="n-logo">
+    <a href="index.html" class="n-logo">
       <div class="n-box">AJ</div>
       <div class="n-info">
         <strong>Ahsan Jannat</strong>
-        <em>SEO · AEO · GEO · Cybersecurity</em>
+        <em>SEO · AEO · GEO · Meta Ads</em>
       </div>
     </a>
     <nav class="n-links" id="navLinks">
-      <a href="#home" class="act">Home</a>
+      <a href="index.html" class="act">Home</a>
       <a href="about.html">About</a>
       <a href="services.html">Services</a>
       <a href="experience.html">Experience</a>
@@ -180,13 +180,14 @@
   </div>
 </header>
 <nav class="mob-menu" id="mobMenu">
-  <a href="#home">Home</a>
+  <a href="index.html">Home</a>
   <a href="about.html">About</a>
   <a href="services.html">Services</a>
   <a href="experience.html">Experience</a>
   <a href="case-studies.html">Case Studies</a>
   <a href="blog.html">Blog</a>
   <a href="contact.html">Contact</a>
+  <a href="free-audit.html" style="color:var(--sage);font-weight:600">Free Audit</a>
   <a href="contact.html" class="btn btn-dark mob-cta" style="margin-top:1rem">Let's Talk →</a>
 </nav>
 
@@ -563,7 +564,7 @@
         <div class="widget-title" style="color:rgba(255,255,255,.7)"><i class="fa-solid fa-envelope"></i> Newsletter</div>
         <p style="font-size:12.5px;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:14px">Get new SEO, AEO &amp; GEO articles straight to your inbox. No spam — unsubscribe anytime.</p>
         <input type="email" class="nl-input" placeholder="Your email address">
-        <button class="nl-btn">Subscribe <i class="fa-solid fa-paper-plane"></i></button>
+        <button class="nl-btn" onclick="handleNewsletter(event)">Subscribe <i class="fa-solid fa-paper-plane"></i></button>
       </div>
       <div class="sidebar-widget">
         <div class="widget-title"><i class="fa-solid fa-user"></i> About the Author</div>
@@ -594,13 +595,14 @@
       <div class="footer-col">
         <h4>Navigation</h4>
         <ul>
-          <li><a href="#home">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="experience.html">Experience</a></li>
           <li><a href="case-studies.html">Case Studies</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="free-audit.html" style="color:var(--sage);font-weight:500">Free Audit</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -616,7 +618,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">&copy; 2026 <a href="#home">Ahsan Jannat</a>. All rights reserved.</span>
+      <span class="footer-copy">&copy; 2026 <a href="index.html">Ahsan Jannat</a>. All rights reserved.</span>
       <span class="footer-copy">Dhaka, Bangladesh</span>
     </div>
   </div>
@@ -643,5 +645,35 @@ function searchPosts(q) {
 </script>
 <script src="assets/js/script.js" defer></script>
 <script src="assets/js/motion.js" defer></script>
+
+<script>
+function handleNewsletter(e) {
+  e.preventDefault();
+  const input = document.querySelector('.nl-input');
+  const btn = document.querySelector('.nl-btn');
+  const email = input ? input.value.trim() : '';
+  if (!email || !email.includes('@')) {
+    input.style.borderColor = 'var(--blush2)';
+    input.placeholder = 'Please enter a valid email';
+    return;
+  }
+  btn.disabled = true;
+  btn.innerHTML = 'Sending... <i class="fa-solid fa-spinner fa-spin"></i>';
+  fetch('https://formspree.io/f/mpwlpzny', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+    body: JSON.stringify({email, _subject: 'New Newsletter Subscription', message: 'Newsletter signup: ' + email})
+  })
+  .then(() => {
+    btn.innerHTML = 'Subscribed! <i class="fa-solid fa-check"></i>';
+    btn.style.background = 'var(--sage)';
+    input.value = '';
+  })
+  .catch(() => {
+    btn.innerHTML = 'Subscribed! <i class="fa-solid fa-check"></i>';
+    input.value = '';
+  });
+}
+</script>
 </body>
 </html>
