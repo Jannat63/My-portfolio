@@ -1,0 +1,84 @@
+/* THEME: GHOST MANOR
+   Near-black background, glowing teal/purple ghosts,
+   spiderweb corners, elegant script headlines. */
+
+@import url('https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Jost:wght@400;500;600&display=swap');
+
+:root {
+  --bg:          #0A0E11;
+  --bg2:         #0F1418;
+  --card:        #12181C;
+
+  --sage:        #5FD8CC;
+  --sage2:       #8AE8DD;
+  --sage-pal:    #122723;
+
+  --blush:       #9B8FE0;
+  --blush2:      #B3A8F0;
+  --blush-pal:   #1C1A2C;
+
+  --ink:         #DCEEEC;
+  --ink2:        #AFC8C5;
+  --muted:       #5E7478;
+
+  --border:      rgba(95,216,204,.16);
+  --border2:     rgba(95,216,204,.3);
+
+  --disp:        'Mrs Saint Delafield', cursive;
+  --sans:        'Jost', system-ui, sans-serif;
+}
+
+body { letter-spacing: .01em; }
+
+.hero-h1 { font-family: var(--disp); font-weight: 400 !important; text-transform: none !important; letter-spacing: 0 !important; }
+.hero-h1 .accent { color: var(--sage) !important; text-shadow: 0 0 18px rgba(95,216,204,.5); }
+.h2 { font-family: var(--disp); font-weight: 400 !important; }
+
+.tag-label {
+  border-radius: 20px !important;
+  border: 1px solid var(--border2) !important;
+  text-transform: uppercase; letter-spacing: .12em; font-size: .68rem !important;
+}
+
+.btn { border-radius: 6px !important; }
+.btn-dark {
+  background: var(--sage) !important; color: #0A0E11 !important; border-color: var(--sage) !important;
+  box-shadow: 0 0 22px rgba(95,216,204,.35);
+}
+.btn-ghost { border-color: var(--sage) !important; color: var(--sage) !important; }
+
+.hero-chip {
+  border-radius: 20px !important; border: 1px solid var(--border2) !important;
+  background: rgba(95,216,204,.06) !important;
+}
+
+.svc-card, .case-card, .testi-card, .proj-card, .tool-card, .blog-card, .post-card, .why-card, .cert-card, .achieve-card {
+  border-radius: 12px !important;
+  border: 1px solid var(--border) !important;
+  background: var(--card) !important;
+}
+.svc-card:hover, .case-card:hover, .testi-card:hover, .proj-card:hover, .tool-card:hover, .blog-card:hover, .post-card:hover {
+  border-color: var(--border2) !important;
+  box-shadow: 0 0 30px rgba(95,216,204,.12) !important;
+}
+
+#navbar { border-bottom: 1px solid var(--border) !important; }
+[data-theme="light"] #navbar.glass,
+[data-theme="dark"]  #navbar.glass { background: rgba(10,14,17,.9) !important; }
+
+/* Spiderweb corner decoration */
+#home { position: relative; overflow: hidden; }
+#home .ghost-web { display: block !important; }
+.hero-blob { opacity: 0 !important; }
+.dot-pattern { opacity: 0 !important; }
+
+.n-box { border-radius: 6px !important; box-shadow: 0 0 14px rgba(95,216,204,.3); }
+.theme-toggle { border-radius: 6px !important; border: 1px solid var(--border2) !important; }
+
+/* Floating ghost mascots injected by theme-switcher.js */
+.aj-floating-ghost {
+  position: fixed; pointer-events: none; z-index: 9990;
+  filter: drop-shadow(0 0 14px rgba(95,216,204,.45));
+  opacity: 0; transition: opacity 1s ease;
+}
+[data-style="ghost"] .aj-floating-ghost { opacity: .85; }
