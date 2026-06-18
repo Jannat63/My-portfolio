@@ -75,10 +75,5 @@ body { letter-spacing: .01em; }
 .n-box { border-radius: 6px !important; box-shadow: 0 0 14px rgba(95,216,204,.3); }
 .theme-toggle { border-radius: 6px !important; border: 1px solid var(--border2) !important; }
 
-/* Floating ghost mascots injected by theme-switcher.js */
-.aj-floating-ghost {
-  position: fixed; pointer-events: none; z-index: 9990;
-  filter: drop-shadow(0 0 14px rgba(95,216,204,.45));
-  opacity: 0; transition: opacity 1s ease;
-}
-[data-style="ghost"] .aj-floating-ghost { opacity: .85; }
+/* Floating ghost mascots — positioning now handled universally
+   in theme-switcher.js so they work correctly on every theme. */

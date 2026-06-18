@@ -29,6 +29,12 @@
     const s = document.createElement('style');
     s.id = 'aj-ghost-anim';
     s.textContent = `
+      .aj-floating-ghost {
+        position: fixed; left: 0; top: 0; pointer-events: none; z-index: 9990;
+        opacity: 0; transition: opacity 1s ease;
+        filter: drop-shadow(0 0 14px rgba(95,216,204,.45));
+      }
+      [data-style="ghost"] .aj-floating-ghost { opacity: .85; }
       @keyframes ghostFloatA {
         0%   { transform: translate(6vw, 82vh) rotate(-3deg); }
         25%  { transform: translate(72vw, 58vh) rotate(2deg); }
