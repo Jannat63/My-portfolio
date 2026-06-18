@@ -38,6 +38,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" id="themeStyleLink" href="assets/css/themes/theme-sage.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
@@ -395,6 +396,7 @@
     </nav>
     <div class="n-right">
       <button class="theme-toggle" id="themeBtn"><i class="fa-solid fa-moon"></i></button>
+      <button class="theme-toggle" id="styleBtn" aria-label="Switch portfolio style"><i class="fa-solid fa-palette"></i></button>
       <a href="contact.html" class="btn btn-dark" style="padding:9px 18px;font-size:13px">Let's Talk <i class="fa-solid fa-arrow-right"></i></a>
       <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
     </div>
@@ -628,6 +630,7 @@
 </footer>
 
 <script src="assets/js/script.js" defer></script>
+<script src="assets/js/theme-switcher.js" defer></script>
 <script>
 (function() {
   let currentStrategy = 'mobile';
