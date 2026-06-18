@@ -1,0 +1,77 @@
+/* THEME: MEMPHIS POP
+   Cream background, bold coral/turquoise/yellow shapes,
+   thick black borders, playful rounded badges. */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap');
+
+:root {
+  --bg:          #FFF6E9;
+  --bg2:         #FFEFD6;
+  --card:        #FFFFFF;
+
+  --sage:        #4ECDC4;
+  --sage2:       #2FA89F;
+  --sage-pal:    #E2F7F5;
+
+  --blush:       #FF5C5C;
+  --blush2:      #E64545;
+  --blush-pal:   #FFE4E4;
+
+  --ink:         #1A1A1A;
+  --ink2:        #3A3A3A;
+  --muted:       #6B6B6B;
+
+  --border:      rgba(26,26,26,.14);
+  --border2:     rgba(26,26,26,.3);
+
+  --disp:        'Poppins', system-ui, sans-serif;
+  --sans:        'Poppins', system-ui, sans-serif;
+}
+
+.hero-h1, .h2, h1, h2, h3 { font-weight: 700 !important; }
+.hero-h1 .accent, .h2 .accent {
+  background: #FFD93D; padding: 2px 10px; border-radius: 8px;
+  display: inline-block; transform: rotate(-1.5deg); color: #1A1A1A !important;
+}
+
+.tag-label {
+  border-radius: 20px !important; border: 2px solid var(--ink) !important;
+  font-weight: 600 !important;
+}
+
+.btn { border-radius: 24px !important; font-weight: 600 !important; border-width: 2px !important; }
+.btn-dark { background: var(--ink) !important; color: #FFF6E9 !important; }
+.btn-ghost { border-color: var(--ink) !important; color: var(--ink) !important; }
+
+.hero-chip {
+  border-radius: 20px !important; border: 2px solid var(--ink) !important; font-weight: 600 !important;
+}
+
+.svc-card, .case-card, .testi-card, .proj-card, .tool-card, .blog-card, .post-card, .why-card, .cert-card, .achieve-card {
+  border-radius: 18px !important;
+  border: 2px solid var(--ink) !important;
+  box-shadow: 5px 5px 0 var(--ink) !important;
+}
+.svc-card:hover, .case-card:hover, .testi-card:hover, .proj-card:hover, .tool-card:hover, .blog-card:hover, .post-card:hover {
+  box-shadow: 7px 7px 0 var(--ink) !important;
+}
+
+#navbar { border-bottom: 2px solid var(--ink) !important; }
+[data-theme="light"] #navbar.glass,
+[data-theme="dark"]  #navbar.glass { background: rgba(255,246,233,.92) !important; }
+
+#home { position: relative; overflow: hidden; }
+#home::before {
+  content: ''; position: absolute; top: 110px; left: 6%;
+  width: 26px; height: 26px; background: var(--sage); border-radius: 50%;
+  z-index: 1; pointer-events: none;
+}
+#home::after {
+  content: ''; position: absolute; bottom: 60px; right: 8%;
+  width: 0; height: 0; z-index: 1; pointer-events: none;
+  border-left: 16px solid transparent; border-right: 16px solid transparent;
+  border-bottom: 26px solid var(--blush);
+}
+
+.n-box { border-radius: 50% !important; }
+.theme-toggle { border-radius: 50% !important; border: 2px solid var(--ink) !important; }

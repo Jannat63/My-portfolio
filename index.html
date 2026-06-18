@@ -34,6 +34,7 @@
 
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/home.css">
+  <link rel="stylesheet" id="themeStyleLink" href="assets/css/themes/theme-sage.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -357,6 +358,7 @@
     </nav>
     <div class="n-right">
       <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+      <button class="theme-toggle" id="styleBtn" aria-label="Switch portfolio style"><i class="fa-solid fa-palette"></i></button>
       <a href="contact.html" class="btn btn-dark" style="padding:9px 18px;font-size:13px">Let's Talk <i class="fa-solid fa-arrow-right"></i></a>
       <button class="hbg" id="hbg" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -385,6 +387,34 @@
   <div class="dot-pattern"></div>
   <div class="hero-blob hero-blob-1"></div>
   <div class="hero-blob hero-blob-2"></div>
+
+  <svg class="wc-wash" id="wcWash" width="100%" height="100%" viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" style="display:none;position:absolute;inset:0;z-index:0;pointer-events:none" aria-hidden="true">
+    <defs>
+      <filter id="wcF1" x="-50%" y="-50%" width="200%" height="200%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.010" numOctaves="3" seed="9" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="70"/>
+        <feGaussianBlur stdDeviation="4"/>
+      </filter>
+      <filter id="wcF2" x="-50%" y="-50%" width="200%" height="200%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="3" seed="22" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="60"/>
+        <feGaussianBlur stdDeviation="3.5"/>
+      </filter>
+      <filter id="wcF3" x="-50%" y="-50%" width="200%" height="200%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="33" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="48"/>
+        <feGaussianBlur stdDeviation="3"/>
+      </filter>
+    </defs>
+    <ellipse cx="160" cy="120" rx="260" ry="190" fill="#E2543C" opacity=".22" filter="url(#wcF1)"/>
+    <ellipse cx="80"  cy="420" rx="220" ry="210" fill="#8B4FA8" opacity=".18" filter="url(#wcF2)"/>
+    <ellipse cx="420" cy="80"  rx="200" ry="150" fill="#F0B429" opacity=".20" filter="url(#wcF3)"/>
+    <ellipse cx="640" cy="440" rx="280" ry="200" fill="#3D5FA8" opacity=".16" filter="url(#wcF1)"/>
+    <ellipse cx="1020" cy="160" rx="260" ry="200" fill="#2E9E8C" opacity=".20" filter="url(#wcF2)"/>
+    <ellipse cx="1180" cy="480" rx="240" ry="180" fill="#5BA84F" opacity=".18" filter="url(#wcF3)"/>
+    <ellipse cx="1340" cy="120" rx="180" ry="150" fill="#7BC95E" opacity=".15" filter="url(#wcF1)"/>
+  </svg>
+
   <div class="wrap" style="width:100%;position:relative;z-index:1">
     <div class="hero-split-grid">
 
@@ -1330,6 +1360,7 @@
 
 
 <script src="assets/js/script.js" defer></script>
+<script src="assets/js/theme-switcher.js" defer></script>
 <script src="assets/js/motion.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,69 @@
+/* THEME: ART DECO GOLD
+   Black, gold and deep emerald. Cinzel display caps.
+   Geometric corner brackets on navbar and hero. */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Jost:wght@400;500&display=swap');
+
+:root {
+  --bg:          #0E0E0E;
+  --bg2:         #161412;
+  --card:        #161412;
+
+  --sage:        #C9A227;
+  --sage2:       #E8C158;
+  --sage-pal:    #1F1B0E;
+
+  --blush:       #2E5C45;
+  --blush2:      #3E7A5C;
+  --blush-pal:   #14201A;
+
+  --ink:         #E8DCB8;
+  --ink2:        #C9BB94;
+  --muted:       #8A8270;
+
+  --border:      rgba(201,162,39,.22);
+  --border2:     rgba(201,162,39,.35);
+
+  --disp:        'Cinzel', Georgia, serif;
+  --sans:        'Jost', system-ui, sans-serif;
+}
+
+body { letter-spacing: .01em; }
+
+.hero-h1, .h2, h1, h2, h3 { text-transform: uppercase; letter-spacing: .03em; }
+
+.tag-label {
+  border-radius: 0 !important;
+  border: 1px solid var(--border2) !important;
+  text-transform: uppercase; letter-spacing: .1em; font-size: .7rem !important;
+}
+
+.btn { border-radius: 0 !important; letter-spacing: .06em; text-transform: uppercase; font-size: .8rem !important; }
+.btn-dark { background: var(--sage) !important; color: #0E0E0E !important; border-color: var(--sage) !important; }
+.btn-ghost { border-color: var(--sage) !important; color: var(--sage) !important; }
+
+.hero-chip, .svc-tag, .case-tag-item, .blog-cat-pill {
+  border-radius: 0 !important;
+  border: 1px solid var(--border2);
+  text-transform: uppercase; letter-spacing: .08em; font-size: .68rem !important;
+}
+
+.svc-card, .case-card, .testi-card, .proj-card, .tool-card, .blog-card, .post-card, .why-card, .cert-card, .achieve-card {
+  border-radius: 0 !important;
+  border: 1px solid var(--border) !important;
+}
+
+#navbar { border-bottom: 1px solid var(--border2) !important; }
+[data-theme="light"] #navbar.glass,
+[data-theme="dark"]  #navbar.glass { background: rgba(14,14,14,.9) !important; }
+
+#home { position: relative; }
+#home::before, #home::after {
+  content: ''; position: absolute; width: 26px; height: 26px;
+  border-color: var(--sage); pointer-events: none; z-index: 2;
+}
+#home::before { top: 90px; left: 24px; border-top: 1px solid var(--sage); border-left: 1px solid var(--sage); }
+#home::after  { top: 90px; right: 24px; border-top: 1px solid var(--sage); border-right: 1px solid var(--sage); }
+
+.n-box { border-radius: 0 !important; }
+.theme-toggle { border-radius: 0 !important; }
