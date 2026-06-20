@@ -131,6 +131,7 @@ Disallow: /node_modules/
 Disallow: /*.json$
 Disallow: /*.md$
 Disallow: /package*.json
+Disallow: /tools/
 
 # Crawl delay for all other bots
 Crawl-delay: 5

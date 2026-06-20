@@ -82,7 +82,16 @@
    RESET & BASE
 ═══════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  /* FIX: html had no background, so the area exposed by elastic
+     overscroll/bounce-scrolling past the page end (trackpads, mobile,
+     dark OS theme) fell back to the browser's default black canvas.
+     Matching it to the footer makes that area blend in instead of
+     flashing black. */
+  background: var(--footer-bg);
+}
 body {
   font-family: var(--sans);
   background: var(--bg);
