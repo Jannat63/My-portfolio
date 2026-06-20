@@ -92,7 +92,7 @@
     ghosts.forEach(g => {
       const outer = document.createElement('div');
       outer.className = 'aj-floating-ghost aj-gw';
-      outer.style.cssText = 'left:0;top:0;animation-name:' + g.anim + ';animation-duration:' + g.dur + ';animation-delay:' + g.delay + ';';
+      outer.style.cssText = 'position:fixed!important;left:0;top:0;margin:0;padding:0;pointer-events:none;z-index:9990;animation-name:' + g.anim + ';animation-duration:' + g.dur + ';animation-delay:' + g.delay + ';';
       const inner = document.createElement('div');
       inner.className = 'aj-gw';
       inner.style.cssText = 'animation-name:ghostBob;animation-duration:' + g.bobDur + ';';
