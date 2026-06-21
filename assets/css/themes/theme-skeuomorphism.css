@@ -101,6 +101,21 @@
 .btn-dark:hover { box-shadow: 0 12px 26px rgba(71,87,199,.48), inset 0 1px 0 rgba(255,255,255,.4) !important; }
 .btn-dark:active { transform: scale(.97) translateY(1px) !important; }
 
+/* These buttons intentionally sit on a fixed dark / saturated-colour band
+   and are designed with white text on a translucent backdrop — restore
+   that instead of letting the theme's embossed button styling apply. */
+.btn-white, .about-cta-secondary {
+  background: rgba(255,255,255,.14) !important;
+  border: 1.5px solid rgba(255,255,255,.4) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+.btn-white:hover, .about-cta-secondary:hover {
+  background: #fff !important;
+  color: var(--ink) !important;
+  border-color: #fff !important;
+}
+
 /* ═══════════════════════════════════
    INPUTS — soft inset material, gentle glow on focus
 ═══════════════════════════════════ */

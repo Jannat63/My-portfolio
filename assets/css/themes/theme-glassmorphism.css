@@ -117,6 +117,24 @@ html { background: #10142A !important; }
 }
 .btn-dark:hover { box-shadow: 0 14px 36px rgba(94,114,235,.5) !important; }
 
+/* These buttons intentionally sit on a fixed dark / saturated-colour band
+   (the homepage CTA strip, the About "ready to work together" band) and
+   are designed with white text on a translucent backdrop — restore that
+   instead of letting the theme's normal light button styling apply. */
+.btn-white, .about-cta-secondary {
+  background: rgba(255,255,255,.14) !important;
+  border: 1.5px solid rgba(255,255,255,.4) !important;
+  color: #fff !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: none !important;
+}
+.btn-white:hover, .about-cta-secondary:hover {
+  background: #fff !important;
+  color: var(--ink) !important;
+  border-color: #fff !important;
+}
+
 /* ═══════════════════════════════════
    INPUTS — glass fields
 ═══════════════════════════════════ */

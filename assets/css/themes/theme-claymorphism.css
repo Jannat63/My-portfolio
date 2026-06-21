@@ -91,6 +91,21 @@
 }
 .btn-ghost { background: var(--card) !important; }
 
+/* These buttons intentionally sit on a fixed dark / saturated-colour band
+   and are designed with white text on a translucent backdrop — restore
+   that instead of letting the theme's puffy button styling apply. */
+.btn-white, .about-cta-secondary {
+  background: rgba(255,255,255,.16) !important;
+  border: 2px solid rgba(255,255,255,.45) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+.btn-white:hover, .about-cta-secondary:hover {
+  background: #fff !important;
+  color: var(--ink) !important;
+  border-color: #fff !important;
+}
+
 /* ═══════════════════════════════════
    INPUTS — soft puffy fields, gentle inward shadow on focus
 ═══════════════════════════════════ */
