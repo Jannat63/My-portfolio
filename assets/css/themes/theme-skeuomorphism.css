@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+/* ═══════════════════════════════════════════════════
+   THEME: MODERN SKEUOMORPHISM
+   Tactile, premium, soft-lit. Surfaces look like real
+   physical material — gently embossed, lit from the
+   top-left, with a thin specular highlight along the
+   top edge and a soft press-in response on touch.
+   ═══════════════════════════════════════════════════ */
+:root {
+  --bg:          #E7EAF6;
+  --bg2:         #DCE0F1;
+  --card:        #F3F5FC;
+
+  --sage:        #4757C7;   /* deep indigo — primary accent, the "dial" colour */
+  --sage2:       #34419E;
+  --sage-pal:    #DEE2F8;
+
+  --blush:       #D6708C;   /* soft rose — secondary accent */
+  --blush2:      #B85470;
+  --blush-pal:   #F6E0E6;
+
+  --ink:         #2B3354;
+  --ink2:        #4A5278;
+  --muted:       #80889F;
+
+  --border:      rgba(71,87,199,.10);
+  --border2:     rgba(71,87,199,.32);
+
+  /* Realistic dual shadow + a thin inset specular line along the top
+     edge, the detail that sells "physical material" over flat neumorphism. */
+  --shadow:      -5px -5px 12px rgba(255,255,255,.9), 7px 9px 20px rgba(71,87,199,.18),
+                 inset 0 1px 0 rgba(255,255,255,.7);
+  --shadow2:     -7px -7px 16px rgba(255,255,255,.95), 11px 15px 30px rgba(71,87,199,.26),
+                 inset 0 1px 0 rgba(255,255,255,.8);
+
+  --footer-bg:   #1B2042;
+  --footer-text: rgba(255,255,255,.55);
+  --footer-head: rgba(140,154,235,.85);
+  --footer-link: rgba(255,255,255,.72);
+
+  --navbar-bg:   rgba(231,234,246,.92);
+
+  --disp:        'Sora', system-ui, sans-serif;
+  --sans:        'Work Sans', system-ui, sans-serif;
+  --r:           20px;
+}
+
+#navbar {
+  border-bottom: none !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,.7) inset, 0 6px 16px rgba(71,87,199,.14) !important;
+}
+
+/* ═══════════════════════════════════
+   CARDS — embossed material with a top sheen, real elevation on hover
+═══════════════════════════════════ */
+.svc-card, .case-card, .testi-card, .proj-card, .tool-card, .blog-card, .post-card, .why-card, .cert-card, .achieve-card,
+.stat-box, .stats-card, .tl-card, .price-card, .case-big, .proj-item, .feat-card, .tool-big-card, .val-card,
+.form-card, .form-outer, .skills-panel, .svc-big, .post-author-box, .sidebar-widget {
+  background: linear-gradient(165deg, #FAFBFF 0%, var(--card) 60%, #ECEFFA 100%) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 22px !important;
+  box-shadow: var(--shadow) !important;
+  transition: box-shadow .35s ease, transform .35s ease !important;
+}
+.svc-card:hover, .case-card:hover, .testi-card:hover, .proj-card:hover, .tool-card:hover, .blog-card:hover, .post-card:hover,
+.stat-box:hover, .stats-card:hover, .tl-card:hover, .price-card:hover, .case-big:hover, .proj-item:hover, .feat-card:hover,
+.tool-big-card:hover, .val-card:hover, .form-card:hover, .form-outer:hover, .skills-panel:hover, .svc-big:hover,
+.post-author-box:hover, .sidebar-widget:hover {
+  box-shadow: var(--shadow2) !important;
+  transform: translateY(-3px) !important;
+}
+
+/* ═══════════════════════════════════
+   BUTTONS — physical, glossy, with a real press-in response
+═══════════════════════════════════ */
+.btn {
+  border-radius: 16px !important;
+  border: 1px solid var(--border) !important;
+  background: linear-gradient(165deg, #FAFBFF, var(--card)) !important;
+  box-shadow: var(--shadow) !important;
+  transition: box-shadow .2s ease, transform .15s ease !important;
+}
+.btn:hover { box-shadow: var(--shadow2) !important; }
+.btn:active {
+  transform: scale(.97) translateY(1px) !important;
+  box-shadow: inset 3px 3px 8px rgba(71,87,199,.25), inset -2px -2px 6px rgba(255,255,255,.6) !important;
+}
+.btn-dark {
+  position: relative; overflow: hidden;
+  background: linear-gradient(165deg, var(--sage), var(--sage2)) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 8px 20px rgba(71,87,199,.4), inset 0 1px 0 rgba(255,255,255,.35) !important;
+}
+.btn-dark::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.28), transparent 55%);
+  pointer-events: none;
+}
+.btn-dark:hover { box-shadow: 0 12px 26px rgba(71,87,199,.48), inset 0 1px 0 rgba(255,255,255,.4) !important; }
+.btn-dark:active { transform: scale(.97) translateY(1px) !important; }
+
+/* ═══════════════════════════════════
+   INPUTS — soft inset material, gentle glow on focus
+═══════════════════════════════════ */
+input, textarea, select {
+  background: var(--bg) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 14px !important;
+  box-shadow: inset 3px 3px 7px rgba(71,87,199,.14), inset -3px -3px 7px rgba(255,255,255,.8) !important;
+  color: var(--ink) !important;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--sage) !important;
+  box-shadow: inset 2px 2px 6px rgba(71,87,199,.16), inset -2px -2px 6px rgba(255,255,255,.85),
+              0 0 0 3px var(--sage-pal) !important;
+  outline: none !important;
+}
+
+/* ═══════════════════════════════════
+   CHIPS — small embossed pills with a hint of glass
+═══════════════════════════════════ */
+.tag, .svc-tag, .hero-chip {
+  background: linear-gradient(165deg, #FAFBFF, var(--card)) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: -2px -2px 6px rgba(255,255,255,.85), 3px 4px 8px rgba(71,87,199,.16) !important;
+}
+
+/* ═══════════════════════════════════
+   MONOGRAM / LOGO BADGE — a little glossy dial, like the reference's ring
+═══════════════════════════════════ */
+.n-box {
+  background: linear-gradient(165deg, var(--sage), var(--sage2)) !important;
+  box-shadow: 0 4px 10px rgba(71,87,199,.35), inset 0 1px 0 rgba(255,255,255,.4) !important;
+}
+
+/* ═══════════════════════════════════
+   HERO PORTRAIT — layered, lit frame with a soft glass-accent rim
+═══════════════════════════════════ */
+.hero-split-portrait {
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow2), 0 0 0 1px rgba(255,255,255,.5) inset !important;
+}

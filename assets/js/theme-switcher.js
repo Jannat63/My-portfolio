@@ -1,161 +1,224 @@
 /*!
  * AHSAN JANNAT — DESIGN THEME SWITCHER
- * Cycles through 5 full visual themes by swapping a single
- * stylesheet href. Persisted in localStorage, shared across pages.
+ * Swaps a single stylesheet href to apply one of 5 full visual themes.
+ * Selection is made from an accessible dropdown menu and persisted in
+ * localStorage so it carries across every page on the site.
  */
 (function () {
   'use strict';
 
   const ROOT = window.location.pathname.includes('/blog/') ? '../' : '';
+  const STORAGE_KEY = 'aj-style';
 
   const THEMES = [
-    { id: 'sage',       label: 'Sage Editorial',  file: 'theme-sage.css' },
-    { id: 'deco',       label: 'Art Deco Gold',    file: 'theme-deco.css' },
-    { id: 'terminal',   label: 'Neon Terminal',    file: 'theme-terminal.css' },
-    { id: 'memphis',    label: 'Memphis Pop',      file: 'theme-memphis.css' },
-    { id: 'watercolor', label: 'Watercolor',       file: 'theme-watercolor.css' },
-    { id: 'ghost',      label: 'Ghost Manor',      file: 'theme-ghost.css' }
+    { id: 'sage',          label: 'Default',           desc: 'Sage editorial — the original look', file: 'theme-sage.css' },
+    { id: 'glass',         label: 'Glassmorphism',     desc: 'Frosted glass, soft light & blur',   file: 'theme-glassmorphism.css' },
+    { id: 'neumorphism',   label: 'Neumorphism',       desc: 'Soft extruded UI, subtle shadows',   file: 'theme-neumorphism.css' },
+    { id: 'claymorphism',  label: 'Claymorphism',      desc: 'Puffy 3D clay, bright & playful',     file: 'theme-claymorphism.css' },
+    { id: 'skeuomorphism', label: 'Modern Skeuomorphism', desc: 'Tactile realism, soft materials',  file: 'theme-skeuomorphism.css' }
   ];
 
-  const link = document.getElementById('themeStyleLink');
-  const btn  = document.getElementById('styleBtn');
-  const htmlEl = document.documentElement;
+  const link    = document.getElementById('themeStyleLink');
+  const btn     = document.getElementById('styleBtn');
+  const htmlEl  = document.documentElement;
   const themeBtn = document.getElementById('themeBtn');
 
   if (!link) return;
 
-  function injectGhostStyles() {
-    if (document.getElementById('aj-ghost-anim')) return;
-    const s = document.createElement('style');
-    s.id = 'aj-ghost-anim';
-    s.textContent = `
-      .aj-floating-ghost {
-        position: fixed; left: 0; top: 0; pointer-events: none; z-index: 9990;
-        opacity: 0; transition: opacity 1s ease;
-        filter: drop-shadow(0 0 14px rgba(95,216,204,.45));
-      }
-      [data-style="ghost"] .aj-floating-ghost { opacity: .85; }
-      /* Paths stay in the left/right margin lanes so mascots never drift
-         over the centered content column and obscure text or links. */
-      @keyframes ghostFloatA {
-        0%   { transform: translate(3vw, 78vh) rotate(-3deg); }
-        25%  { transform: translate(9vw, 54vh) rotate(2deg); }
-        50%  { transform: translate(4vw, 16vh) rotate(-2deg); }
-        75%  { transform: translate(10vw, 38vh) rotate(3deg); }
-        100% { transform: translate(3vw, 78vh) rotate(-3deg); }
-      }
-      @keyframes ghostFloatB {
-        0%   { transform: translate(94vw, 16vh) rotate(2deg); }
-        25%  { transform: translate(89vw, 44vh) rotate(-3deg); }
-        50%  { transform: translate(95vw, 66vh) rotate(2deg); }
-        75%  { transform: translate(90vw, 30vh) rotate(-2deg); }
-        100% { transform: translate(94vw, 16vh) rotate(2deg); }
-      }
-      @keyframes ghostFloatC {
-        0%   { transform: translate(6vw, 10vh) rotate(0deg); }
-        33%  { transform: translate(2vw, 30vh) rotate(3deg); }
-        66%  { transform: translate(8vw, 8vh) rotate(-3deg); }
-        100% { transform: translate(6vw, 10vh) rotate(0deg); }
-      }
-      @keyframes ghostFloatD {
-        0%   { transform: translate(92vw, 84vh) rotate(-2deg); }
-        50%  { transform: translate(97vw, 88vh) rotate(2deg); }
-        100% { transform: translate(92vw, 84vh) rotate(-2deg); }
-      }
-      @keyframes ghostBob {
-        0%, 100% { transform: translateY(0); }
-        50%      { transform: translateY(-12px); }
-      }
-      .aj-gw { animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
-      /* No safe margin lane on narrow viewports — hide rather than overlap content. */
-      @media (max-width: 900px) {
-        .aj-floating-ghost { display: none !important; }
-      }
-    `;
-    document.head.appendChild(s);
-  }
-
-  function ghostSVG(w, grad1, grad2) {
-    return '<svg width="' + w + '" height="' + (w*1.1) + '" viewBox="0 0 100 110">' +
-      '<defs><linearGradient id="gg' + grad1 + grad2 + '" x1="0" y1="0" x2="0" y2="1">' +
-      '<stop offset="0" stop-color="' + grad1 + '" stop-opacity=".9"/>' +
-      '<stop offset="1" stop-color="' + grad2 + '" stop-opacity=".55"/></linearGradient></defs>' +
-      '<path d="M50 8 C25 8 14 30 14 52 L14 88 C18 84 23 92 28 86 C32 93 37 95 41 87 C44 94 49 96 50 87 C51 96 56 94 59 87 C63 95 68 93 72 86 C77 92 82 84 86 88 L86 52 C86 30 75 8 50 8 Z" fill="url(#gg' + grad1 + grad2 + ')"/>' +
-      '<ellipse cx="38" cy="46" rx="5" ry="7" fill="#0A0E11" opacity=".75"/>' +
-      '<ellipse cx="63" cy="46" rx="5" ry="7" fill="#0A0E11" opacity=".75"/>' +
-      '</svg>';
-  }
-
-  function injectFloatingGhosts() {
-    if (document.querySelector('.aj-floating-ghost')) return;
-    injectGhostStyles();
-    const ghosts = [
-      { anim: 'ghostFloatA', dur: '34s', delay: '0s',  bobDur: '3.2s', size: 70, c1: '#5FD8CC', c2: '#9B8FE0' },
-      { anim: 'ghostFloatB', dur: '40s', delay: '-8s', bobDur: '3.8s', size: 54, c1: '#9B8FE0', c2: '#5FD8CC' },
-      { anim: 'ghostFloatC', dur: '28s', delay: '-3s', bobDur: '2.9s', size: 42, c1: '#8AE8DD', c2: '#B3A8F0' },
-      { anim: 'ghostFloatD', dur: '36s', delay: '-14s',bobDur: '3.5s', size: 58, c1: '#B3A8F0', c2: '#5FD8CC' }
-    ];
-    ghosts.forEach(g => {
-      const outer = document.createElement('div');
-      outer.className = 'aj-floating-ghost aj-gw';
-      outer.style.cssText = 'position:fixed!important;left:0;top:0;margin:0;padding:0;pointer-events:none;z-index:9990;animation-name:' + g.anim + ';animation-duration:' + g.dur + ';animation-delay:' + g.delay + ';';
-      const inner = document.createElement('div');
-      inner.className = 'aj-gw';
-      inner.style.cssText = 'animation-name:ghostBob;animation-duration:' + g.bobDur + ';';
-      inner.innerHTML = ghostSVG(g.size, g.c1, g.c2);
-      outer.appendChild(inner);
-      document.body.appendChild(outer);
-    });
-  }
-
+  /* ── Apply a theme ───────────────────────────────────────────── */
   function applyTheme(id, announce) {
     const theme = THEMES.find(t => t.id === id) || THEMES[0];
+
+    // Briefly force every element to transition colour/shadow properties
+    // smoothly, even ones that don't normally declare a transition, so
+    // swapping the stylesheet never feels like an abrupt jump-cut.
+    htmlEl.classList.add('aj-theme-transitioning');
+    window.clearTimeout(htmlEl._ajThemeT);
+    htmlEl._ajThemeT = window.setTimeout(() => {
+      htmlEl.classList.remove('aj-theme-transitioning');
+    }, 420);
+
     link.setAttribute('href', ROOT + 'assets/css/themes/' + theme.file);
     htmlEl.setAttribute('data-style', theme.id);
-    localStorage.setItem('aj-style', theme.id);
+    localStorage.setItem(STORAGE_KEY, theme.id);
 
-    // Hide light/dark toggle for themes with a fixed mood
+    // Hide the light/dark toggle for themes with one fixed mood —
+    // only the Default theme supports manual day/night switching.
     if (themeBtn) {
       themeBtn.style.display = (theme.id === 'sage') ? '' : 'none';
     }
 
+    syncMenuState(theme.id);
     if (announce) showToast(theme.label);
   }
 
-  function nextTheme() {
-    const current = localStorage.getItem('aj-style') || 'sage';
-    const idx = THEMES.findIndex(t => t.id === current);
-    const next = THEMES[(idx + 1) % THEMES.length];
-    applyTheme(next.id, true);
+  /* ── Dropdown menu ────────────────────────────────────────────── */
+  let panel = null;
+  let items = [];
+
+  function buildPanel() {
+    if (panel) return panel;
+
+    panel = document.createElement('div');
+    panel.id = 'aj-theme-panel';
+    panel.setAttribute('role', 'menu');
+    panel.setAttribute('aria-label', 'Choose a portfolio theme');
+
+    const heading = document.createElement('div');
+    heading.className = 'aj-theme-panel-head';
+    heading.textContent = '🎨 Themes';
+    panel.appendChild(heading);
+
+    THEMES.forEach((theme) => {
+      const item = document.createElement('button');
+      item.type = 'button';
+      item.className = 'aj-theme-item';
+      item.setAttribute('role', 'menuitemradio');
+      item.setAttribute('aria-checked', 'false');
+      item.dataset.themeId = theme.id;
+      item.tabIndex = -1;
+
+      const dot = document.createElement('span');
+      dot.className = 'aj-theme-item-check';
+      dot.setAttribute('aria-hidden', 'true');
+
+      const text = document.createElement('span');
+      text.className = 'aj-theme-item-text';
+      const titleEl = document.createElement('span');
+      titleEl.className = 'aj-theme-item-title';
+      titleEl.textContent = theme.label;
+      const descEl = document.createElement('span');
+      descEl.className = 'aj-theme-item-desc';
+      descEl.textContent = theme.desc;
+      text.appendChild(titleEl);
+      text.appendChild(descEl);
+
+      item.appendChild(dot);
+      item.appendChild(text);
+
+      item.addEventListener('click', () => {
+        applyTheme(theme.id, true);
+        closePanel();
+        if (btn) btn.focus();
+      });
+
+      panel.appendChild(item);
+      items.push(item);
+    });
+
+    panel.addEventListener('keydown', onPanelKeydown);
+    document.body.appendChild(panel);
+    return panel;
   }
 
+  function syncMenuState(activeId) {
+    items.forEach((item) => {
+      const isActive = item.dataset.themeId === activeId;
+      item.setAttribute('aria-checked', isActive ? 'true' : 'false');
+      item.classList.toggle('is-active', isActive);
+      item.tabIndex = isActive ? 0 : -1;
+    });
+  }
+
+  function positionPanel() {
+    if (!btn || !panel) return;
+    const r = btn.getBoundingClientRect();
+    const panelWidth = 260;
+    let left = r.right - panelWidth;
+    left = Math.max(12, Math.min(left, window.innerWidth - panelWidth - 12));
+    panel.style.top = (r.bottom + 10) + 'px';
+    panel.style.left = left + 'px';
+  }
+
+  function openPanel() {
+    buildPanel();
+    positionPanel();
+    panel.classList.add('is-open');
+    btn.setAttribute('aria-expanded', 'true');
+    document.addEventListener('click', onDocClick, true);
+    document.addEventListener('keydown', onDocKeydown, true);
+    window.addEventListener('resize', positionPanel);
+    const active = items.find(i => i.classList.contains('is-active')) || items[0];
+    window.setTimeout(() => active && active.focus(), 30);
+  }
+
+  function closePanel() {
+    if (!panel) return;
+    panel.classList.remove('is-open');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+    document.removeEventListener('click', onDocClick, true);
+    document.removeEventListener('keydown', onDocKeydown, true);
+    window.removeEventListener('resize', positionPanel);
+  }
+
+  function isOpen() { return !!(panel && panel.classList.contains('is-open')); }
+
+  function togglePanel() { isOpen() ? closePanel() : openPanel(); }
+
+  function onDocClick(e) {
+    if (panel && (panel.contains(e.target) || e.target === btn || btn.contains(e.target))) return;
+    closePanel();
+  }
+
+  function onDocKeydown(e) {
+    if (e.key === 'Escape') {
+      closePanel();
+      if (btn) btn.focus();
+    }
+  }
+
+  function onPanelKeydown(e) {
+    const focusable = items;
+    const idx = focusable.indexOf(document.activeElement);
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      focusable[(idx + 1 + focusable.length) % focusable.length].focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      focusable[(idx - 1 + focusable.length) % focusable.length].focus();
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      focusable[0].focus();
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      focusable[focusable.length - 1].focus();
+    } else if (e.key === 'Tab') {
+      // Keep focus inside the menu while it's open.
+      e.preventDefault();
+      const dir = e.shiftKey ? -1 : 1;
+      focusable[(idx + dir + focusable.length) % focusable.length].focus();
+    }
+  }
+
+  /* ── Toast ────────────────────────────────────────────────────── */
   function showToast(label) {
     let toast = document.getElementById('aj-theme-toast');
     if (!toast) {
       toast = document.createElement('div');
       toast.id = 'aj-theme-toast';
-      toast.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);' +
-        'background:#1A1A1A;color:#fff;padding:11px 22px;border-radius:30px;font-size:13px;font-family:system-ui,sans-serif;' +
-        'z-index:999999;opacity:0;transition:opacity .35s,transform .35s;pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.25);';
       document.body.appendChild(toast);
     }
     toast.textContent = label;
-    requestAnimationFrame(() => {
-      toast.style.opacity = '1';
-      toast.style.transform = 'translateX(-50%) translateY(0)';
-    });
-    clearTimeout(toast._hideT);
-    toast._hideT = setTimeout(() => {
-      toast.style.opacity = '0';
-      toast.style.transform = 'translateX(-50%) translateY(20px)';
+    toast.classList.add('is-visible');
+    window.clearTimeout(toast._hideT);
+    toast._hideT = window.setTimeout(() => {
+      toast.classList.remove('is-visible');
     }, 1600);
   }
 
-  // Apply saved theme on load (no toast on initial load)
-  const saved = localStorage.getItem('aj-style') || 'sage';
-  applyTheme(saved, false);
-  injectFloatingGhosts();
+  /* ── Wire up ──────────────────────────────────────────────────── */
+  if (btn) {
+    btn.setAttribute('aria-haspopup', 'menu');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePanel();
+    });
+  }
 
-  if (btn) btn.addEventListener('click', nextTheme);
+  // Apply saved theme on load (no toast on initial load).
+  const saved = localStorage.getItem(STORAGE_KEY) || 'sage';
+  buildPanel();
+  applyTheme(saved, false);
 
 })();

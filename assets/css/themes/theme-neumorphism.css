@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&display=swap');
+
+/* ═══════════════════════════════════════════════════
+   THEME: NEUMORPHISM
+   Soft UI — every surface looks molded from the same
+   material as the page behind it. Depth comes only from
+   a dual light/dark shadow pair, never from a hard border.
+   ═══════════════════════════════════════════════════ */
+:root {
+  --bg:          #E4E9F2;
+  --bg2:         #DDE3ED;
+  --card:        #E4E9F2;   /* same as --bg on purpose — the "molded" look */
+
+  --sage:        #7B93DB;   /* primary accent — soft indigo */
+  --sage2:       #5A71C4;
+  --sage-pal:    #D7DEF0;
+
+  --blush:       #E0936F;   /* secondary accent — soft clay-orange */
+  --blush2:      #C97350;
+  --blush-pal:   #F3DCD0;
+
+  --ink:         #3D4663;
+  --ink2:        #5D6685;
+  --muted:       #8891AC;
+
+  /* Neumorphism relies on shadow, not line-borders, for depth.
+     Keep the border almost invisible — same family as the surface. */
+  --border:      rgba(163,177,198,.25);
+  --border2:     rgba(123,147,219,.4);
+
+  /* The signature dual shadow: a light highlight + a darker shadow,
+     offset opposite the light source (top-left). */
+  --shadow:      -6px -6px 12px rgba(255,255,255,.75), 6px 6px 14px rgba(163,177,198,.55);
+  --shadow2:     -9px -9px 18px rgba(255,255,255,.85), 9px 9px 22px rgba(163,177,198,.65);
+
+  --footer-bg:   #2E3548;
+  --footer-text: rgba(255,255,255,.55);
+  --footer-head: rgba(140,162,230,.85);
+  --footer-link: rgba(255,255,255,.72);
+
+  --navbar-bg:   rgba(228,233,242,.95);
+
+  --disp:        'Comfortaa', system-ui, sans-serif;
+  --sans:        'Nunito Sans', system-ui, sans-serif;
+  --r:           24px;
+}
+
+/* ═══════════════════════════════════
+   STRUCTURE — soft, uniform, low-contrast
+═══════════════════════════════════ */
+body { letter-spacing: .01em; }
+
+#navbar {
+  border-bottom: none !important;
+  box-shadow: 0 4px 14px rgba(163,177,198,.35) !important;
+}
+
+/* ═══════════════════════════════════
+   CARDS — raised, soft-shadowed, no hard border
+═══════════════════════════════════ */
+.svc-card, .case-card, .testi-card, .proj-card, .tool-card, .blog-card, .post-card, .why-card, .cert-card, .achieve-card,
+.stat-box, .stats-card, .tl-card, .price-card, .case-big, .proj-item, .feat-card, .tool-big-card, .val-card,
+.form-card, .form-outer, .skills-panel, .svc-big, .post-author-box, .sidebar-widget {
+  background: var(--card) !important;
+  border: none !important;
+  border-radius: 26px !important;
+  box-shadow: var(--shadow) !important;
+  transition: box-shadow .3s ease, transform .3s ease !important;
+}
+.svc-card:hover, .case-card:hover, .testi-card:hover, .proj-card:hover, .tool-card:hover, .blog-card:hover, .post-card:hover,
+.stat-box:hover, .stats-card:hover, .tl-card:hover, .price-card:hover, .case-big:hover, .proj-item:hover, .feat-card:hover,
+.tool-big-card:hover, .val-card:hover, .form-card:hover, .form-outer:hover, .skills-panel:hover, .svc-big:hover,
+.post-author-box:hover, .sidebar-widget:hover {
+  box-shadow: var(--shadow2) !important;
+  transform: translateY(-3px) !important;
+}
+
+/* ═══════════════════════════════════
+   BUTTONS — raised by default, pressed (inset) when active
+═══════════════════════════════════ */
+.btn {
+  border-radius: 18px !important;
+  border: none !important;
+  background: var(--card) !important;
+  box-shadow: var(--shadow) !important;
+  transition: box-shadow .2s ease, transform .2s ease !important;
+}
+.btn:hover { box-shadow: var(--shadow2) !important; }
+.btn:active {
+  box-shadow: inset -4px -4px 10px rgba(255,255,255,.6), inset 4px 4px 10px rgba(163,177,198,.5) !important;
+  transform: translateY(1px) !important;
+}
+.btn-dark {
+  background: linear-gradient(145deg, var(--sage), var(--sage2)) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: -4px -4px 10px rgba(255,255,255,.5), 6px 6px 16px rgba(90,113,196,.4) !important;
+}
+.btn-dark:hover {
+  box-shadow: -5px -5px 12px rgba(255,255,255,.6), 8px 8px 20px rgba(90,113,196,.5) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ═══════════════════════════════════
+   INPUTS — pressed / inset, the defining neumorphic detail
+═══════════════════════════════════ */
+input, textarea, select {
+  background: var(--bg) !important;
+  border: none !important;
+  border-radius: 16px !important;
+  box-shadow: inset 3px 3px 7px rgba(163,177,198,.5), inset -3px -3px 7px rgba(255,255,255,.7) !important;
+  color: var(--ink) !important;
+}
+input:focus, textarea:focus, select:focus {
+  box-shadow: inset 3px 3px 8px rgba(123,147,219,.4), inset -3px -3px 8px rgba(255,255,255,.8),
+              0 0 0 2px var(--sage-pal) !important;
+  outline: none !important;
+}
+
+/* ═══════════════════════════════════
+   CHIPS / TAGS — small raised pills
+═══════════════════════════════════ */
+.tag, .svc-tag, .hero-chip {
+  box-shadow: -2px -2px 5px rgba(255,255,255,.7), 2px 2px 6px rgba(163,177,198,.45) !important;
+  border: none !important;
+}
+
+/* ═══════════════════════════════════
+   MONOGRAM / LOGO BADGE — keep it raised too
+═══════════════════════════════════ */
+.n-box {
+  box-shadow: -3px -3px 7px rgba(255,255,255,.6), 3px 3px 9px rgba(163,177,198,.5) !important;
+}

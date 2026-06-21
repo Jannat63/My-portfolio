@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap');
+
+/* ═══════════════════════════════════════════════════
+   THEME: CLAYMORPHISM
+   Puffy, tactile, friendly. Thick soft shadows, bright
+   gradients, big rounded corners, bouncy elastic motion.
+   ═══════════════════════════════════════════════════ */
+:root {
+  --bg:          #FFF4EA;
+  --bg2:         #FFE8D6;
+  --card:        #FFFFFF;
+
+  --sage:        #FF8A65;   /* clay coral-orange — primary accent */
+  --sage2:       #F4511E;
+  --sage-pal:    #FFE0D1;
+
+  --blush:       #7C5CFC;   /* vivid periwinkle-purple — secondary accent */
+  --blush2:      #5B3FD6;
+  --blush-pal:   #ECE6FF;
+
+  --ink:         #4A3728;   /* warm clay-brown, soft not harsh black */
+  --ink2:        #6B5544;
+  --muted:       #A6917F;
+
+  --border:      rgba(74,55,40,.08);
+  --border2:     rgba(255,138,101,.35);
+
+  /* Thick, layered, puffy shadow — the claymorphism signature */
+  --shadow:      0 10px 22px rgba(74,55,40,.16), 0 2px 6px rgba(74,55,40,.10);
+  --shadow2:     0 20px 34px rgba(74,55,40,.22), 0 6px 14px rgba(74,55,40,.14);
+
+  --footer-bg:   #3A2A22;
+  --footer-text: rgba(255,244,234,.6);
+  --footer-head: rgba(255,138,101,.85);
+  --footer-link: rgba(255,244,234,.78);
+
+  --navbar-bg:   rgba(255,244,234,.94);
+
+  --disp:        'Baloo 2', system-ui, sans-serif;
+  --sans:        'Quicksand', system-ui, sans-serif;
+  --r:           28px;
+}
+
+/* Bouncy elastic easing used throughout the theme for lifts & taps. */
+:root { --clay-ease: cubic-bezier(.34, 1.56, .64, 1); }
+
+#navbar {
+  border-bottom: none !important;
+  box-shadow: 0 6px 18px rgba(74,55,40,.12) !important;
+}
+
+/* ═══════════════════════════════════
+   CARDS — puffy, thick-shadowed, big radius, bounce on hover
+═══════════════════════════════════ */
+.svc-card, .case-card, .testi-card, .proj-card, .tool-card, .blog-card, .post-card, .why-card, .cert-card, .achieve-card,
+.stat-box, .stats-card, .tl-card, .price-card, .case-big, .proj-item, .feat-card, .tool-big-card, .val-card,
+.form-card, .form-outer, .skills-panel, .svc-big, .post-author-box, .sidebar-widget {
+  background: var(--card) !important;
+  border: none !important;
+  border-radius: 32px !important;
+  box-shadow: var(--shadow) !important;
+  transition: transform .45s var(--clay-ease), box-shadow .45s var(--clay-ease) !important;
+}
+.svc-card:hover, .case-card:hover, .testi-card:hover, .proj-card:hover, .tool-card:hover, .blog-card:hover, .post-card:hover,
+.stat-box:hover, .stats-card:hover, .tl-card:hover, .price-card:hover, .case-big:hover, .proj-item:hover, .feat-card:hover,
+.tool-big-card:hover, .val-card:hover, .form-card:hover, .form-outer:hover, .skills-panel:hover, .svc-big:hover,
+.post-author-box:hover, .sidebar-widget:hover {
+  box-shadow: var(--shadow2) !important;
+  transform: translateY(-8px) scale(1.015) !important;
+}
+
+/* ═══════════════════════════════════
+   BUTTONS — floating puffy pills with a bouncy tap
+═══════════════════════════════════ */
+.btn {
+  border-radius: 50px !important;
+  border: none !important;
+  font-weight: 600 !important;
+  box-shadow: var(--shadow) !important;
+  transition: transform .4s var(--clay-ease), box-shadow .4s var(--clay-ease) !important;
+}
+.btn:hover { box-shadow: var(--shadow2) !important; transform: translateY(-4px) scale(1.03) !important; }
+.btn:active { transform: translateY(0) scale(.97) !important; }
+.btn-dark {
+  background: linear-gradient(150deg, var(--sage), var(--sage2)) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 10px 22px rgba(244,81,30,.32), 0 2px 6px rgba(74,55,40,.12) !important;
+}
+.btn-dark:hover {
+  box-shadow: 0 18px 30px rgba(244,81,30,.4), 0 4px 10px rgba(74,55,40,.16) !important;
+}
+.btn-ghost { background: var(--card) !important; }
+
+/* ═══════════════════════════════════
+   INPUTS — soft puffy fields, gentle inward shadow on focus
+═══════════════════════════════════ */
+input, textarea, select {
+  background: var(--card) !important;
+  border: 2px solid var(--bg2) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 10px rgba(74,55,40,.08) !important;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--blush) !important;
+  box-shadow: 0 0 0 4px var(--blush-pal) !important;
+  outline: none !important;
+}
+
+/* ═══════════════════════════════════
+   CHIPS — small puffy pills
+═══════════════════════════════════ */
+.tag, .svc-tag, .hero-chip {
+  border-radius: 50px !important;
+  border: none !important;
+  box-shadow: 0 4px 10px rgba(74,55,40,.12) !important;
+}
+
+/* ═══════════════════════════════════
+   MONOGRAM / LOGO BADGE — clay puff with gentle float
+═══════════════════════════════════ */
+.n-box {
+  border-radius: 14px !important;
+  box-shadow: 0 6px 14px rgba(74,55,40,.22) !important;
+  animation: clayFloat 4.5s ease-in-out infinite;
+}
+@keyframes clayFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}

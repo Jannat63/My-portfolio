@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&display=swap');
+
+/* ═══════════════════════════════════════════════════
+   THEME: GLASSMORPHISM
+   Frosted glass over a soft colour-wash backdrop —
+   think Windows 11, visionOS, modern SaaS dashboards.
+   ═══════════════════════════════════════════════════ */
+:root {
+  --bg:          #EEF2FB;
+  --bg2:         #E6ECFA;
+  --card:        rgba(255,255,255,.55);   /* translucent glass surface */
+
+  --sage:        #5E72EB;   /* indigo — primary accent */
+  --sage2:       #4357C9;
+  --sage-pal:    rgba(94,114,235,.14);
+
+  --blush:       #00C2B2;   /* teal — secondary accent */
+  --blush2:      #00A18E;
+  --blush-pal:   rgba(0,194,178,.14);
+
+  --ink:         #1B1F3B;
+  --ink2:        #3D4470;
+  --muted:       #7A82A8;
+
+  --border:      rgba(255,255,255,.55);   /* light glass edge */
+  --border2:     rgba(94,114,235,.4);
+
+  --shadow:      0 8px 28px rgba(31,38,77,.10);
+  --shadow2:     0 18px 46px rgba(94,114,235,.22);
+
+  --footer-bg:   rgba(16,20,42,.78);
+  --footer-text: rgba(255,255,255,.62);
+  --footer-head: rgba(0,194,178,.85);
+  --footer-link: rgba(255,255,255,.78);
+
+  --navbar-bg:   rgba(255,255,255,.45);
+
+  --disp:        'Outfit', system-ui, sans-serif;
+  --sans:        'Inter', system-ui, sans-serif;
+  --r:           18px;
+}
+
+/* ═══════════════════════════════════
+   AURORA BACKDROP — soft colour wash the glass floats over.
+   Fixed so it never scrolls away from behind translucent panels.
+═══════════════════════════════════ */
+body {
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -2;
+  background:
+    radial-gradient(38% 30% at 12% 18%, rgba(94,114,235,.35), transparent 70%),
+    radial-gradient(34% 28% at 88% 12%, rgba(0,194,178,.30), transparent 70%),
+    radial-gradient(40% 34% at 50% 92%, rgba(255,160,210,.22), transparent 70%),
+    var(--bg);
+  animation: glassDrift 26s ease-in-out infinite alternate;
+}
+@keyframes glassDrift {
+  0%   { background-position: 0% 0%, 0% 0%, 0% 0%, 0 0; }
+  100% { background-position: 4% 6%, -5% 4%, 3% -4%, 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
+}
+
+/* ═══════════════════════════════════
+   NAVBAR — already blurs via base styles; just needs translucency
+═══════════════════════════════════ */
+#navbar { border-bottom: 1px solid var(--border) !important; }
+
+/* html's background backs the overscroll-bounce area (see style.css).
+   --footer-bg is intentionally translucent for the glass footer panel,
+   so give the bounce area its own solid fallback colour instead. */
+html { background: #10142A !important; }
+
+/* ═══════════════════════════════════
+   CARDS — frosted glass: blur, soft border, gentle hover lift
+═══════════════════════════════════ */
+.svc-card, .case-card, .testi-card, .proj-card, .tool-card, .blog-card, .post-card, .why-card, .cert-card, .achieve-card,
+.stat-box, .stats-card, .tl-card, .price-card, .case-big, .proj-item, .feat-card, .tool-big-card, .val-card,
+.form-card, .form-outer, .skills-panel, .svc-big, .post-author-box, .sidebar-widget {
+  background: var(--card) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(170%) !important;
+  backdrop-filter: blur(20px) saturate(170%) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 20px !important;
+  box-shadow: var(--shadow) !important;
+  transition: box-shadow .35s ease, transform .35s ease, border-color .35s ease !important;
+}
+.svc-card:hover, .case-card:hover, .testi-card:hover, .proj-card:hover, .tool-card:hover, .blog-card:hover, .post-card:hover,
+.stat-box:hover, .stats-card:hover, .tl-card:hover, .price-card:hover, .case-big:hover, .proj-item:hover, .feat-card:hover,
+.tool-big-card:hover, .val-card:hover, .form-card:hover, .form-outer:hover, .skills-panel:hover, .svc-big:hover,
+.post-author-box:hover, .sidebar-widget:hover {
+  border-color: var(--border2) !important;
+  box-shadow: var(--shadow2) !important;
+  transform: translateY(-4px) !important;
+}
+
+/* ═══════════════════════════════════
+   BUTTONS — glass outline by default, solid gradient for the primary CTA
+═══════════════════════════════════ */
+.btn {
+  border-radius: 14px !important;
+  background: rgba(255,255,255,.35) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--border) !important;
+}
+.btn:hover { border-color: var(--border2) !important; box-shadow: var(--shadow) !important; }
+.btn-dark {
+  background: linear-gradient(120deg, var(--sage), var(--blush)) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 8px 26px rgba(94,114,235,.4) !important;
+}
+.btn-dark:hover { box-shadow: 0 14px 36px rgba(94,114,235,.5) !important; }
+
+/* ═══════════════════════════════════
+   INPUTS — glass fields
+═══════════════════════════════════ */
+input, textarea, select {
+  background: rgba(255,255,255,.5) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--sage) !important;
+  box-shadow: 0 0 0 3px var(--sage-pal) !important;
+  outline: none !important;
+}
+
+/* ═══════════════════════════════════
+   CHIPS — small glass pills
+═══════════════════════════════════ */
+.tag, .svc-tag, .hero-chip {
+  background: rgba(255,255,255,.45) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* ═══════════════════════════════════
+   HERO PORTRAIT — soft glow ring instead of flat border
+═══════════════════════════════════ */
+.hero-split-portrait {
+  box-shadow: 0 0 0 1px var(--border), 0 20px 50px rgba(94,114,235,.25) !important;
+}
+
+/* ═══════════════════════════════════
+   FOOTER — its own glass panel over the aurora
+═══════════════════════════════════ */
+#footer {
+  -webkit-backdrop-filter: blur(24px) !important;
+  backdrop-filter: blur(24px) !important;
+}
