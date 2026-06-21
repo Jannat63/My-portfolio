@@ -155,9 +155,7 @@
     .btn:hover::after{transform:translateX(110%) skewX(-10deg);}
     .tl-dot{animation:tlp 2.4s ease-in-out infinite;}
     @keyframes tlp{0%,100%{box-shadow:0 0 0 0 rgba(107,140,110,.4);}50%{box-shadow:0 0 0 7px rgba(107,140,110,0);}}
-    #navbar.glass{backdrop-filter:blur(18px) saturate(180%);-webkit-backdrop-filter:blur(18px) saturate(180%);}
-    [data-theme=light] #navbar.glass{background:rgba(250,248,249,.82)!important;}
-    [data-theme=dark]  #navbar.glass{background:rgba(25,18,26,.85)!important;}
+    #navbar.glass{backdrop-filter:blur(18px) saturate(180%);-webkit-backdrop-filter:blur(18px) saturate(180%);background:var(--navbar-bg)!important;}
     .sparkline polyline{stroke-dasharray:300;stroke-dashoffset:300;transition:stroke-dashoffset 1.5s cubic-bezier(.16,1,.3,1);}
     .sparkline polyline.drawn{stroke-dashoffset:0;}
     #aj-read-bar{position:fixed;top:0;left:0;height:2px;z-index:99998;background:linear-gradient(90deg,#6B8C6E,#C9A0AC);width:0;transition:width .1s linear;}

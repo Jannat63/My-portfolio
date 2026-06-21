@@ -41,6 +41,9 @@
   --footer-head: rgba(255,255,255,.3);
   --footer-link: rgba(255,255,255,.55);
 
+  /* Navbar background (themeable; overridden per theme + dark mode) */
+  --navbar-bg:   rgba(250,248,249,.92);
+
   /* Typography */
   --disp:        'DM Serif Display', Georgia, serif;
   --sans:        'DM Sans', system-ui, sans-serif;
@@ -76,6 +79,8 @@
   --footer-text: rgba(255,255,255,.4);
   --footer-head: rgba(255,255,255,.25);
   --footer-link: rgba(255,255,255,.5);
+
+  --navbar-bg:   rgba(25,18,26,.92);
 }
 
 /* ═══════════════════════════════════
@@ -200,12 +205,11 @@ button { font-family: var(--sans); cursor: pointer; }
 #navbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 900;
   height: 66px; display: flex; align-items: center;
-  background: rgba(250,248,249,.92);
+  background: var(--navbar-bg);
   backdrop-filter: blur(18px) saturate(160%);
   border-bottom: 1px solid var(--border);
   transition: background .35s, box-shadow .3s;
 }
-[data-theme="dark"] #navbar { background: rgba(25,18,26,.92); }
 #navbar.scrolled { box-shadow: var(--shadow); }
 
 .nav-inner {

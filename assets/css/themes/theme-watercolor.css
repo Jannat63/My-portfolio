@@ -26,6 +26,14 @@
 
   --disp:        'Playfair Display', Georgia, serif;
   --sans:        'Jost', system-ui, sans-serif;
+
+  --navbar-bg:   rgba(254,252,248,.92);
+  --shadow:      0 2px 16px rgba(42,34,48,.08);
+  --shadow2:     0 12px 40px rgba(46,158,140,.18);
+  --footer-bg:   #241D2A;
+  --footer-text: rgba(252,246,236,.5);
+  --footer-head: rgba(226,84,60,.55);
+  --footer-link: rgba(252,246,236,.65);
 }
 
 .hero-h1, .h2 { font-style: italic; }
@@ -39,7 +47,9 @@
 
 .hero-chip { border-radius: 20px !important; }
 
-.svc-card, .case-card, .testi-card, .proj-card, .tool-card, .blog-card, .post-card, .why-card, .cert-card, .achieve-card {
+.svc-card, .case-card, .testi-card, .proj-card, .tool-card, .blog-card, .post-card, .why-card, .cert-card, .achieve-card,
+.stat-box, .stats-card, .tl-card, .price-card, .case-big, .proj-item, .feat-card, .tool-big-card, .val-card,
+.form-card, .form-outer, .skills-panel, .svc-big, .post-author-box, .sidebar-widget {
   border-radius: 22px !important;
   border: 1px solid var(--border) !important;
 }

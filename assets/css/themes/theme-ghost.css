@@ -26,6 +26,14 @@
 
   --disp:        'Mrs Saint Delafield', cursive;
   --sans:        'Jost', system-ui, sans-serif;
+
+  --navbar-bg:   rgba(10,14,17,.92);
+  --shadow:      0 2px 16px rgba(0,0,0,.5);
+  --shadow2:     0 0 28px rgba(95,216,204,.22);
+  --footer-bg:   #060809;
+  --footer-text: rgba(220,238,236,.45);
+  --footer-head: rgba(95,216,204,.5);
+  --footer-link: rgba(220,238,236,.6);
 }
 
 body { letter-spacing: .01em; }
@@ -52,19 +60,22 @@ body { letter-spacing: .01em; }
   background: rgba(95,216,204,.06) !important;
 }
 
-.svc-card, .case-card, .testi-card, .proj-card, .tool-card, .blog-card, .post-card, .why-card, .cert-card, .achieve-card {
+.svc-card, .case-card, .testi-card, .proj-card, .tool-card, .blog-card, .post-card, .why-card, .cert-card, .achieve-card,
+.stat-box, .stats-card, .tl-card, .price-card, .case-big, .proj-item, .feat-card, .tool-big-card, .val-card,
+.form-card, .form-outer, .skills-panel, .svc-big, .post-author-box, .sidebar-widget {
   border-radius: 12px !important;
   border: 1px solid var(--border) !important;
   background: var(--card) !important;
 }
-.svc-card:hover, .case-card:hover, .testi-card:hover, .proj-card:hover, .tool-card:hover, .blog-card:hover, .post-card:hover {
+.svc-card:hover, .case-card:hover, .testi-card:hover, .proj-card:hover, .tool-card:hover, .blog-card:hover, .post-card:hover,
+.stat-box:hover, .stats-card:hover, .tl-card:hover, .price-card:hover, .case-big:hover, .proj-item:hover, .feat-card:hover,
+.tool-big-card:hover, .val-card:hover, .form-card:hover, .form-outer:hover, .skills-panel:hover, .svc-big:hover,
+.post-author-box:hover, .sidebar-widget:hover {
   border-color: var(--border2) !important;
   box-shadow: 0 0 30px rgba(95,216,204,.12) !important;
 }
 
 #navbar { border-bottom: 1px solid var(--border) !important; }
-[data-theme="light"] #navbar.glass,
-[data-theme="dark"]  #navbar.glass { background: rgba(10,14,17,.9) !important; }
 
 /* Spiderweb corner decoration */
 #home { position: relative; overflow: hidden; }

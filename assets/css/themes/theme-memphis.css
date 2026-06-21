@@ -26,6 +26,14 @@
 
   --disp:        'Poppins', system-ui, sans-serif;
   --sans:        'Poppins', system-ui, sans-serif;
+
+  --navbar-bg:   rgba(255,246,233,.92);
+  --shadow:      0 2px 16px rgba(26,26,26,.1);
+  --shadow2:     0 6px 0 var(--ink);
+  --footer-bg:   #1A1A1A;
+  --footer-text: rgba(255,246,233,.55);
+  --footer-head: rgba(78,205,196,.7);
+  --footer-link: rgba(255,246,233,.7);
 }
 
 .hero-h1, .h2, h1, h2, h3 { font-weight: 700 !important; }
@@ -47,18 +55,21 @@
   border-radius: 20px !important; border: 2px solid var(--ink) !important; font-weight: 600 !important;
 }
 
-.svc-card, .case-card, .testi-card, .proj-card, .tool-card, .blog-card, .post-card, .why-card, .cert-card, .achieve-card {
+.svc-card, .case-card, .testi-card, .proj-card, .tool-card, .blog-card, .post-card, .why-card, .cert-card, .achieve-card,
+.stat-box, .stats-card, .tl-card, .price-card, .case-big, .proj-item, .feat-card, .tool-big-card, .val-card,
+.form-card, .form-outer, .skills-panel, .svc-big, .post-author-box, .sidebar-widget {
   border-radius: 18px !important;
   border: 2px solid var(--ink) !important;
   box-shadow: 5px 5px 0 var(--ink) !important;
 }
-.svc-card:hover, .case-card:hover, .testi-card:hover, .proj-card:hover, .tool-card:hover, .blog-card:hover, .post-card:hover {
+.svc-card:hover, .case-card:hover, .testi-card:hover, .proj-card:hover, .tool-card:hover, .blog-card:hover, .post-card:hover,
+.stat-box:hover, .stats-card:hover, .tl-card:hover, .price-card:hover, .case-big:hover, .proj-item:hover, .feat-card:hover,
+.tool-big-card:hover, .val-card:hover, .form-card:hover, .form-outer:hover, .skills-panel:hover, .svc-big:hover,
+.post-author-box:hover, .sidebar-widget:hover {
   box-shadow: 7px 7px 0 var(--ink) !important;
 }
 
 #navbar { border-bottom: 2px solid var(--ink) !important; }
-[data-theme="light"] #navbar.glass,
-[data-theme="dark"]  #navbar.glass { background: rgba(255,246,233,.92) !important; }
 
 #home { position: relative; overflow: hidden; }
 #home::before {

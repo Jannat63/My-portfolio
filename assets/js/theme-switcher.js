@@ -35,36 +35,42 @@
         filter: drop-shadow(0 0 14px rgba(95,216,204,.45));
       }
       [data-style="ghost"] .aj-floating-ghost { opacity: .85; }
+      /* Paths stay in the left/right margin lanes so mascots never drift
+         over the centered content column and obscure text or links. */
       @keyframes ghostFloatA {
-        0%   { transform: translate(6vw, 82vh) rotate(-3deg); }
-        25%  { transform: translate(72vw, 58vh) rotate(2deg); }
-        50%  { transform: translate(86vw, 14vh) rotate(-2deg); }
-        75%  { transform: translate(32vw, 28vh) rotate(3deg); }
-        100% { transform: translate(6vw, 82vh) rotate(-3deg); }
+        0%   { transform: translate(3vw, 78vh) rotate(-3deg); }
+        25%  { transform: translate(9vw, 54vh) rotate(2deg); }
+        50%  { transform: translate(4vw, 16vh) rotate(-2deg); }
+        75%  { transform: translate(10vw, 38vh) rotate(3deg); }
+        100% { transform: translate(3vw, 78vh) rotate(-3deg); }
       }
       @keyframes ghostFloatB {
-        0%   { transform: translate(88vw, 18vh) rotate(2deg); }
-        25%  { transform: translate(48vw, 68vh) rotate(-3deg); }
-        50%  { transform: translate(8vw, 48vh) rotate(2deg); }
-        75%  { transform: translate(58vw, 9vh) rotate(-2deg); }
-        100% { transform: translate(88vw, 18vh) rotate(2deg); }
+        0%   { transform: translate(94vw, 16vh) rotate(2deg); }
+        25%  { transform: translate(89vw, 44vh) rotate(-3deg); }
+        50%  { transform: translate(95vw, 66vh) rotate(2deg); }
+        75%  { transform: translate(90vw, 30vh) rotate(-2deg); }
+        100% { transform: translate(94vw, 16vh) rotate(2deg); }
       }
       @keyframes ghostFloatC {
-        0%   { transform: translate(14vw, 9vh) rotate(0deg); }
-        33%  { transform: translate(44vw, 24vh) rotate(3deg); }
-        66%  { transform: translate(76vw, 7vh) rotate(-3deg); }
-        100% { transform: translate(14vw, 9vh) rotate(0deg); }
+        0%   { transform: translate(6vw, 10vh) rotate(0deg); }
+        33%  { transform: translate(2vw, 30vh) rotate(3deg); }
+        66%  { transform: translate(8vw, 8vh) rotate(-3deg); }
+        100% { transform: translate(6vw, 10vh) rotate(0deg); }
       }
       @keyframes ghostFloatD {
-        0%   { transform: translate(78vw, 86vh) rotate(-2deg); }
-        50%  { transform: translate(18vw, 90vh) rotate(2deg); }
-        100% { transform: translate(78vw, 86vh) rotate(-2deg); }
+        0%   { transform: translate(92vw, 84vh) rotate(-2deg); }
+        50%  { transform: translate(97vw, 88vh) rotate(2deg); }
+        100% { transform: translate(92vw, 84vh) rotate(-2deg); }
       }
       @keyframes ghostBob {
         0%, 100% { transform: translateY(0); }
         50%      { transform: translateY(-12px); }
       }
       .aj-gw { animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+      /* No safe margin lane on narrow viewports — hide rather than overlap content. */
+      @media (max-width: 900px) {
+        .aj-floating-ghost { display: none !important; }
+      }
     `;
     document.head.appendChild(s);
   }
