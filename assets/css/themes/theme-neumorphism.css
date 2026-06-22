@@ -45,6 +45,40 @@
   --r:           24px;
 }
 
+/* ── Dark mode — same "molded from one material" language, just a
+   darker material. The highlight shadow becomes a lighter shade of
+   the dark surface itself (never white), the shadow becomes near-black. ── */
+[data-theme="dark"] {
+  --bg:          #2B3142;
+  --bg2:         #242938;
+  --card:        #2B3142;
+
+  --sage:        #8FA3E8;
+  --sage2:       #B0C0F0;
+  --sage-pal:    #1F2740;
+
+  --blush:       #E8A37D;
+  --blush2:      #F0BC9C;
+  --blush-pal:   #3A2B22;
+
+  --ink:         #E8EBF5;
+  --ink2:        #B5BCD4;
+  --muted:       #7C859E;
+
+  --border:      rgba(0,0,0,.3);
+  --border2:     rgba(143,163,232,.4);
+
+  --shadow:      -6px -6px 12px rgba(58,67,90,.7), 6px 6px 14px rgba(0,0,0,.55);
+  --shadow2:     -9px -9px 18px rgba(58,67,90,.85), 9px 9px 22px rgba(0,0,0,.65);
+
+  --footer-bg:   #14161F;
+  --footer-text: rgba(255,255,255,.5);
+  --footer-head: rgba(143,163,232,.8);
+  --footer-link: rgba(255,255,255,.68);
+
+  --navbar-bg:   rgba(43,49,66,.95);
+}
+
 /* ═══════════════════════════════════
    STRUCTURE — soft, uniform, low-contrast
 ═══════════════════════════════════ */
@@ -145,4 +179,35 @@ input:focus, textarea:focus, select:focus {
 ═══════════════════════════════════ */
 .n-box {
   box-shadow: -3px -3px 7px rgba(255,255,255,.6), 3px 3px 9px rgba(163,177,198,.5) !important;
+}
+
+/* ═══════════════════════════════════
+   DARK MODE — the hardcoded highlight shadows above all assume a
+   light surface; restate each one with a dark-safe highlight so
+   nothing reads as a bright white halo on a dark card.
+═══════════════════════════════════ */
+[data-theme="dark"] #navbar {
+  box-shadow: 0 4px 14px rgba(0,0,0,.45) !important;
+}
+[data-theme="dark"] .btn:active {
+  box-shadow: inset -4px -4px 10px rgba(58,67,90,.6), inset 4px 4px 10px rgba(0,0,0,.5) !important;
+}
+[data-theme="dark"] .btn-dark {
+  box-shadow: -4px -4px 10px rgba(58,67,90,.5), 6px 6px 16px rgba(0,0,0,.45) !important;
+}
+[data-theme="dark"] .btn-dark:hover {
+  box-shadow: -5px -5px 12px rgba(58,67,90,.6), 8px 8px 20px rgba(0,0,0,.55) !important;
+}
+[data-theme="dark"] input, [data-theme="dark"] textarea, [data-theme="dark"] select {
+  box-shadow: inset 3px 3px 7px rgba(0,0,0,.5), inset -3px -3px 7px rgba(58,67,90,.6) !important;
+}
+[data-theme="dark"] input:focus, [data-theme="dark"] textarea:focus, [data-theme="dark"] select:focus {
+  box-shadow: inset 3px 3px 8px rgba(0,0,0,.55), inset -3px -3px 8px rgba(58,67,90,.7),
+              0 0 0 2px var(--sage-pal) !important;
+}
+[data-theme="dark"] .tag, [data-theme="dark"] .svc-tag, [data-theme="dark"] .hero-chip {
+  box-shadow: -2px -2px 5px rgba(58,67,90,.6), 2px 2px 6px rgba(0,0,0,.45) !important;
+}
+[data-theme="dark"] .n-box {
+  box-shadow: -3px -3px 7px rgba(58,67,90,.5), 3px 3px 9px rgba(0,0,0,.45) !important;
 }

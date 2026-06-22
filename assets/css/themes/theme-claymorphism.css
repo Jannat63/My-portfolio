@@ -41,6 +41,40 @@
   --r:           28px;
 }
 
+/* ── Dark mode — same warm, puffy clay language at night: deep cocoa
+   surfaces, brighter coral/purple accents so they still pop, and
+   shadows that lean on real darkness instead of tinted brown. ── */
+[data-theme="dark"] {
+  --bg:          #2A2118;
+  --bg2:         #34281C;
+  --card:        #3A2C20;
+
+  --sage:        #FF9D7A;
+  --sage2:       #FF7A4D;
+  --sage-pal:    #4A372A;
+
+  --blush:       #9B7FFF;
+  --blush2:      #B49BFF;
+  --blush-pal:   #3D3354;
+
+  --ink:         #FFF4EA;
+  --ink2:        #E0CFC0;
+  --muted:       #B09A85;
+
+  --border:      rgba(0,0,0,.25);
+  --border2:     rgba(255,157,122,.4);
+
+  --shadow:      0 10px 24px rgba(0,0,0,.45), 0 2px 8px rgba(0,0,0,.3);
+  --shadow2:     0 18px 36px rgba(0,0,0,.55), 0 6px 16px rgba(0,0,0,.35);
+
+  --footer-bg:   #1A1410;
+  --footer-text: rgba(255,244,234,.55);
+  --footer-head: rgba(255,157,122,.85);
+  --footer-link: rgba(255,244,234,.75);
+
+  --navbar-bg:   rgba(42,33,24,.94);
+}
+
 /* Bouncy elastic easing used throughout the theme for lifts & taps. */
 :root { --clay-ease: cubic-bezier(.34, 1.56, .64, 1); }
 
@@ -141,4 +175,27 @@ input:focus, textarea:focus, select:focus {
 @keyframes clayFloat {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-3px); }
+}
+
+/* ═══════════════════════════════════
+   DARK MODE — restate the warm-brown-tinted shadows above as plain
+   darkness; a brown-tinted shadow would just look muddy at night.
+═══════════════════════════════════ */
+[data-theme="dark"] #navbar {
+  box-shadow: 0 6px 18px rgba(0,0,0,.4) !important;
+}
+[data-theme="dark"] .btn-dark {
+  box-shadow: 0 10px 22px rgba(255,122,77,.3), 0 2px 6px rgba(0,0,0,.35) !important;
+}
+[data-theme="dark"] .btn-dark:hover {
+  box-shadow: 0 18px 30px rgba(255,122,77,.38), 0 4px 10px rgba(0,0,0,.4) !important;
+}
+[data-theme="dark"] input, [data-theme="dark"] textarea, [data-theme="dark"] select {
+  box-shadow: 0 4px 10px rgba(0,0,0,.3) !important;
+}
+[data-theme="dark"] .tag, [data-theme="dark"] .svc-tag, [data-theme="dark"] .hero-chip {
+  box-shadow: 0 4px 10px rgba(0,0,0,.32) !important;
+}
+[data-theme="dark"] .n-box {
+  box-shadow: 0 6px 14px rgba(0,0,0,.45) !important;
 }

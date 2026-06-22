@@ -43,10 +43,10 @@
     htmlEl.setAttribute('data-style', theme.id);
     localStorage.setItem(STORAGE_KEY, theme.id);
 
-    // Hide the light/dark toggle for themes with one fixed mood —
-    // only the Default theme supports manual day/night switching.
+    // Every theme now has its own dark-mode palette, so the day/night
+    // toggle stays available no matter which design theme is active.
     if (themeBtn) {
-      themeBtn.style.display = (theme.id === 'sage') ? '' : 'none';
+      themeBtn.style.display = '';
     }
 
     if (btn) btn.setAttribute('aria-label', 'Portfolio theme: ' + theme.label + '. Click to switch to the next theme.');

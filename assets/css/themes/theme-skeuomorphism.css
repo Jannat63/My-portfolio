@@ -46,6 +46,43 @@
   --r:           20px;
 }
 
+/* ── Dark mode — the same tactile, lit-material language, but a dark
+   material's specular highlight is a lighter shade of itself, never
+   flat white — that's what keeps it feeling like real depth instead
+   of a sticker pasted on top. ── */
+[data-theme="dark"] {
+  --bg:          #1B1F3D;
+  --bg2:         #141729;
+  --card:        #232849;
+
+  --sage:        #7C8FF0;
+  --sage2:       #5A6DD8;
+  --sage-pal:    #2A3060;
+
+  --blush:       #F0A0B8;
+  --blush2:      #E87FA0;
+  --blush-pal:   #3D2A38;
+
+  --ink:         #EEF0FA;
+  --ink2:        #C5CAE8;
+  --muted:       #8890B5;
+
+  --border:      rgba(124,143,240,.18);
+  --border2:     rgba(124,143,240,.42);
+
+  --shadow:      -5px -5px 12px rgba(50,57,100,.6), 7px 9px 20px rgba(0,0,0,.5),
+                 inset 0 1px 0 rgba(124,143,240,.16);
+  --shadow2:     -7px -7px 16px rgba(50,57,100,.7), 11px 15px 30px rgba(0,0,0,.6),
+                 inset 0 1px 0 rgba(124,143,240,.24);
+
+  --footer-bg:   #0E1024;
+  --footer-text: rgba(255,255,255,.5);
+  --footer-head: rgba(124,143,240,.85);
+  --footer-link: rgba(255,255,255,.7);
+
+  --navbar-bg:   rgba(27,31,61,.92);
+}
+
 #navbar {
   border-bottom: none !important;
   box-shadow: 0 1px 0 rgba(255,255,255,.7) inset, 0 6px 16px rgba(71,87,199,.14) !important;
@@ -156,4 +193,63 @@ input:focus, textarea:focus, select:focus {
 .hero-split-portrait {
   border: 1px solid var(--border) !important;
   box-shadow: var(--shadow2), 0 0 0 1px rgba(255,255,255,.5) inset !important;
+}
+
+/* ═══════════════════════════════════
+   DARK MODE — every gradient/shadow above leans on near-white
+   (#FAFBFF, rgba(255,255,255,…)) to simulate light hitting a pale
+   material. On a dark material the highlight has to be a lighter
+   shade of the surface itself, so each one is restated here.
+═══════════════════════════════════ */
+[data-theme="dark"] .svc-card, [data-theme="dark"] .case-card, [data-theme="dark"] .testi-card,
+[data-theme="dark"] .proj-card, [data-theme="dark"] .tool-card, [data-theme="dark"] .blog-card,
+[data-theme="dark"] .post-card, [data-theme="dark"] .why-card, [data-theme="dark"] .cert-card,
+[data-theme="dark"] .achieve-card, [data-theme="dark"] .stat-box, [data-theme="dark"] .stats-card,
+[data-theme="dark"] .tl-card, [data-theme="dark"] .price-card, [data-theme="dark"] .case-big,
+[data-theme="dark"] .proj-item, [data-theme="dark"] .feat-card, [data-theme="dark"] .tool-big-card,
+[data-theme="dark"] .val-card, [data-theme="dark"] .form-card, [data-theme="dark"] .form-outer,
+[data-theme="dark"] .skills-panel, [data-theme="dark"] .svc-big, [data-theme="dark"] .post-author-box,
+[data-theme="dark"] .sidebar-widget {
+  background: linear-gradient(165deg, #2D3361 0%, var(--card) 60%, #1B1F3D 100%) !important;
+}
+[data-theme="dark"] #navbar {
+  box-shadow: 0 1px 0 rgba(124,143,240,.18) inset, 0 6px 16px rgba(0,0,0,.4) !important;
+}
+[data-theme="dark"] .btn {
+  background: linear-gradient(165deg, #2D3361, var(--card)) !important;
+}
+[data-theme="dark"] .btn-white, [data-theme="dark"] .about-cta-secondary {
+  background: rgba(255,255,255,.14) !important;
+}
+[data-theme="dark"] .btn-white:hover, [data-theme="dark"] .about-cta-secondary:hover {
+  background: #fff !important;
+}
+[data-theme="dark"] .btn:active {
+  box-shadow: inset 3px 3px 8px rgba(0,0,0,.45), inset -2px -2px 6px rgba(50,57,100,.5) !important;
+}
+[data-theme="dark"] .btn-dark {
+  box-shadow: 0 8px 22px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+[data-theme="dark"] .btn-dark::after {
+  background: linear-gradient(180deg, rgba(255,255,255,.16), transparent 55%) !important;
+}
+[data-theme="dark"] .btn-dark:hover {
+  box-shadow: 0 12px 28px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+[data-theme="dark"] input, [data-theme="dark"] textarea, [data-theme="dark"] select {
+  box-shadow: inset 3px 3px 7px rgba(0,0,0,.45), inset -3px -3px 7px rgba(50,57,100,.5) !important;
+}
+[data-theme="dark"] input:focus, [data-theme="dark"] textarea:focus, [data-theme="dark"] select:focus {
+  box-shadow: inset 2px 2px 6px rgba(0,0,0,.5), inset -2px -2px 6px rgba(50,57,100,.6),
+              0 0 0 3px var(--sage-pal) !important;
+}
+[data-theme="dark"] .tag, [data-theme="dark"] .svc-tag, [data-theme="dark"] .hero-chip {
+  background: linear-gradient(165deg, #2D3361, var(--card)) !important;
+  box-shadow: -2px -2px 6px rgba(50,57,100,.5), 3px 4px 8px rgba(0,0,0,.4) !important;
+}
+[data-theme="dark"] .n-box {
+  box-shadow: 0 4px 10px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+[data-theme="dark"] .hero-split-portrait {
+  box-shadow: var(--shadow2), 0 0 0 1px rgba(124,143,240,.3) inset !important;
 }

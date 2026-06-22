@@ -8,7 +8,7 @@
 :root {
   --bg:          #EEF2FB;
   --bg2:         #E6ECFA;
-  --card:        rgba(255,255,255,.55);   /* translucent glass surface */
+  --card:        rgba(255,255,255,.42);   /* translucent glass surface */
 
   --sage:        #5E72EB;   /* indigo — primary accent */
   --sage2:       #4357C9;
@@ -22,22 +22,56 @@
   --ink2:        #3D4470;
   --muted:       #7A82A8;
 
-  --border:      rgba(255,255,255,.55);   /* light glass edge */
-  --border2:     rgba(94,114,235,.4);
+  --border:      rgba(255,255,255,.6);   /* light glass edge */
+  --border2:     rgba(94,114,235,.45);
 
-  --shadow:      0 8px 28px rgba(31,38,77,.10);
-  --shadow2:     0 18px 46px rgba(94,114,235,.22);
+  --shadow:      0 8px 28px rgba(31,38,77,.12), inset 0 1px 0 rgba(255,255,255,.5);
+  --shadow2:     0 18px 50px rgba(94,114,235,.28), inset 0 1px 0 rgba(255,255,255,.6);
 
   --footer-bg:   rgba(16,20,42,.78);
   --footer-text: rgba(255,255,255,.62);
   --footer-head: rgba(0,194,178,.85);
   --footer-link: rgba(255,255,255,.78);
 
-  --navbar-bg:   rgba(255,255,255,.45);
+  --navbar-bg:   rgba(255,255,255,.38);
 
   --disp:        'Outfit', system-ui, sans-serif;
   --sans:        'Inter', system-ui, sans-serif;
   --r:           18px;
+}
+
+/* ── Dark mode — same frosted-glass language, lit from within instead
+   of lit by daylight: dim navy backdrop, low-opacity glass panels,
+   luminous indigo/teal accents that glow rather than just tint. ── */
+[data-theme="dark"] {
+  --bg:          #0B0E22;
+  --bg2:         #11152C;
+  --card:        rgba(255,255,255,.07);
+
+  --sage:        #8B9DFF;
+  --sage2:       #6B7FFF;
+  --sage-pal:    rgba(139,157,255,.18);
+
+  --blush:       #3FE8D4;
+  --blush2:      #2BC9B6;
+  --blush-pal:   rgba(63,232,212,.18);
+
+  --ink:         #EDEFFA;
+  --ink2:        #C2C6E8;
+  --muted:       #8B92B8;
+
+  --border:      rgba(255,255,255,.14);
+  --border2:     rgba(139,157,255,.5);
+
+  --shadow:      0 8px 32px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.07);
+  --shadow2:     0 0 0 1px rgba(139,157,255,.3), 0 20px 54px rgba(139,157,255,.3);
+
+  --footer-bg:   rgba(4,5,14,.85);
+  --footer-text: rgba(255,255,255,.5);
+  --footer-head: rgba(63,232,212,.85);
+  --footer-link: rgba(255,255,255,.72);
+
+  --navbar-bg:   rgba(11,14,34,.5);
 }
 
 /* ═══════════════════════════════════
@@ -51,9 +85,9 @@ body::before {
   content: '';
   position: fixed; inset: 0; z-index: -2;
   background:
-    radial-gradient(38% 30% at 12% 18%, rgba(94,114,235,.35), transparent 70%),
-    radial-gradient(34% 28% at 88% 12%, rgba(0,194,178,.30), transparent 70%),
-    radial-gradient(40% 34% at 50% 92%, rgba(255,160,210,.22), transparent 70%),
+    radial-gradient(38% 30% at 12% 18%, rgba(94,114,235,.42), transparent 70%),
+    radial-gradient(34% 28% at 88% 12%, rgba(0,194,178,.38), transparent 70%),
+    radial-gradient(40% 34% at 50% 92%, rgba(255,160,210,.28), transparent 70%),
     var(--bg);
   animation: glassDrift 26s ease-in-out infinite alternate;
 }
@@ -66,35 +100,51 @@ body::before {
 }
 
 /* ═══════════════════════════════════
-   NAVBAR — already blurs via base styles; just needs translucency
+   NAVBAR — already blurs via base styles; push it further for this theme
 ═══════════════════════════════════ */
-#navbar { border-bottom: 1px solid var(--border) !important; }
+#navbar {
+  border-bottom: 1px solid var(--border) !important;
+  -webkit-backdrop-filter: blur(26px) saturate(180%) !important;
+  backdrop-filter: blur(26px) saturate(180%) !important;
+}
 
 /* html's background backs the overscroll-bounce area (see style.css).
    --footer-bg is intentionally translucent for the glass footer panel,
    so give the bounce area its own solid fallback colour instead. */
 html { background: #10142A !important; }
+[data-theme="dark"] html { background: #03040C !important; }
 
 /* ═══════════════════════════════════
-   CARDS — frosted glass: blur, soft border, gentle hover lift
+   CARDS — frosted glass: strong blur, glowing border, glossy sheen
 ═══════════════════════════════════ */
 .svc-card, .case-card, .testi-card, .proj-card, .tool-card, .blog-card, .post-card, .why-card, .cert-card, .achieve-card,
 .stat-box, .stats-card, .tl-card, .price-card, .case-big, .proj-item, .feat-card, .tool-big-card, .val-card,
 .form-card, .form-outer, .skills-panel, .svc-big, .post-author-box, .sidebar-widget {
+  position: relative;
   background: var(--card) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(170%) !important;
-  backdrop-filter: blur(20px) saturate(170%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+  backdrop-filter: blur(28px) saturate(190%) !important;
   border: 1px solid var(--border) !important;
   border-radius: 20px !important;
-  box-shadow: var(--shadow) !important;
+  box-shadow: var(--shadow), 0 0 24px rgba(94,114,235,.08) !important;
   transition: box-shadow .35s ease, transform .35s ease, border-color .35s ease !important;
+  overflow: hidden;
+}
+/* A soft diagonal sheen across the top, like light catching real glass. */
+.svc-card::before, .case-card::before, .testi-card::before, .proj-card::before, .tool-card::before,
+.blog-card::before, .post-card::before, .why-card::before, .cert-card::before, .achieve-card::before,
+.stat-box::before, .stats-card::before, .tl-card::before, .price-card::before, .case-big::before,
+.proj-item::before, .feat-card::before, .tool-big-card::before, .val-card::before, .form-card::before,
+.form-outer::before, .skills-panel::before, .svc-big::before, .post-author-box::before, .sidebar-widget::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(125deg, rgba(255,255,255,.35) 0%, transparent 32%);
 }
 .svc-card:hover, .case-card:hover, .testi-card:hover, .proj-card:hover, .tool-card:hover, .blog-card:hover, .post-card:hover,
 .stat-box:hover, .stats-card:hover, .tl-card:hover, .price-card:hover, .case-big:hover, .proj-item:hover, .feat-card:hover,
 .tool-big-card:hover, .val-card:hover, .form-card:hover, .form-outer:hover, .skills-panel:hover, .svc-big:hover,
 .post-author-box:hover, .sidebar-widget:hover {
   border-color: var(--border2) !important;
-  box-shadow: var(--shadow2) !important;
+  box-shadow: var(--shadow2), 0 0 36px rgba(94,114,235,.18) !important;
   transform: translateY(-4px) !important;
 }
 
@@ -104,8 +154,8 @@ html { background: #10142A !important; }
 .btn {
   border-radius: 14px !important;
   background: rgba(255,255,255,.35) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  backdrop-filter: blur(18px) !important;
   border: 1px solid var(--border) !important;
 }
 .btn:hover { border-color: var(--border2) !important; box-shadow: var(--shadow) !important; }
@@ -125,8 +175,8 @@ html { background: #10142A !important; }
   background: rgba(255,255,255,.14) !important;
   border: 1.5px solid rgba(255,255,255,.4) !important;
   color: #fff !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  backdrop-filter: blur(14px) !important;
   box-shadow: none !important;
 }
 .btn-white:hover, .about-cta-secondary:hover {
@@ -140,8 +190,8 @@ html { background: #10142A !important; }
 ═══════════════════════════════════ */
 input, textarea, select {
   background: rgba(255,255,255,.5) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  backdrop-filter: blur(14px) !important;
   border: 1px solid var(--border) !important;
   border-radius: 12px !important;
 }
@@ -156,8 +206,8 @@ input:focus, textarea:focus, select:focus {
 ═══════════════════════════════════ */
 .tag, .svc-tag, .hero-chip {
   background: rgba(255,255,255,.45) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  backdrop-filter: blur(12px) !important;
   border: 1px solid var(--border) !important;
 }
 
@@ -172,6 +222,6 @@ input:focus, textarea:focus, select:focus {
    FOOTER — its own glass panel over the aurora
 ═══════════════════════════════════ */
 #footer {
-  -webkit-backdrop-filter: blur(24px) !important;
-  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(32px) !important;
+  backdrop-filter: blur(32px) !important;
 }
