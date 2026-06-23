@@ -37,6 +37,10 @@ URLS = [
     f"{BASE}/blog/core-web-vitals-2026.html",
     f"{BASE}/blog/how-to-win-paa-boxes.html",
     f"{BASE}/blog/website-security-seo-factor.html",
+    f"{BASE}/blog/website-security-checklist-2026.html",
+    f"{BASE}/blog/https-ssl-mistakes-seo.html",
+    f"{BASE}/blog/recover-seo-after-hack.html",
+    f"{BASE}/blog/wordpress-security-basics-2026.html",
 ]
 
 def ping_indexnow():

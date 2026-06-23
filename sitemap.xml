@@ -274,4 +274,48 @@
     </image:image>
   </url>
 
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/website-security-checklist-2026</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/website-security-checklist-2026.jpg</image:loc>
+      <image:title>Website Security Checklist for SEO 2026</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/https-ssl-mistakes-seo</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/https-ssl-mistakes-seo.jpg</image:loc>
+      <image:title>HTTPS and SSL Mistakes That Hurt Your SEO</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/recover-seo-after-hack</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/recover-seo-after-hack.jpg</image:loc>
+      <image:title>Recovering SEO Rankings After a Google Blacklist</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/blog/wordpress-security-basics-2026</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/blog/images/wordpress-security-basics-2026.jpg</image:loc>
+      <image:title>WordPress Security Basics Every Site Owner Should Know</image:title>
+    </image:image>
+  </url>
+
 </urlset>
