@@ -318,4 +318,17 @@
     </image:image>
   </url>
 
+
+  <url>
+    <loc>https://ahsan-jannat.netlify.app/gallery.html</loc>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ahsan-jannat.netlify.app/assets/images/portrait.png</image:loc>
+      <image:title>Ahsan Jannat – SEO AEO GEO Specialist Dhaka Bangladesh | Memory Library</image:title>
+      <image:caption>Ahsan Jannat | SEO · AEO · GEO Expert | Dhaka, Bangladesh</image:caption>
+    </image:image>
+  </url>
+
 </urlset>
