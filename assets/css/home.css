@@ -441,3 +441,129 @@
   .metric-num { font-size: 1.3rem; }
   .metric-lbl { font-size: 10px; }
 }
+
+/* ═══════════════════════════════════════════════
+   AJ SLIDER SYSTEM
+═══════════════════════════════════════════════ */
+
+/* Outer wrapper */
+.aj-slider-outer {
+  position: relative;
+  margin-top: 3.5rem;
+}
+
+/* Track — overrides grid → flex */
+.svc-grid.aj-track,
+.proj-grid.aj-track,
+.testi-grid.aj-track,
+.blog-grid.aj-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  grid-template-columns: none !important;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 1.25rem;
+  margin-top: 0;
+  padding-bottom: 2px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.aj-track:active { cursor: grabbing; }
+.aj-track::-webkit-scrollbar { display: none; }
+
+/* Card widths — 3 visible */
+.svc-grid.aj-track > *,
+.proj-grid.aj-track > *,
+.blog-grid.aj-track > * {
+  flex: 0 0 calc((100% - 2 * 1.25rem) / 3);
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+/* Card widths — 2 visible */
+.testi-grid.aj-track > * {
+  flex: 0 0 calc((100% - 1.25rem) / 2);
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+/* Nav row */
+.aj-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+/* Arrow buttons */
+.aj-btn {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--ink2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color .2s, color .2s, background .2s, transform .2s, opacity .2s;
+  flex-shrink: 0;
+}
+.aj-btn:hover {
+  border-color: var(--sage);
+  color: var(--sage);
+  background: var(--sage-pal);
+  transform: scale(1.06);
+}
+.aj-btn:disabled,
+.aj-btn.disabled {
+  opacity: .28;
+  cursor: not-allowed;
+  transform: none;
+  pointer-events: none;
+}
+
+/* Dot strip */
+.aj-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.aj-dot {
+  width: 7px; height: 7px;
+  border-radius: 99px;
+  background: var(--border2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: width .25s ease, background .25s ease;
+}
+.aj-dot.active {
+  width: 22px;
+  background: var(--sage);
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  /* 2 visible on tablet */
+  .svc-grid.aj-track > *,
+  .proj-grid.aj-track > *,
+  .blog-grid.aj-track > * {
+    flex: 0 0 calc((100% - 1.25rem) / 2);
+  }
+  .testi-grid.aj-track > * {
+    flex: 0 0 100%;
+  }
+}
+@media (max-width: 540px) {
+  /* 1 visible on mobile */
+  .svc-grid.aj-track > *,
+  .proj-grid.aj-track > *,
+  .testi-grid.aj-track > *,
+  .blog-grid.aj-track > * {
+    flex: 0 0 90%;
+  }
+}

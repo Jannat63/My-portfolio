@@ -64,24 +64,7 @@
   "@id": "https://ahsan-jannat.netlify.app/#person",
   "name": "Ahsan Jannat",
   "url": "https://ahsan-jannat.netlify.app",
-  "image": {
-    "@type": "ImageObject",
-    "@id": "https://ahsan-jannat.netlify.app/#portrait",
-    "url": "https://ahsan-jannat.netlify.app/assets/images/portrait.png",
-    "contentUrl": "https://ahsan-jannat.netlify.app/assets/images/portrait.png",
-    "name": "Ahsan Jannat – SEO AEO GEO Specialist Bangladesh",
-    "description": "Professional portrait of Ahsan Jannat, SEO, AEO and GEO Expert based in Dhaka, Bangladesh. Digital marketing specialist at HATIL Complex Ltd.",
-    "caption": "Ahsan Jannat | SEO · AEO · GEO Expert | Dhaka, Bangladesh",
-    "width": 400,
-    "height": 400,
-    "encodingFormat": "image/png",
-    "author": {"@id": "https://ahsan-jannat.netlify.app/#person"},
-    "creator": {"@id": "https://ahsan-jannat.netlify.app/#person"},
-    "copyrightHolder": {"@id": "https://ahsan-jannat.netlify.app/#person"},
-    "license": "https://creativecommons.org/licenses/by/4.0/",
-    "acquireLicensePage": "https://ahsan-jannat.netlify.app/contact.html",
-    "creditText": "Ahsan Jannat – ahsan-jannat.netlify.app"
-  },
+  "image": "https://ahsan-jannat.netlify.app/assets/images/portrait.png",
   "jobTitle": "SEO, AEO & GEO Expert",
   "description": "Bangladesh-based SEO, AEO & GEO specialist helping brands rank on Google, appear in AI answers, and dominate generative search.",
   "knowsAbout": [
@@ -392,6 +375,7 @@
   <a href="services.html">Services</a>
   <a href="experience.html">Experience</a>
   <a href="case-studies.html">Case Studies</a>
+  <a href="gallery.html">Memory Library</a>
   <a href="blog.html">Blog</a>
   <a href="contact.html">Contact</a>
   <a href="free-audit.html" style="color:var(--sage);font-weight:600">Free Audit</a>
@@ -688,7 +672,8 @@
       <a href="services.html" class="btn btn-dark" data-reveal="up" style="transition-delay:.25s;align-self:flex-end">All Services <i class="fa-solid fa-arrow-right"></i></a>
     </div>
 
-    <div class="svc-grid">
+    <div class="aj-slider-outer">
+    <div class="svc-grid aj-track" data-visible="3">
       <div class="svc-card" data-reveal="up" style="transition-delay:.1s">
         <div class="svc-icon"><i class="fa-brands fa-google"></i></div>
         <h3>Search Engine Optimization</h3>
@@ -771,6 +756,12 @@
         </div>
       </div>
     </div>
+    <div class="aj-nav">
+      <button class="aj-btn aj-prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="aj-dots"></div>
+      <button class="aj-btn aj-next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </div>
   </div>
 </section>
 
@@ -928,7 +919,7 @@
      PROJECTS
 ═══════════════════════════════════ -->
 <section class="section" id="projects">
-  <div class="wrap">
+  <div class="wrap" data-filter-group>
     <span class="tag-label" data-reveal="up"><i class="fa-solid fa-folder-open"></i> Portfolio</span>
     <h2 class="h2" data-reveal="up" style="transition-delay:.1s">Recent Projects</h2>
 
@@ -939,7 +930,8 @@
       <button class="filter-btn" data-f="web-design">Web Design</button>
     </div>
 
-    <div class="proj-grid" id="projGrid">
+    <div class="aj-slider-outer">
+    <div class="proj-grid aj-track" id="projGrid" data-visible="3">
       <div class="proj-card" data-cat="web-dev" data-reveal="up" style="transition-delay:.1s">
         <div class="proj-thumb">
           <img src="./assets/images/projects/project-1.jpg" alt="Union Agrovet" loading="lazy">
@@ -1022,6 +1014,12 @@
         <div class="proj-info"><div class="proj-cat">Web Dev &amp; Blog</div><h3>Best Tech Planet</h3></div>
       </div>
     </div>
+    <div class="aj-nav">
+      <button class="aj-btn aj-prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="aj-dots"></div>
+      <button class="aj-btn aj-next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </div>
   </div>
 </section>
 
@@ -1090,7 +1088,8 @@
       </div>
       <a href="case-studies.html" class="btn btn-ghost" data-reveal="up" style="transition-delay:.2s;align-self:flex-end">View Case Studies <i class="fa-solid fa-arrow-right"></i></a>
     </div>
-    <div class="testi-grid" style="margin-top:3rem">
+    <div class="aj-slider-outer">
+    <div class="testi-grid aj-track" data-visible="2">
       <div class="testi-card" data-reveal="up" style="transition-delay:.1s">
         <div class="testi-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
         <p class="testi-text">"Within three months of working with Ahsan, our organic traffic jumped by over 200%. He identified technical issues we didn't even know existed and rebuilt our content structure from the ground up. Real results, no fluff."</p>
@@ -1140,6 +1139,12 @@
         </div>
       </div>
     </div>
+    <div class="aj-nav">
+      <button class="aj-btn aj-prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="aj-dots"></div>
+      <button class="aj-btn aj-next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </div>
   </div>
 </section>
 
@@ -1236,7 +1241,8 @@
       </div>
       <a href="blog.html" class="btn btn-ghost" data-reveal="up" style="transition-delay:.15s">View All Posts <i class="fa-solid fa-arrow-right"></i></a>
     </div>
-    <div class="blog-grid">
+    <div class="aj-slider-outer">
+    <div class="blog-grid aj-track" data-visible="3">
 
       <div class="blog-card" data-reveal="up" style="transition-delay:.1s">
         <div class="blog-thumb" style="background:linear-gradient(135deg,#EDF0E2,#D4DBBB)">
@@ -1329,6 +1335,12 @@
         </div>
       </div>
     </div>
+    <div class="aj-nav">
+      <button class="aj-btn aj-prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="aj-dots"></div>
+      <button class="aj-btn aj-next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </div>
   </div>
 </section>
 
@@ -1408,5 +1420,110 @@
 <script src="assets/js/script.js" defer></script>
 <script src="assets/js/theme-switcher.js" defer></script>
 <script src="assets/js/motion.js" defer></script>
+
+<script>
+/* AJ SLIDER */
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.aj-track').forEach(function (track) {
+    var outer = track.closest('.aj-slider-outer');
+    var prev  = outer.querySelector('.aj-prev');
+    var next  = outer.querySelector('.aj-next');
+    var dots  = outer.querySelector('.aj-dots');
+    var isDragging = false, startX = 0, scrollStart = 0;
+
+    function vis() {
+      var v = parseInt(track.dataset.visible,10)||3;
+      if(window.innerWidth<=540) return 1;
+      if(window.innerWidth<=860) return Math.min(v,2);
+      return v;
+    }
+    function cards() {
+      return Array.from(track.children).filter(function(c){return c.style.display!=='none';});
+    }
+    function pages() { return Math.max(1,Math.ceil(cards().length/vis())); }
+    function currentPage() {
+      var cs=cards(); if(!cs.length)return 0;
+      var cw=cs[0].offsetWidth+20;
+      return Math.round(track.scrollLeft/(cw*vis()));
+    }
+
+    function buildDots() {
+      var p=pages(); dots.innerHTML='';
+      for(var i=0;i<p;i++){
+        var d=document.createElement('button');
+        d.className='aj-dot'+(i===0?' active':'');
+        d.dataset.page=i;
+        d.setAttribute('aria-label','Slide '+(i+1));
+        dots.appendChild(d);
+      }
+      dots.querySelectorAll('.aj-dot').forEach(function(d){
+        d.addEventListener('click',function(){goTo(+this.dataset.page);});
+      });
+    }
+
+    function goTo(page) {
+      var p=pages();
+      page=Math.max(0,Math.min(page,p-1));
+      var cs=cards(), target=cs[page*vis()];
+      if(target) track.scrollTo({left:target.offsetLeft,behavior:'smooth'});
+      dots.querySelectorAll('.aj-dot').forEach(function(d,i){d.classList.toggle('active',i===page);});
+      prev.disabled=prev.classList.toggle('disabled',page===0);
+      next.disabled=next.classList.toggle('disabled',page>=p-1);
+    }
+
+    prev.addEventListener('click',function(){goTo(currentPage()-1);});
+    next.addEventListener('click',function(){goTo(currentPage()+1);});
+
+    track.addEventListener('scroll',function(){
+      var pg=currentPage(),p=pages();
+      dots.querySelectorAll('.aj-dot').forEach(function(d,i){d.classList.toggle('active',i===pg);});
+      prev.disabled=prev.classList.toggle('disabled',pg===0);
+      next.disabled=next.classList.toggle('disabled',pg>=p-1);
+    },{passive:true});
+
+    /* drag to scroll */
+    track.addEventListener('mousedown',function(e){isDragging=true;startX=e.pageX;scrollStart=track.scrollLeft;track.style.scrollBehavior='auto';});
+    document.addEventListener('mousemove',function(e){if(isDragging)track.scrollLeft=scrollStart-(e.pageX-startX);});
+    document.addEventListener('mouseup',function(){if(!isDragging)return;isDragging=false;track.style.scrollBehavior='smooth';goTo(currentPage());});
+
+    window.addEventListener('resize',function(){buildDots();goTo(0);});
+    buildDots(); goTo(0);
+  });
+
+  /* re-init project slider after filter */
+  var pt=document.querySelector('.proj-grid.aj-track');
+  if(pt){
+    var po=pt.closest('.aj-slider-outer');
+    document.querySelectorAll('[data-filter-group] [data-f]').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        requestAnimationFrame(function(){
+          var v=window.innerWidth<=540?1:window.innerWidth<=860?2:3;
+          var cs=Array.from(pt.children).filter(function(c){return c.style.display!=='none';});
+          var p=Math.max(1,Math.ceil(cs.length/v));
+          var dw=po.querySelector('.aj-dots'),pb=po.querySelector('.aj-prev'),nb=po.querySelector('.aj-next');
+          dw.innerHTML='';
+          for(var i=0;i<p;i++){
+            var d=document.createElement('button');
+            d.className='aj-dot'+(i===0?' active':'');
+            d.dataset.page=i;
+            d.setAttribute('aria-label','Slide '+(i+1));
+            dw.appendChild(d);
+          }
+          dw.querySelectorAll('.aj-dot').forEach(function(d){
+            d.addEventListener('click',function(){
+              var pg=+this.dataset.page,c=cs[pg*v];
+              if(c)pt.scrollTo({left:c.offsetLeft,behavior:'smooth'});
+              dw.querySelectorAll('.aj-dot').forEach(function(dd,i){dd.classList.toggle('active',i===pg);});
+            });
+          });
+          pt.scrollTo({left:0,behavior:'smooth'});
+          pb.disabled=true;pb.classList.add('disabled');
+          nb.disabled=p<=1;nb.classList.toggle('disabled',p<=1);
+        });
+      });
+    });
+  }
+});
+</script>
 </body>
 </html>
