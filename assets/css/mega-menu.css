@@ -1,9 +1,9 @@
 /* ═══════════════════════════════════════════════════════════
    MEGA MENU — Ahsan Jannat Portfolio
-   Built on top of the existing footer-token system (--footer-bg,
-   --footer-text, --footer-head, --footer-link, --sage, --blush)
-   so it auto-adapts to every theme + light/dark mode with zero
-   per-theme overrides.
+   Built on the site's mode-reactive token system (--card, --ink,
+   --ink2, --muted, --bg2, --border, --sage, --blush) so the panel
+   properly flips between light and dark mode, and auto-adapts to
+   every theme — same tokens the rest of the page already uses.
    ═══════════════════════════════════════════════════════════ */
 
 /* Reset inherited nav-link nowrap/sizing so panel content can wrap freely */
@@ -40,12 +40,13 @@
 .mega-panel {
   position: fixed; top: 76px; left: 50%;
   transform: translateX(-50%) translateY(-10px);
-  background: var(--footer-bg);
+  background: var(--card);
   border-radius: 22px;
-  box-shadow: var(--shadow2), 0 0 0 1px rgba(255,255,255,.06);
+  box-shadow: var(--shadow2), 0 0 0 1px var(--border);
   padding: 32px;
   opacity: 0; visibility: hidden; pointer-events: none;
-  transition: opacity .22s ease, transform .22s ease, visibility 0s linear .22s;
+  transition: opacity .22s ease, transform .22s ease, visibility 0s linear .22s,
+              background-color .3s ease;
   z-index: 950;
   max-height: calc(100vh - 110px);
   overflow-y: auto;
@@ -53,7 +54,8 @@
 .mega-host.open .mega-panel {
   opacity: 1; visibility: visible; pointer-events: auto;
   transform: translateX(-50%) translateY(0);
-  transition: opacity .22s ease, transform .22s ease, visibility 0s linear 0s;
+  transition: opacity .22s ease, transform .22s ease, visibility 0s linear 0s,
+              background-color .3s ease;
 }
 .mega-panel.size-sm { width: min(340px, 90vw); }
 .mega-panel.size-md { width: min(620px, 92vw); }
@@ -64,7 +66,7 @@
 .mega-eyebrow {
   display: block; font-size: 10.5px; font-weight: 600;
   letter-spacing: .12em; text-transform: uppercase;
-  color: var(--footer-head); margin-bottom: 14px;
+  color: var(--muted); margin-bottom: 14px;
 }
 .mega-grid { display: grid; gap: 36px; }
 .mega-grid.cols-services { grid-template-columns: 1fr 1fr 220px; }
@@ -79,18 +81,18 @@
   text-decoration: none; transition: background .2s, color .2s;
   min-width: 0;
 }
-.mega-link:hover { background: rgba(255,255,255,.06); }
+.mega-link:hover { background: var(--bg2); }
 .mega-link-icon {
   width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0; margin-top: 1px;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(154,184,157,.16); color: var(--sage); font-size: 13px;
+  background: var(--sage-pal); color: var(--sage); font-size: 13px;
 }
 .mega-link-text { flex: 1 1 auto; min-width: 0; }
 .mega-link-text strong {
-  display: block; font-size: 13.5px; font-weight: 500; color: #fff; line-height: 1.35;
+  display: block; font-size: 13.5px; font-weight: 500; color: var(--ink); line-height: 1.35;
 }
 .mega-link-text span {
-  display: block; font-size: 11.5px; color: var(--footer-text); line-height: 1.5; margin-top: 2px;
+  display: block; font-size: 11.5px; color: var(--muted); line-height: 1.5; margin-top: 2px;
 }
 
 .mega-view-all {
@@ -103,32 +105,32 @@
 
 .mega-panel-footer {
   grid-column: 1 / -1; margin-top: 6px; padding-top: 20px;
-  border-top: 1px solid rgba(255,255,255,.08);
+  border-top: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
 }
-.mega-panel-footer span { font-size: 11.5px; color: var(--footer-text); }
+.mega-panel-footer span { font-size: 11.5px; color: var(--muted); }
 
 /* ── Work (simple list) ── */
 .mega-panel.work-panel .mega-col { gap: 4px; }
 
 /* ── Blog post links ── */
 .mega-post-link {
-  display: block; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,.07);
+  display: block; padding: 11px 0; border-bottom: 1px solid var(--border);
   text-decoration: none; transition: padding-left .2s;
 }
 .mega-post-link:last-child { border-bottom: none; }
 .mega-post-link:hover { padding-left: 4px; }
 .mega-post-link strong {
-  display: block; font-size: 13px; font-weight: 500; color: #fff; line-height: 1.45;
+  display: block; font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.45;
 }
 .mega-post-link:hover strong { color: var(--sage); }
 .mega-post-link span {
-  display: block; font-size: 11px; color: var(--footer-text); margin-top: 4px;
+  display: block; font-size: 11px; color: var(--muted); margin-top: 4px;
 }
 
 /* ── CTA rail (Services panel) ── */
 .mega-cta-card {
-  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  background: var(--bg2); border: 1px solid var(--border);
   border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 12px;
 }
 .mega-cta-icon {
@@ -137,9 +139,9 @@
   display: flex; align-items: center; justify-content: center; font-size: 14px;
 }
 .mega-cta-card h6 {
-  font-family: var(--disp); font-weight: 400; font-size: 15px; color: #fff; line-height: 1.3;
+  font-family: var(--disp); font-weight: 400; font-size: 15px; color: var(--ink); line-height: 1.3;
 }
-.mega-cta-card p { font-size: 12px; color: var(--footer-text); line-height: 1.65; }
+.mega-cta-card p { font-size: 12px; color: var(--muted); line-height: 1.65; }
 .mega-cta-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
   background: var(--sage); color: #fff; font-size: 12.5px; font-weight: 500;
@@ -151,7 +153,7 @@
 .mega-photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .mega-photo-tile {
   position: relative; aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden;
-  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+  background: var(--bg2); border: 1px solid var(--border);
 }
 .mega-photo-tile img {
   width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s ease;
@@ -159,13 +161,13 @@
 .mega-photo-tile:hover img { transform: scale(1.07); }
 .mega-photo-empty {
   position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center;
-  justify-content: center; gap: 6px; color: var(--footer-text); text-align: center; padding: 6px;
+  justify-content: center; gap: 6px; color: var(--muted); text-align: center; padding: 6px;
 }
 .mega-photo-empty i { font-size: 17px; opacity: .45; }
 .mega-photo-empty span { font-size: 9.5px; letter-spacing: .03em; line-height: 1.4; }
 .mega-photo-link {
   position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: flex-end;
-  padding: 9px; opacity: 0; transition: opacity .25s; background: rgba(20,14,20,.25);
+  padding: 9px; opacity: 0; transition: opacity .25s; background: rgba(20,14,20,.3);
 }
 .mega-photo-tile:hover .mega-photo-link { opacity: 1; }
 .mega-photo-link i {
@@ -173,9 +175,16 @@
   color: var(--ink); display: flex; align-items: center; justify-content: center; font-size: 10px;
 }
 
-/* About: social row + tagline reuse footer-soc styling already defined in style.css */
+/* ── About: social row + tagline (mode-reactive, NOT the always-dark footer style) ── */
 .mega-social-row { display: flex; gap: 8px; margin-top: 16px; }
-.mega-meta-text { font-size: 11.5px; color: var(--footer-text); margin-top: 14px; line-height: 1.7; }
+.mega-soc {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border); color: var(--ink2); font-size: 13px;
+  transition: all .2s;
+}
+.mega-soc:hover { border-color: var(--sage); color: var(--sage); }
+.mega-meta-text { font-size: 11.5px; color: var(--muted); margin-top: 14px; line-height: 1.7; }
 
 /* ═══════════════════════════════════════════════════
    MOBILE ACCORDION (inside .mob-menu)
