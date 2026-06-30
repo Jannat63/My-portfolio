@@ -1,0 +1,215 @@
+/* ═══════════════════════════════════════════════════════════
+   MEGA MENU — Ahsan Jannat Portfolio
+   Built on top of the existing footer-token system (--footer-bg,
+   --footer-text, --footer-head, --footer-link, --sage, --blush)
+   so it auto-adapts to every theme + light/dark mode with zero
+   per-theme overrides.
+   ═══════════════════════════════════════════════════════════ */
+
+/* Reset inherited nav-link nowrap/sizing so panel content can wrap freely */
+.mega-panel, .mega-panel * { white-space: normal; }
+
+/* ── Desktop trigger ── */
+.mega-host { position: relative; display: flex; align-items: center; }
+
+.mega-trigger {
+  position: relative;
+  appearance: none; -webkit-appearance: none;
+  background: transparent; border: 0; font: inherit;
+  font-size: 12.5px; color: var(--ink2); white-space: nowrap;
+  display: flex; align-items: center; gap: 5px; cursor: pointer;
+  padding: 5px 9px; border-radius: 6px; transition: all .2s;
+}
+.mega-trigger i {
+  font-size: 9px; color: var(--muted); transition: transform .25s, color .2s;
+}
+.mega-trigger:hover,
+.mega-host.open .mega-trigger { color: var(--ink); background: var(--bg2); font-weight: 500; }
+.mega-trigger:hover i,
+.mega-host.open .mega-trigger i { color: var(--ink); }
+.mega-host.open .mega-trigger i { transform: rotate(180deg); }
+
+.mega-trigger.act { color: var(--ink); font-weight: 500; }
+.mega-trigger.act::after {
+  content: ''; position: absolute; left: 9px; right: 9px; bottom: -2px;
+  height: 2px; border-radius: 2px;
+  background: linear-gradient(to right, var(--sage), var(--blush));
+}
+
+/* ── Panel shell ── */
+.mega-panel {
+  position: fixed; top: 76px; left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background: var(--footer-bg);
+  border-radius: 22px;
+  box-shadow: var(--shadow2), 0 0 0 1px rgba(255,255,255,.06);
+  padding: 32px;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .22s ease, transform .22s ease, visibility 0s linear .22s;
+  z-index: 950;
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+}
+.mega-host.open .mega-panel {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+  transition: opacity .22s ease, transform .22s ease, visibility 0s linear 0s;
+}
+.mega-panel.size-sm { width: min(340px, 90vw); }
+.mega-panel.size-md { width: min(620px, 92vw); }
+.mega-panel.size-lg { width: min(880px, 92vw); }
+.mega-panel.size-xl { width: min(1000px, 94vw); }
+
+/* ── Shared bits ── */
+.mega-eyebrow {
+  display: block; font-size: 10.5px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--footer-head); margin-bottom: 14px;
+}
+.mega-grid { display: grid; gap: 36px; }
+.mega-grid.cols-services { grid-template-columns: 1fr 1fr 220px; }
+.mega-grid.cols-blog     { grid-template-columns: repeat(3, 1fr); }
+.mega-grid.cols-about    { grid-template-columns: 1fr 252px; gap: 40px; }
+
+.mega-col { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+
+.mega-link {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 9px 10px; margin: 0 -10px; border-radius: 12px;
+  text-decoration: none; transition: background .2s, color .2s;
+  min-width: 0;
+}
+.mega-link:hover { background: rgba(255,255,255,.06); }
+.mega-link-icon {
+  width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0; margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(154,184,157,.16); color: var(--sage); font-size: 13px;
+}
+.mega-link-text { flex: 1 1 auto; min-width: 0; }
+.mega-link-text strong {
+  display: block; font-size: 13.5px; font-weight: 500; color: #fff; line-height: 1.35;
+}
+.mega-link-text span {
+  display: block; font-size: 11.5px; color: var(--footer-text); line-height: 1.5; margin-top: 2px;
+}
+
+.mega-view-all {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; color: var(--sage); text-decoration: none;
+  transition: gap .2s;
+}
+.mega-view-all:hover { gap: 9px; }
+.mega-view-all i { font-size: 11px; transition: transform .2s; }
+
+.mega-panel-footer {
+  grid-column: 1 / -1; margin-top: 6px; padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.mega-panel-footer span { font-size: 11.5px; color: var(--footer-text); }
+
+/* ── Work (simple list) ── */
+.mega-panel.work-panel .mega-col { gap: 4px; }
+
+/* ── Blog post links ── */
+.mega-post-link {
+  display: block; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,.07);
+  text-decoration: none; transition: padding-left .2s;
+}
+.mega-post-link:last-child { border-bottom: none; }
+.mega-post-link:hover { padding-left: 4px; }
+.mega-post-link strong {
+  display: block; font-size: 13px; font-weight: 500; color: #fff; line-height: 1.45;
+}
+.mega-post-link:hover strong { color: var(--sage); }
+.mega-post-link span {
+  display: block; font-size: 11px; color: var(--footer-text); margin-top: 4px;
+}
+
+/* ── CTA rail (Services panel) ── */
+.mega-cta-card {
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 12px;
+}
+.mega-cta-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: var(--sage); color: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+}
+.mega-cta-card h6 {
+  font-family: var(--disp); font-weight: 400; font-size: 15px; color: #fff; line-height: 1.3;
+}
+.mega-cta-card p { font-size: 12px; color: var(--footer-text); line-height: 1.65; }
+.mega-cta-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  background: var(--sage); color: #fff; font-size: 12.5px; font-weight: 500;
+  padding: 10px 14px; border-radius: 9px; text-decoration: none; transition: background .2s;
+}
+.mega-cta-btn:hover { background: var(--sage2); }
+
+/* ── About: photo grid ── */
+.mega-photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.mega-photo-tile {
+  position: relative; aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+}
+.mega-photo-tile img {
+  width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s ease;
+}
+.mega-photo-tile:hover img { transform: scale(1.07); }
+.mega-photo-empty {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 6px; color: var(--footer-text); text-align: center; padding: 6px;
+}
+.mega-photo-empty i { font-size: 17px; opacity: .45; }
+.mega-photo-empty span { font-size: 9.5px; letter-spacing: .03em; line-height: 1.4; }
+.mega-photo-link {
+  position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: flex-end;
+  padding: 9px; opacity: 0; transition: opacity .25s; background: rgba(20,14,20,.25);
+}
+.mega-photo-tile:hover .mega-photo-link { opacity: 1; }
+.mega-photo-link i {
+  width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,.92);
+  color: var(--ink); display: flex; align-items: center; justify-content: center; font-size: 10px;
+}
+
+/* About: social row + tagline reuse footer-soc styling already defined in style.css */
+.mega-social-row { display: flex; gap: 8px; margin-top: 16px; }
+.mega-meta-text { font-size: 11.5px; color: var(--footer-text); margin-top: 14px; line-height: 1.7; }
+
+/* ═══════════════════════════════════════════════════
+   MOBILE ACCORDION (inside .mob-menu)
+   ═══════════════════════════════════════════════════ */
+.mob-acc { border-bottom: 1px solid var(--border); }
+.mob-acc-trigger {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  background: none; border: 0; font: inherit; font-size: 1.2rem;
+  padding: 14px 0; color: var(--ink); text-align: left; cursor: pointer;
+}
+.mob-acc-trigger i { font-size: 14px; color: var(--muted); transition: transform .3s; }
+.mob-acc.open .mob-acc-trigger i { transform: rotate(180deg); }
+.mob-acc-panel { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+.mob-acc.open .mob-acc-panel { max-height: 700px; }
+.mob-acc-panel-inner { padding-bottom: 10px; }
+.mob-acc-panel a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 0 9px 4px; font-size: .98rem; color: var(--ink2); border: none !important;
+}
+.mob-acc-panel a:hover { color: var(--sage); padding-left: 10px !important; }
+.mob-acc-panel a i { width: 18px; text-align: center; color: var(--sage); font-size: 12.5px; }
+.mob-sub-label {
+  font-size: 10px; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--muted); margin: 12px 0 2px; padding-left: 4px;
+}
+
+/* Plain top-level mobile links keep the original look */
+.mob-menu > a { display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mega-panel, .mega-trigger i, .mob-acc-panel, .mob-acc-trigger i, .mega-photo-tile img { transition: none !important; }
+}
+
+/* Mega system is desktop-only; mobile uses the accordion above */
+@media (max-width: 1140px) {
+  .mega-panel { display: none !important; }
+}

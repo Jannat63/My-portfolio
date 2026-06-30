@@ -137,6 +137,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/mega-menu.css">
 <link rel="stylesheet" href="blog-post.css">
 <link rel="stylesheet" id="themeStyleLink" href="../assets/css/themes/theme-sage.css">
 </head>
@@ -146,32 +147,207 @@
 <div class="loader" id="loader"><span class="loader-logo">AJ</span></div>
 <button class="btt" id="btt"><i class="fa-solid fa-arrow-up"></i></button>
 <a href="https://wa.me/8801643644550" target="_blank" rel="noopener" class="wa-float"><i class="fa-brands fa-whatsapp"></i></a>
-<header id="navbar"><div class="nav-inner">
-  <a href="../index.html" class="n-logo"><div class="n-box">AJ</div>
-    <div class="n-info"><strong>Ahsan Jannat</strong><em>SEO · AEO · GEO · Meta Ads</em></div></a>
-  <nav class="n-links">
-    <a href="../index.html">Home</a><a href="../about.html">About</a>
-    <a href="../services.html">Services</a><a href="../experience.html">Experience</a>
-    <a href="../case-studies.html">Case Studies</a>
-    <a href="../gallery.html">Memory Library</a>
-    <a href="../blog.html" class="act">Blog</a>
-    <a href="../contact.html">Contact</a>
-    <a href="../free-audit.html" style="color:var(--sage);font-weight:600">Free Audit</a>
-  </nav>
-  <div class="n-right">
-    <button class="theme-toggle" id="themeBtn"><i class="fa-solid fa-moon"></i></button>
-    <button class="theme-toggle" id="styleBtn" aria-label="Switch portfolio style"><i class="fa-solid fa-palette"></i></button>
-    <a href="../contact.html" class="btn btn-dark" style="padding:9px 18px;font-size:13px">Let's Talk <i class="fa-solid fa-arrow-right"></i></a>
-    <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+<header id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="n-logo">
+      <div class="n-box">AJ</div>
+      <div class="n-info"><strong>Ahsan Jannat</strong><em>SEO · AEO · GEO · Meta Ads</em></div>
+    </a>
+    <nav class="n-links" id="navLinks">
+      <a href="../index.html">Home</a>
+
+      <div class="mega-host">
+        <button class="mega-trigger" type="button">Services <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="mega-panel size-lg" role="region" aria-label="Services menu">
+          <div class="mega-grid cols-services">
+            <div class="mega-col">
+              <span class="mega-eyebrow">Search &amp; AI Visibility</span>
+              <a class="mega-link" href="../services.html#seo">
+                <span class="mega-link-icon"><i class="fa-brands fa-google"></i></span>
+                <span class="mega-link-text"><strong>SEO</strong><span>Organic rankings &amp; traffic growth</span></span>
+              </a>
+              <a class="mega-link" href="../services.html#aeo">
+                <span class="mega-link-icon"><i class="fa-solid fa-microphone"></i></span>
+                <span class="mega-link-text"><strong>Answer Engine Optimization</strong><span>Win featured snippets &amp; voice results</span></span>
+              </a>
+              <a class="mega-link" href="../services.html#geo">
+                <span class="mega-link-icon"><i class="fa-solid fa-robot"></i></span>
+                <span class="mega-link-text"><strong>Generative Engine Optimization</strong><span>Get cited in AI Overviews &amp; chatbots</span></span>
+              </a>
+              <a class="mega-link" href="../services.html#technical">
+                <span class="mega-link-icon"><i class="fa-solid fa-code"></i></span>
+                <span class="mega-link-text"><strong>Technical SEO</strong><span>Crawlability, speed &amp; Core Web Vitals</span></span>
+              </a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-eyebrow">Growth &amp; Support</span>
+              <a class="mega-link" href="../services.html#meta">
+                <span class="mega-link-icon"><i class="fa-brands fa-meta"></i></span>
+                <span class="mega-link-text"><strong>Meta Ads Management</strong><span>Facebook &amp; Instagram campaigns</span></span>
+              </a>
+              <a class="mega-link" href="../services.html#cyber">
+                <span class="mega-link-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                <span class="mega-link-text"><strong>Security-Aware SEO</strong><span>Protect rankings from hacks &amp; blacklists</span></span>
+              </a>
+              <a class="mega-link" href="../services.html#it">
+                <span class="mega-link-icon"><i class="fa-solid fa-server"></i></span>
+                <span class="mega-link-text"><strong>IT Support &amp; Systems</strong><span>Network &amp; system administration</span></span>
+              </a>
+              <a class="mega-link" href="../services.html#process">
+                <span class="mega-link-icon"><i class="fa-solid fa-route"></i></span>
+                <span class="mega-link-text"><strong>Process, Pricing &amp; FAQ</strong><span>How engagements work, start to finish</span></span>
+              </a>
+            </div>
+            <div class="mega-cta-card">
+              <span class="mega-cta-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></span>
+              <h6>Free SEO Audit</h6>
+              <p>Run an instant audit of your site's SEO health — no signup required.</p>
+              <a class="mega-cta-btn" href="../free-audit.html">Try it free <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mega-host">
+        <button class="mega-trigger" type="button">Work <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="mega-panel size-sm work-panel" role="region" aria-label="Work menu">
+          <div class="mega-col">
+            <span class="mega-eyebrow">Proof of Work</span>
+            <a class="mega-link" href="../case-studies.html">
+              <span class="mega-link-icon"><i class="fa-solid fa-chart-line"></i></span>
+              <span class="mega-link-text"><strong>Case Studies</strong><span>Real campaigns, real ranking &amp; ROAS gains</span></span>
+            </a>
+            <a class="mega-link" href="../gallery.html">
+              <span class="mega-link-icon"><i class="fa-solid fa-images"></i></span>
+              <span class="mega-link-text"><strong>Memory Library</strong><span>Photos from Bangla City PLC, Final Touch &amp; HATIL</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mega-host">
+        <button class="mega-trigger act" type="button">Blog <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="mega-panel size-xl" role="region" aria-label="Blog menu">
+          <div class="mega-grid cols-blog">
+            <div class="mega-col">
+              <span class="mega-eyebrow">SEO &amp; GEO</span>
+              <a class="mega-post-link" href="seo-vs-aeo-vs-geo.html"><strong>SEO vs AEO vs GEO</strong><span>What's the difference & which do you need</span></a>
+              <a class="mega-post-link" href="how-to-rank-in-ai-overviews.html"><strong>How to Rank in AI Overviews & SGE</strong><span>Get featured in Google's AI-generated answers</span></a>
+              <a class="mega-post-link" href="technical-seo-checklist-2026.html"><strong>Technical SEO Checklist 2026</strong><span>The 30-point audit I run on every site</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-eyebrow">Meta Ads</span>
+              <a class="mega-post-link" href="meta-ads-complete-guide-2026.html"><strong>Meta Ads Complete Guide 2026</strong><span>Every campaign type & setting explained</span></a>
+              <a class="mega-post-link" href="meta-ads-targeting-options-2026.html"><strong>Meta Ads Targeting Options 2026</strong><span>Core, Custom, Lookalike & Advantage+</span></a>
+              <a class="mega-post-link" href="meta-ads-retargeting-setup-2026.html"><strong>Facebook Ads Retargeting Setup</strong><span>Pixel, Custom Audiences & CAPI, end to end</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-eyebrow">Website Security</span>
+              <a class="mega-post-link" href="website-security-checklist-2026.html"><strong>Website Security Checklist 2026</strong><span>The complete guide to locking down your site</span></a>
+              <a class="mega-post-link" href="website-security-seo-factor.html"><strong>Why Security Is an SEO Factor</strong><span>How a hack or blacklist tanks your rankings</span></a>
+              <a class="mega-post-link" href="wordpress-security-basics-2026.html"><strong>WordPress Security Basics</strong><span>Essentials every site owner should know</span></a>
+            </div>
+            <div class="mega-panel-footer">
+              <span>22 articles across SEO, Meta Ads &amp; Security</span>
+              <a class="mega-view-all" href="../blog.html">Browse all articles <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mega-host">
+        <button class="mega-trigger" type="button">About <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="mega-panel size-md" role="region" aria-label="About menu">
+          <div class="mega-grid cols-about">
+            <div class="mega-col">
+              <span class="mega-eyebrow">About</span>
+              <a class="mega-link" href="../about.html">
+                <span class="mega-link-icon"><i class="fa-solid fa-user"></i></span>
+                <span class="mega-link-text"><strong>About Me</strong><span>My story, background &amp; approach</span></span>
+              </a>
+              <a class="mega-link" href="../experience.html">
+                <span class="mega-link-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+                <span class="mega-link-text"><strong>Experience &amp; Education</strong><span>Career timeline, certifications &amp; degree</span></span>
+              </a>
+              <a class="mega-link" href="../contact.html">
+                <span class="mega-link-icon"><i class="fa-solid fa-envelope"></i></span>
+                <span class="mega-link-text"><strong>Contact</strong><span>Let's talk about your project</span></span>
+              </a>
+              <div class="mega-social-row">
+                <a href="https://www.linkedin.com/in/ahsan-jannat/" target="_blank" rel="noopener" class="footer-soc" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://web.facebook.com/ahsan.jnat.2024/" target="_blank" rel="noopener" class="footer-soc" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.youtube.com/@AhsanJannat" target="_blank" rel="noopener" class="footer-soc" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+              </div>
+              <p class="mega-meta-text">Dhaka, Bangladesh · Available for freelance &amp; full-time roles</p>
+            </div>
+            <div class="mega-col">
+              <span class="mega-eyebrow">Memory Library</span>
+              <div class="mega-photo-grid" data-mega-photo-grid data-asset-prefix="../" data-gallery-href="../gallery.html"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="../free-audit.html" style="color:var(--sage);font-weight:600">Free Audit</a>
+    </nav>
+    <div class="n-right">
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+      <button class="theme-toggle" id="styleBtn" aria-label="Switch portfolio style"><i class="fa-solid fa-palette"></i></button>
+      <a href="../contact.html" class="btn btn-dark" style="padding:9px 18px;font-size:13px">Let's Talk <i class="fa-solid fa-arrow-right"></i></a>
+      <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+    </div>
   </div>
-</div></header>
+</header>
 <nav class="mob-menu" id="mobMenu">
-  <a href="../index.html">Home</a><a href="../about.html">About</a><a href="../services.html">Services</a>
-  <a href="../experience.html">Experience</a><a href="../case-studies.html">Case Studies</a>
-  <a href="../gallery.html">Memory Library</a>
-      <a href="../blog.html">Blog</a><a href="../contact.html">Contact</a>
-  <a href="../free-audit.html" style="color:var(--sage);font-weight:600;padding:14px 0;border-bottom:1px solid var(--border);display:block"><i class="fa-solid fa-magnifying-glass-chart"></i> Free SEO Audit</a>
-  <a href="../contact.html" class="btn btn-dark">Let's Talk →</a>
+  <a href="../index.html">Home</a>
+
+  <div class="mob-acc">
+    <button class="mob-acc-trigger" type="button">Services <i class="fa-solid fa-chevron-down"></i></button>
+    <div class="mob-acc-panel"><div class="mob-acc-panel-inner">
+      <a href="../services.html#seo"><i class="fa-brands fa-google"></i> SEO</a>
+      <a href="../services.html#aeo"><i class="fa-solid fa-microphone"></i> Answer Engine Optimization</a>
+      <a href="../services.html#geo"><i class="fa-solid fa-robot"></i> Generative Engine Optimization</a>
+      <a href="../services.html#technical"><i class="fa-solid fa-code"></i> Technical SEO</a>
+      <a href="../services.html#meta"><i class="fa-brands fa-meta"></i> Meta Ads Management</a>
+      <a href="../services.html#cyber"><i class="fa-solid fa-shield-halved"></i> Security-Aware SEO</a>
+      <a href="../services.html#it"><i class="fa-solid fa-server"></i> IT Support &amp; Systems</a>
+      <a href="../free-audit.html"><i class="fa-solid fa-magnifying-glass-chart"></i> Free SEO Audit</a>
+    </div></div>
+  </div>
+
+  <div class="mob-acc">
+    <button class="mob-acc-trigger" type="button">Work <i class="fa-solid fa-chevron-down"></i></button>
+    <div class="mob-acc-panel"><div class="mob-acc-panel-inner">
+      <a href="../case-studies.html"><i class="fa-solid fa-chart-line"></i> Case Studies</a>
+      <a href="../gallery.html"><i class="fa-solid fa-images"></i> Memory Library</a>
+    </div></div>
+  </div>
+
+  <div class="mob-acc">
+    <button class="mob-acc-trigger" type="button">Blog <i class="fa-solid fa-chevron-down"></i></button>
+    <div class="mob-acc-panel"><div class="mob-acc-panel-inner">
+      <div class="mob-sub-label">SEO &amp; GEO</div>
+      <a href="seo-vs-aeo-vs-geo.html"><i class="fa-solid fa-magnifying-glass"></i> SEO vs AEO vs GEO</a>
+      <a href="how-to-rank-in-ai-overviews.html"><i class="fa-solid fa-magnifying-glass"></i> Rank in AI Overviews</a>
+      <div class="mob-sub-label">Meta Ads</div>
+      <a href="meta-ads-complete-guide-2026.html"><i class="fa-solid fa-bullseye"></i> Meta Ads Complete Guide</a>
+      <div class="mob-sub-label">Security</div>
+      <a href="website-security-checklist-2026.html"><i class="fa-solid fa-shield-halved"></i> Security Checklist 2026</a>
+      <a href="../blog.html" style="color:var(--sage);font-weight:600"><i class="fa-solid fa-arrow-right"></i> Browse all 22 articles</a>
+    </div></div>
+  </div>
+
+  <div class="mob-acc">
+    <button class="mob-acc-trigger" type="button">About <i class="fa-solid fa-chevron-down"></i></button>
+    <div class="mob-acc-panel"><div class="mob-acc-panel-inner">
+      <a href="../about.html"><i class="fa-solid fa-user"></i> About Me</a>
+      <a href="../experience.html"><i class="fa-solid fa-graduation-cap"></i> Experience &amp; Education</a>
+      <a href="../contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+    </div></div>
+  </div>
+
+  <a href="../free-audit.html" style="color:var(--sage);font-weight:600">Free Audit</a>
+  <a href="../contact.html" class="btn btn-dark mob-cta" style="margin-top:1rem">Let's Talk →</a>
 </nav>
 <article>
 <div class="post-hero"><div class="post-hero-inner">
@@ -480,6 +656,8 @@
     <span class="footer-copy">Dhaka, Bangladesh</span>
   </div>
 </div></footer>
+<script src="../assets/js/gallery-data.js"></script>
+<script src="../assets/js/mega-menu.js" defer></script>
 <script src="../assets/js/script.js" defer></script>
 <script src="../assets/js/theme-switcher.js" defer></script>
 <script src="../assets/js/motion.js" defer></script>
