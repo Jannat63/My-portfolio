@@ -218,12 +218,12 @@ button { font-family: var(--sans); cursor: pointer; }
 }
 .n-logo { display: flex; align-items: center; gap: 11px; }
 .n-box {
-  width: 40px; height: 40px; background: var(--ink);
+  width: 40px; height: 40px; background: var(--footer-bg);
   border-radius: 8px; display: flex; align-items: center; justify-content: center;
-  font-family: var(--disp); font-size: 14px; color: var(--bg);
-  flex-shrink: 0; transition: background .25s;
+  flex-shrink: 0; transition: transform .25s;
 }
-.n-box:hover { background: var(--sage); }
+.n-box:hover { transform: scale(1.06); }
+.n-box svg { transition: opacity .25s; }
 .n-info strong { display: block; font-size: 12.5px; font-weight: 600; color: var(--ink); line-height: 1.3; }
 .n-info em { font-style: normal; font-size: 9.5px; color: var(--muted); letter-spacing: .05em; text-transform: uppercase; }
 
