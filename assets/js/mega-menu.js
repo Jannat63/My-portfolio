@@ -103,6 +103,18 @@
         '<span class="mega-photo-empty"><i class="fa-solid fa-camera-retro"></i><span>Photos coming soon</span></span>' +
       '</a>';
     }).join('');
+
+    /* Fix: dynamically-injected images are missed by the page's initial
+       lazy-fade-in wiring (which only runs once on page load), so they'd
+       otherwise stay stuck invisible. Wire each one up individually here. */
+    grid.querySelectorAll('img[loading="lazy"]').forEach(function (img) {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener('load', function () { img.classList.add('loaded'); });
+        img.addEventListener('error', function () { img.classList.add('loaded'); });
+      }
+    });
   }
   buildMegaPhotoGrid();
 })();

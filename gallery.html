@@ -320,6 +320,10 @@
   display: flex; align-items: center; justify-content: center;
   font-size: 18px; color: rgba(255,255,255,.85);
   transition: background .2s;
+  overflow: hidden;
+}
+.ml-dir-icon img {
+  width: 100%; height: 100%; object-fit: contain; padding: 6px;
 }
 .ml-dir-card:hover .ml-dir-icon { background: rgba(255,255,255,.2); }
 .ml-dir-photo-count {
@@ -870,7 +874,7 @@
             <div class="ml-dir-cover-circle"></div>
             <div class="ml-dir-cover-fade"></div>
             <div class="ml-dir-cover-top">
-              <div class="ml-dir-icon"><i class="fa-solid fa-building"></i></div>
+              <div class="ml-dir-icon"><img src="assets/images/logos/bangla-city-plc-logo.png" alt="Bangla City PLC company logo — Ahsan Jannat's previous workplace, Dhaka" loading="lazy"></div>
               <span class="ml-dir-photo-count">
                 <i class="fa-regular fa-image"></i>
                 <span id="cnt-bcp">0</span> photos
@@ -909,7 +913,7 @@
             <div class="ml-dir-cover-circle"></div>
             <div class="ml-dir-cover-fade"></div>
             <div class="ml-dir-cover-top">
-              <div class="ml-dir-icon"><i class="fa-solid fa-star"></i></div>
+              <div class="ml-dir-icon"><img src="assets/images/logos/final-touch-logo.png" alt="Final Touch company logo — Ahsan Jannat's previous workplace, Bangladesh" loading="lazy"></div>
               <span class="ml-dir-photo-count">
                 <i class="fa-regular fa-image"></i>
                 <span id="cnt-ft">0</span> photos
@@ -948,7 +952,7 @@
             <div class="ml-dir-cover-circle"></div>
             <div class="ml-dir-cover-fade"></div>
             <div class="ml-dir-cover-top">
-              <div class="ml-dir-icon"><i class="fa-solid fa-couch"></i></div>
+              <div class="ml-dir-icon"><img src="assets/images/logos/hatil-logo.png" alt="HATIL Complex Ltd company logo — Ahsan Jannat's current workplace, Dhaka" loading="lazy"></div>
               <span class="ml-dir-photo-count">
                 <i class="fa-regular fa-image"></i>
                 <span id="cnt-hatil">0</span> photos
@@ -1145,6 +1149,18 @@ function buildGrids() {
         </div>
       </figure>
     `).join('');
+
+    /* Fix: dynamically-injected images are missed by the page's initial
+       lazy-fade-in wiring (which only runs once on page load), so they'd
+       otherwise stay stuck invisible. Wire each one up individually here. */
+    masonry.querySelectorAll('img[loading="lazy"]').forEach(img => {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener('load', () => img.classList.add('loaded'));
+        img.addEventListener('error', () => img.classList.add('loaded'));
+      }
+    });
 
     masonry.querySelectorAll('.ml-photo').forEach(el => {
       el.addEventListener('keydown', e => {
